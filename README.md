@@ -1,166 +1,211 @@
-Sub ExtraireTitresFichiers()
-    ' Déclaration des variables
-    Dim chemin As String
-    Dim fso As Object
-    Dim dossier As Object
-    Dim fichier As Object
-    Dim feuille As Worksheet
-    Dim ligne As Integer
-    
-    ' Initialisation
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    ' Utiliser le répertoire spécifié directement
-    chemin = "C:\Users\m.oniaefuto\Documents\ALL WSP FILES"
-    
-    ' Vérifier si le dossier existe
-    If Not fso.FolderExists(chemin) Then
-        MsgBox "Le dossier spécifié n'existe pas.", vbExclamation
-        Exit Sub
-    End If
-    
-    ' Créer une nouvelle feuille ou utiliser la feuille active
-    On Error Resume Next
-    Application.DisplayAlerts = False
-    Worksheets("Titres des fichiers").Delete
-    Application.DisplayAlerts = True
-    Set feuille = Worksheets.Add
-    feuille.Name = "Titres des fichiers"
-    On Error GoTo 0
-    
-    ' Ajouter les en-têtes
-    feuille.Cells(1, 1) = "Nom du fichier"
-    feuille.Cells(1, 2) = "Extension"
-    feuille.Cells(1, 3) = "Taille (octets)"
-    feuille.Cells(1, 4) = "Date de modification"
-    feuille.Cells(1, 5) = "Chemin complet"
-    
-    ' Mettre en forme les en-têtes
-    feuille.Range("A1:E1").Font.Bold = True
-    
-    ' Initialiser le compteur de ligne
-    ligne = 2
-    
-    ' Accéder au dossier
-    Set dossier = fso.GetFolder(chemin)
-    
-    ' Parcourir tous les fichiers du dossier
-    For Each fichier In dossier.Files
-        ' Écrire les informations dans la feuille
-        feuille.Cells(ligne, 1) = fso.GetBaseName(fichier.Name)
-        feuille.Cells(ligne, 2) = fso.GetExtensionName(fichier.Name)
-        feuille.Cells(ligne, 3) = fichier.Size
-        feuille.Cells(ligne, 4) = fichier.DateLastModified
-        feuille.Cells(ligne, 5) = fichier.Path
-        
-        ' Incrémenter le compteur de ligne
-        ligne = ligne + 1
-    Next fichier
-    
-    ' Ajuster la largeur des colonnes automatiquement
-    feuille.Columns("A:E").AutoFit
-    
-    ' Appliquer un filtre
-    feuille.Range("A1:E1").AutoFilter
-    
-    ' Afficher un message de confirmation
-    MsgBox "L'extraction est terminée. " & (ligne - 2) & " fichiers ont été trouvés dans le dossier " & chemin, vbInformation
-    
-    ' Libérer les objets
-    Set fichier = Nothing
-    Set dossier = Nothing
-    Set fso = Nothing
-End Sub
-
-' Sous-procédure pour extraire les fichiers d'un dossier et ses sous-dossiers
-Sub ExtraireTitresFichiersRecursif()
-    ' Déclaration des variables
-    Dim chemin As String
-    Dim fso As Object
-    Dim feuille As Worksheet
-    Dim ligne As Integer
-    
-    ' Initialisation
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    ' Utiliser le répertoire spécifié directement
-    chemin = "C:\Users\m.oniaefuto\Documents\ALL WSP FILES"
-    
-    ' Vérifier si le dossier existe
-    If Not fso.FolderExists(chemin) Then
-        MsgBox "Le dossier spécifié n'existe pas.", vbExclamation
-        Exit Sub
-    End If
-    
-    ' Créer une nouvelle feuille ou utiliser la feuille active
-    On Error Resume Next
-    Application.DisplayAlerts = False
-    Worksheets("Titres des fichiers").Delete
-    Application.DisplayAlerts = True
-    Set feuille = Worksheets.Add
-    feuille.Name = "Titres des fichiers"
-    On Error GoTo 0
-    
-    ' Ajouter les en-têtes
-    feuille.Cells(1, 1) = "Nom du fichier"
-    feuille.Cells(1, 2) = "Extension"
-    feuille.Cells(1, 3) = "Taille (octets)"
-    feuille.Cells(1, 4) = "Date de modification"
-    feuille.Cells(1, 5) = "Dossier parent"
-    feuille.Cells(1, 6) = "Chemin complet"
-    
-    ' Mettre en forme les en-têtes
-    feuille.Range("A1:F1").Font.Bold = True
-    
-    ' Initialiser le compteur de ligne
-    ligne = 2
-    
-    ' Lancer la recherche récursive
-    ExplorerDossier chemin, fso, feuille, ligne
-    
-    ' Ajuster la largeur des colonnes automatiquement
-    feuille.Columns("A:F").AutoFit
-    
-    ' Appliquer un filtre
-    feuille.Range("A1:F1").AutoFilter
-    
-    ' Afficher un message de confirmation
-    MsgBox "L'extraction est terminée. " & (ligne - 2) & " fichiers ont été trouvés dans le dossier " & chemin & " et ses sous-dossiers.", vbInformation
-    
-    ' Libérer les objets
-    Set fso = Nothing
-End Sub
-
-' Procédure pour explorer récursivement un dossier et ses sous-dossiers
-Private Sub ExplorerDossier(chemin As String, fso As Object, feuille As Worksheet, ByRef ligne As Integer)
-    Dim dossier As Object
-    Dim sousDossier As Object
-    Dim fichier As Object
-    
-    ' Accéder au dossier
-    Set dossier = fso.GetFolder(chemin)
-    
-    ' Parcourir tous les fichiers du dossier
-    For Each fichier In dossier.Files
-        ' Écrire les informations dans la feuille
-        feuille.Cells(ligne, 1) = fso.GetBaseName(fichier.Name)
-        feuille.Cells(ligne, 2) = fso.GetExtensionName(fichier.Name)
-        feuille.Cells(ligne, 3) = fichier.Size
-        feuille.Cells(ligne, 4) = fichier.DateLastModified
-        feuille.Cells(ligne, 5) = dossier.Name
-        feuille.Cells(ligne, 6) = fichier.Path
-        
-        ' Incrémenter le compteur de ligne
-        ligne = ligne + 1
-    Next fichier
-    
-    ' Explorer récursivement tous les sous-dossiers
-    For Each sousDossier In dossier.SubFolders
-        ExplorerDossier sousDossier.Path, fso, feuille, ligne
-    Next sousDossier
-    
-    ' Libérer les objets
-    Set fichier = Nothing
-    Set sousDossier = Nothing
-    Set dossier = Nothing
-End Sub
+APPLICATION	TOTAL BILLING AMOUNT (HT) ?
+WH	5742,62
+RAD	4391,55
+WH	3640,67
+RAD	3026,79
+RAD	2974,4
+RAD	2072,62
+RAD	15456,1
+RAD	4019,9
+RAD	12160
+RAD	1507,48
+CV	3250,59
+CV	5005,78
+RAD	13174,65
+RAD	6916,76
+WH	7728,05
+RAD	15340,34
+RAD	4145,24
+RAD	13833,52
+RAD	25776,42
+RAD	15340,34
+WH	2590
+RAD	16079,6
+RAD	2974,4
+RAD	6916,76
+RAD	38664,63
+RAD	23010,51
+RAD	12059,7
+WH	7728,05
+RAD	15456,1
+RAD	10465
+RAD	6916,44
+WH	17132,9
+RAD	25776,42
+RAD	2009,95
+RAD	4391,55
+RAD	12888,21
+RAD	6916,44
+RAD	5969,54
+RAD	3056,78
+RAD	878,31
+RAD	6916,44
+WH	1441,23
+WH	5514,26
+WH	2636,4
+RAD	4634,96
+RAD	620,43
+RAD	12888,21
+RAD	9524
+RAD	595,56
+WH	2072,62
+RAD	581,7
+RAD	2252,66
+NO INFO	25776,42
+NO INFO	3513,24
+NO INFO	4145,24
+NO INFO	455,08
+NO INFO	882,52
+NO INFO	1765,04
+NO INFO	2795,72
+NO INFO	6916,44
+NO INFO	9937,2
+NO INFO	2755
+NO INFO	5272,8
+NO INFO	3312,4
+NO INFO	2096,76
+NO INFO	6952,44
+NO INFO	17227,86
+NO INFO	5374,2
+NO INFO	9524
+NO INFO	6916,44
+NO INFO	698,92
+NO INFO	3513,24
+NO INFO	8039,8
+NO INFO	9524
+NO INFO	7728,05
+NO INFO	11256,88
+NO INFO	10100,86
+NO INFO	13495,79
+NO INFO	7728,05
+NO INFO	12759,72
+NO INFO	9524
+NO INFO	1808,96
+NO INFO	1938,09
+NO INFO	7670,17
+NO INFO	9524
+NO INFO	5272,8
+NO INFO	1720,55
+NO INFO	528,76
+NO INFO	3460,44
+NO INFO	1938,09
+NO INFO	9524
+NO INFO	1808,96
+NO INFO	3617,92
+NO INFO	3876,18
+NO INFO	19047,88
+NO INFO	7728,05
+NO INFO	1938,09
+NO INFO	872,05
+NO INFO	492,8
+NO INFO	14306,32
+NO INFO	2210
+NO INFO	4019,9
+NO INFO	5948,8
+NO INFO	3494,65
+NO INFO	10853,76
+NO INFO	3876,18
+NO INFO	507,77
+NO INFO	136,52
+NO INFO	546,1
+NO INFO	9044,8
+NO INFO	16065,15
+NO INFO	10699,73
+NO INFO	136,52
+NO INFO	9690,45
+NO INFO	530,93
+NO INFO	878,31
+NO INFO	2009,95
+NO INFO	17132,9
+NO INFO	4634,96
+NO INFO	17132,9
+NO INFO	3003,55
+NO INFO	3494,65
+NO INFO	1163,4
+NO INFO	6916,44
+NO INFO	6624,8
+NO INFO	1419,6
+NO INFO	25824,12
+NO INFO	1397,86
+NO INFO	9524
+NO INFO	3342,3
+NO INFO	3312,4
+NO INFO	19047,88
+NO INFO	17132,9
+NO INFO	2317,48
+NO INFO	9287,44
+NO INFO	3617,92
+NO INFO	1938,09
+NO INFO	4728,02
+NO INFO	878,31
+NO INFO	3342,3
+NO INFO	9523,94
+NO INFO	1808,96
+NO INFO	1938,09
+NO INFO	12888,21
+NO INFO	9523,94
+NO INFO	2009,95
+NO INFO	6916,44
+NO INFO	1808,96
+NO INFO	878,31
+NO INFO	3342,3
+NO INFO	9523,94
+NO INFO	3342,3
+NO INFO	19047,88
+NO INFO	17132,9
+NO INFO	5363
+NO INFO	6217,86
+NO INFO	9639,09
+NO INFO	1008,95
+NO INFO	1808,96
+NO INFO	3876,18
+NO INFO	3494,65
+NO INFO	2634,93
+NO INFO	6624,8
+NO INFO	7728,05
+NO INFO	3342,3
+NO INFO	9523,94
+NO INFO	11833,72
+NO INFO	946,9
+NO INFO	6684,6
+NO INFO	19047,88
+NO INFO	11833,72
+NO INFO	4019,9
+NO INFO	2634,93
+NO INFO	12888,21
+NO INFO	6916,44
+NO INFO	11833,72
+NO INFO	17132,9
+NO INFO	380
+NO INFO	2962,3
+NO INFO	679,92
+NO INFO	6685,23
+NO INFO	9523,94
+NO INFO	679,92
+NO INFO	7001,9
+NO INFO	5814,27
+NO INFO	4391,55
+NO INFO	3617,92
+NO INFO	1690
+NO INFO	583,49
+NO INFO	3680,46
+NO INFO	1008,95
+NO INFO	9639,09
+NO INFO	360,06
+NO INFO	8746,78
+NO INFO	3494,65
+NO INFO	11256,88
+NO INFO	11833,72
+NO INFO	5969,54
+NO INFO	17132,9
+NO INFO	11833,72
+NO INFO	1756,62
+NO INFO	4019,9
+NO INFO	3342,3
+NO INFO	11833,72
+NO INFO	3342,3
+NO INFO	17132,9
+NO INFO	19047,88
+NO INFO	11833,72
+NO INFO	5916,86
+NO INFO	5272,8
