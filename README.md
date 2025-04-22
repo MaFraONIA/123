@@ -1,211 +1,65 @@
-APPLICATION	TOTAL BILLING AMOUNT (HT)
-WH	5742,62
-RAD	4391,55
-WH	3640,67
-RAD	3026,79
-RAD	2974,4
-RAD	2072,62
-RAD	15456,1
-RAD	4019,9
-RAD	12160
-RAD	1507,48
-CV	3250,59
-CV	5005,78
-RAD	13174,65
-RAD	6916,76
-WH	7728,05
-RAD	15340,34
-RAD	4145,24
-RAD	13833,52
-RAD	25776,42
-RAD	15340,34
-WH	2590
-RAD	16079,6
-RAD	2974,4
-RAD	6916,76
-RAD	38664,63
-RAD	23010,51
-RAD	12059,7
-WH	7728,05
-RAD	15456,1
-RAD	10465
-RAD	6916,44
-WH	17132,9
-RAD	25776,42
-RAD	2009,95
-RAD	4391,55
-RAD	12888,21
-RAD	6916,44
-RAD	5969,54
-RAD	3056,78
-RAD	878,31
-RAD	6916,44
-WH	1441,23
-WH	5514,26
-WH	2636,4
-RAD	4634,96
-RAD	620,43
-RAD	12888,21
-RAD	9524
-RAD	595,56
-WH	2072,62
-RAD	581,7
-RAD	2252,66
-MG	25776,42
-MG	3513,24
-POC	4145,24
-WH	455,08
-WH	882,52
-MG	1765,04
-MG	2795,72
-MG	6916,44
-CV	9937,2
-POC	2755
-MG	5272,8
-POC	3312,4
-POC	2096,76
-POC	6952,44
-MG	17227,86
-MG	5374,2
-CV	9524
-WH	6916,44
-WH	698,92
-CV	3513,24
-CV	8039,8
-CV	9524
-WH	7728,05
-WH	11256,88
-MG	10100,86
-MG	13495,79
-POC	7728,05
-WH	12759,72
-MG	9524
-POC	1808,96
-WH	1938,09
-CV	7670,17
-CV	9524
-RAD	5272,8
-WH	1720,55
-POC	528,76
-WH	3460,44
-WH	1938,09
-CV	9524
-POC	1808,96
-WH	3617,92
-MG	3876,18
-MG	19047,88
-WH	7728,05
-WH	1938,09
-POC	872,05
-CV	492,8
-WH	14306,32
-WH	2210
-RAD	4019,9
-CV	5948,8
-RAD	3494,65
-WH	10853,76
-MG	3876,18
-RAD	507,77
-RAD	136,52
-MG	546,1
-CV	9044,8
-MG	16065,15
-CV	10699,73
-RAD	136,52
-WH	9690,45
-WH	530,93
-MG	878,31
-POC	2009,95
-MG	17132,9
-RAD	4634,96
-MG	17132,9
-RAD	3003,55
-CV	3494,65
-POC	1163,4
-MG	6916,44
-RAD	6624,8
-MG	1419,6
-MG	25824,12
-WH	1397,86
-CV	9524
-RAD	3342,3
-WH	3312,4
-MG	19047,88
-MG	17132,9
-RAD	2317,48
-WH	9287,44
-WH	3617,92
-CV	1938,09
-CV	4728,02
-MG	878,31
-RAD	3342,3
-CV	9523,94
-POC	1808,96
-WH	1938,09
-CV	12888,21
-MG	9523,94
-POC	2009,95
-WH	6916,44
-POC	1808,96
-MG	878,31
-RAD	3342,3
-CV	9523,94
-POC	3342,3
-MG	19047,88
-MG	17132,9
-CV	5363
-MG	6217,86
-MG	9639,09
-CV	1008,95
-MG	1808,96
-MG	3876,18
-MG	3494,65
-CV	2634,93
-POC	6624,8
-WH	7728,05
-RAD	3342,3
-MG	9523,94
-WH	11833,72
-POC	946,9
-CV	6684,6
-MG	19047,88
-WH	11833,72
-CV	4019,9
-CV	2634,93
-WH	12888,21
-WH	6916,44
-WH	11833,72
-MG	17132,9
-MG	380
-CV	2962,3
-MG	679,92
-MG	6685,23
-WH	9523,94
-RAD	679,92
-MG	7001,9
-WH	5814,27
-WH	4391,55
-WH	3617,92
-RAD	1690
-CV	583,49
-CV	3680,46
-CV	1008,95
-WH	9639,09
-POC	360,06
-MG	8746,78
-MG	3494,65
-MG	11256,88
-WH	11833,72
-WH	5969,54
-MG	17132,9
-WH	11833,72
-CV	1756,62
-WH	4019,9
-MG	3342,3
-WH	11833,72
-POC	3342,3
-MG	17132,9
-MG	19047,88
-MG	11833,72
-POC	5916,86
-POC	5272,8
+Perles Spirituelles
+-------------------
+
+Q1/ R1/
+
+Pr 10:22 : Puisque les bénédictions de Jéhovah ne s’accompagnent pas de douleurs, pourquoi les serviteurs de Dieu rencontrent ils beaucoup d’épreuves ?
+
+Cela signifie que les vraies bénédictions de Dieu apportent une richesse authentique, une paix intérieure et une satisfaction profonde, sans les regrets, la culpabilité ou les conséquences douloureuses qui accompagnent souvent les richesses ou plaisirs du monde.
+
+Cependant, cela ne veut pas dire que les serviteurs de Dieu sont épargnés par les épreuves ou les difficultés. Le chapitre 10 des Proverbes montre que la vie d'un juste n’est pas exempte de défis, mais que la droiture, la sagesse et la fidélité à Dieu apportent une protection, une direction et une paix que le monde ne peut offrir.
+
+La tour de garde de :
+Les bénédictions de Jéhovah ne s’accompagnent pas de douleurs dans le sens où elles ne provoquent pas de souffrances inutiles, de remords ou de conséquences négatives comme c’est souvent le cas avec les « bénédictions » du monde (richesses mal acquises, plaisirs égoïstes, etc.). Les épreuves que rencontrent les serviteurs de Dieu ne viennent pas de Jéhovah, mais sont le résultat de vivre dans un monde imparfait, sous l’influence de Satan, et parfois à cause de l’opposition ou des choix des autres (voir aussi Jean 15:18, 19 ; 1 Pierre 5:8, source).
+
+Les épreuves servent à éprouver et à renforcer la foi, mais elles ne sont pas une « douleur » ajoutée par Dieu à ses bénédictions. Au contraire, même au milieu des difficultés, les serviteurs de Dieu peuvent ressentir la paix, la joie et la satisfaction qui viennent de la bénédiction divine, ce que le chapitre 10 des Proverbes illustre par la différence entre la vie du juste et celle du méchant.
+
+Les bénédictions de Jéhovah enrichissent la vie sans y ajouter de douleurs inutiles ou de conséquences négatives. Les épreuves que rencontrent les serviteurs de Dieu sont dues à l’état du monde et non à la volonté de Dieu. Malgré ces épreuves, la bénédiction de Jéhovah procure une paix et une joie véritables, qui ne dépendent pas des circonstances extérieures (source).
+
+
+
+
+Q2/ R2/
+
+1. L’importance de la droiture et de l’intégrité
+Proverbes 10:2 :
+
+« Les trésors mal acquis ne profitent aˋ rien, mais la justice délivre de la mort. »
+
+Ce verset montre que l’honnêteté et la droiture ont une valeur durable, alors que les gains malhonnêtes n’apportent aucun vrai bénéfice.
+
+2. La valeur du travail assidu
+Proverbes 10:4 :
+
+« Celui qui agit avec nonchalance s’appauvrit, mais la main des personnes actives enrichit. »
+
+Ce passage encourage à être travailleur et à éviter la paresse, car le travail honnête mène à la satisfaction et à la sécurité.
+
+3. Le pouvoir des paroles
+Proverbes 10:19-21 :
+
+« Celui qui parle beaucoup ne manque pas de pécher, mais celui qui retient ses lèvres agit avec sagesse. La langue du juste est un argent de choix, le cœur du méchant a peu de valeur. Les lèvres du juste dirigent beaucoup de gens, mais les insensés meurent par manque de bon sens. »
+
+Ces versets rappellent l’importance de contrôler ses paroles et d’utiliser la parole pour encourager et édifier, plutôt que pour blesser.
+
+4. Les conséquences de la conduite
+Proverbes 10:9 :
+
+« Celui qui marche dans l’intégritéˊ marche en sécuritéˊ, mais celui qui suit des voies tortueuses sera découvert. »
+
+Ce verset souligne que vivre avec intégrité procure la sécurité et la paix intérieure, tandis que la malhonnêteté finit par être dévoilée.
+
+5. La vraie richesse vient de Jéhovah
+Proverbes 10:22 :
+
+« C’est la bénédiction de Jéhovah qui enrichit, et il n’ajoute aucune douleur avec elle. »
+
+Ce passage enseigne que la vraie richesse et le vrai bonheur viennent de la bénédiction de Dieu, et non des possessions matérielles.
+
+6. L’importance de la discipline et de l’écoute
+Proverbes 10:17 :
+
+« Qui tient compte de la discipline est sur le chemin de la vie, mais celui qui ignore la réprimande s’égare. »
+
+Accepter la discipline et les conseils est essentiel pour progresser et rester sur la bonne voie.
+
