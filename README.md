@@ -28,3 +28,38 @@ Q2/
 
 ### Étude biblique de l’assemblée
 
+9-10. Quelles difficultés ont surgi au voisinage de la Crète ?
+
+Après avoir longé la Crète, le navire a été surpris par un vent violent appelé l’Euroaquilon (Actes 27:14). Ce vent a rapidement transformé la situation, rendant la navigation incontrôlable. Le bateau a été emporté loin de la côte, et l’équipage n’a pas pu maintenir le cap. Ils ont dû se laisser porter par la tempête, ce qui a créé une situation très dangereuse pour tous à bord (Actes 27:15-17).
+
+Euroaquilon est le nom d'un vent violent et impétueux venant du nord-est. Imagine un vent très fort, capable de soulever des vagues énormes et de rendre la navigation extrêmement dangereuse. C'est un peu comme un ouragan, mais localisé en Méditerranée.
+
+11. Quel conseil Paul a-t-il donné, mais quelle décision a été prise ?
+
+Paul avait conseillé de ne pas quitter le port de Beaux-Ports, car il prévoyait que le voyage serait périlleux et causerait de grandes pertes, non seulement pour la cargaison et le navire, mais aussi pour les vies humaines (Actes 27:9-10). Cependant, le centurion a préféré écouter le pilote et le propriétaire du navire, qui voulaient continuer le voyage, pensant trouver un meilleur port pour passer l’hiver (Actes 27:11-12).
+
+12. Quels périls le bateau a-t-il rencontrés après avoir quitté la Crète, et qu’a fait l’équipage pour éviter la catastrophe ?
+
+Après avoir quitté la Crète, le navire a été pris dans une tempête si violente que l’équipage a dû renforcer le bateau en le ceinturant de cordages pour éviter qu’il ne se brise (Actes 27:16-17). Ils ont aussi jeté la cargaison et une partie de l’équipement à la mer pour alléger le navire (Actes 27:18-19). Malgré tous leurs efforts, ils ont été ballottés par la tempête pendant de nombreux jours, sans voir ni soleil ni étoiles, ce qui a accru leur désespoir.
+
+13. Quelle devait être la situation sur le bateau pendant la tempête ?
+
+La situation à bord était extrêmement tendue et angoissante. Les passagers et l’équipage étaient épuisés, n’ayant pas mangé depuis longtemps à cause de la peur et du mal de mer (Actes 27:20-21, 33). Beaucoup avaient perdu tout espoir de survie, tant la tempête semblait interminable et la situation désespérée.
+
+14-15.
+
+a) Pourquoi Paul a-t-il rappelé sa mise en garde précédente ?
+b) Quelle leçon tirons-nous du message d’espoir transmis par Paul ?
+
+a) Paul a rappelé sa mise en garde pour souligner qu’il avait déjà averti du danger, mais aussi pour préparer les esprits à écouter le message d’espoir qu’il allait transmettre (Actes 27:21). Cela montrait qu’il n’agissait pas par orgueil, mais pour renforcer la confiance dans ce qu’il allait dire ensuite.
+
+b) Le message d’espoir de Paul, basé sur la promesse reçue d’un ange de Dieu, a redonné du courage à tous. Il a affirmé que, malgré la perte du navire, aucune vie ne serait perdue (Actes 27:22-25). La leçon à en tirer est que, même dans les situations les plus désespérées, la foi en Dieu et l’écoute de ses instructions peuvent apporter réconfort et espoir.
+
+16-17.
+
+a) Quelle occasion de prier Paul a-t-il saisie ?
+b) Comment l’avertissement de Paul s’est-il vérifié ?
+
+a) Paul a saisi l’occasion de prier et de remercier Dieu publiquement avant de manger, alors que la tempête faisait toujours rage (Actes 27:35). Ce geste a encouragé les autres à reprendre des forces et a montré l’importance de la reconnaissance envers Dieu, même dans l’épreuve.
+
+b) L’avertissement de Paul s’est vérifié lorsque le navire s’est effectivement échoué, mais, conformément à la promesse divine, tous les passagers ont survécu (Actes 27:41-44). Cela a confirmé que la confiance en la parole de Dieu n’est jamais vaine, même lorsque la situation semble sans issue.
