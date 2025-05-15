@@ -8,6 +8,7 @@ Q1/
 
 Proverbes 13:24 met en garde contre une forme d’amour parental qui, sous prétexte de tendresse ou de compassion, refuse de corriger l’enfant. Ce verset montre que négliger la discipline n’est pas une preuve d’affection, mais plutôt un manque d’amour véritable. En effet, un parent qui aime sincèrement son enfant cherchera à le guider et à le corriger, même si cela peut être difficile ou désagréable sur le moment. Laisser un enfant sans discipline, c’est en réalité lui nuire, car il risque de s’égarer et de souffrir des conséquences de ses mauvais choix.
 
+
 L’avertissement de ce verset, c’est donc que l’amour mal dirigé – celui qui évite la discipline pour ne pas peiner l’enfant ou par peur du conflit – peut avoir des conséquences graves. Un tel amour, en réalité, prive l’enfant de la protection et de l’encadrement dont il a besoin pour grandir et devenir une personne équilibrée. La véritable affection se manifeste par la volonté d’enseigner, de corriger et de guider, même si cela demande des efforts et du courage.
 
 En résumé, Proverbes 13:24 nous rappelle que l’amour authentique ne consiste pas à tout permettre, mais à aider l’enfant à progresser, en lui offrant un cadre et des limites qui le protègent et le font grandir. Refuser la correction, c’est céder à un amour mal orienté, qui peut finalement nuire à l’enfant plutôt que de l’aider.
