@@ -1,64 +1,88 @@
-
-
 ### Perles spirituelles
 
 Q1/
 
-Proverbes 13:24 met en garde contre une forme d’amour parental qui, sous prétexte de tendresse ou de compassion, refuse de corriger l’enfant. Ce verset montre que négliger la discipline n’est pas une preuve d’affection, mais plutôt un manque d’amour véritable. En effet, un parent qui aime sincèrement son enfant cherchera à le guider et à le corriger, même si cela peut être difficile ou désagréable sur le moment. Laisser un enfant sans discipline, c’est en réalité lui nuire, car il risque de s’égarer et de souffrir des conséquences de ses mauvais choix.
 
+Proverbes 15:22 souligne l'importance de consulter d'autres personnes avant de prendre des décisions importantes : « Les projets échouent faute de délibération, mais ils réussissent quand il y a de nombreux conseillers. » Ce principe s’applique particulièrement bien lorsqu’il s’agit de choisir un traitement médical.
 
-L’avertissement de ce verset, c’est donc que l’amour mal dirigé – celui qui évite la discipline pour ne pas peiner l’enfant ou par peur du conflit – peut avoir des conséquences graves. Un tel amour, en réalité, prive l’enfant de la protection et de l’encadrement dont il a besoin pour grandir et devenir une personne équilibrée. La véritable affection se manifeste par la volonté d’enseigner, de corriger et de guider, même si cela demande des efforts et du courage.
+Dans le contexte des soins de santé, il est facile de se sentir dépassé par la complexité des options et des conséquences possibles. S’inspirer de ce verset, c’est reconnaître que nous n’avons pas toutes les connaissances nécessaires pour évaluer seuls chaque aspect d’un traitement. Chercher l’avis de professionnels compétents, comme des médecins ou des spécialistes, permet d’obtenir des informations précises et actualisées. De plus, discuter avec des personnes de confiance, qui partagent nos valeurs et notre foi, peut nous aider à voir les choses sous un autre angle et à éviter des décisions précipitées ou mal informées.
 
-En résumé, Proverbes 13:24 nous rappelle que l’amour authentique ne consiste pas à tout permettre, mais à aider l’enfant à progresser, en lui offrant un cadre et des limites qui le protègent et le font grandir. Refuser la correction, c’est céder à un amour mal orienté, qui peut finalement nuire à l’enfant plutôt que de l’aider.
+Le chapitre 15 des Proverbes met aussi en avant la valeur de l’humilité, de l’écoute et de la réflexion avant d’agir. Par exemple, il encourage à accepter la correction et à rechercher la sagesse plutôt que de s’appuyer uniquement sur sa propre compréhension. Cela nous invite à ne pas hésiter à poser des questions, à exprimer nos préoccupations et à examiner les différentes options avec ouverture d’esprit.
+
+Appliquer le principe de Proverbes 15:22 dans le domaine médical, c’est faire preuve de prudence et de sagesse en s’entourant de conseils avisés, en prenant le temps de réfléchir et en restant humble face à la complexité des choix à faire. Cela augmente nos chances de prendre des décisions éclairées, respectueuses de nos convictions et bénéfiques pour notre santé.
 
 Q2/
 
 
-- D’abord, ce chapitre montre l’importance d’écouter les conseils et la correction. Par exemple, le premier verset souligne que celui qui accepte la discipline fait preuve de sagesse, alors que celui qui la rejette s’expose à des difficultés. Cela nous enseigne que l’humilité et la volonté d’apprendre sont essentielles pour progresser.
+### 1. Le pouvoir des paroles  
+**Proverbes 15:1** : « Une réponse douce calme la fureur, mais une parole blessante excite la colère. »
 
-- Ensuite, plusieurs versets insistent sur la valeur du travail et de la persévérance. Le verset 4, par exemple, met en contraste le paresseux, qui désire sans rien obtenir, et la personne active, qui voit ses efforts récompensés. Cela rappelle que la réussite et la satisfaction sont souvent le fruit de l’effort constant.
+Ce verset met en lumière l’influence considérable de nos paroles sur l’ambiance autour de nous. Dans une situation tendue, il est facile de réagir impulsivement ou de répondre sur le même ton que notre interlocuteur. Pourtant, choisir la douceur, même face à l’agressivité, peut désamorcer la colère et ouvrir la voie à la compréhension. Cela demande de la maîtrise de soi et de l’empathie, mais c’est un moyen puissant de préserver la paix dans nos relations, que ce soit en famille, au travail ou dans la communauté. Ce principe nous invite à réfléchir avant de parler et à privilégier la bienveillance, même quand nous sommes contrariés.
 
-- Le chapitre aborde aussi la question de l’influence des fréquentations. Le verset 20 explique que fréquenter des personnes sages nous aide à devenir plus sages, tandis que s’associer à des personnes dépourvues de bon sens peut nous attirer des ennuis. Ce principe nous encourage à choisir nos amis avec discernement.
+---
 
-- Un autre point important concerne l’attitude envers la richesse et la pauvreté. Le verset 11, par exemple, montre que l’argent acquis trop facilement disparaît vite, alors que celui qui est gagné progressivement augmente. Cela enseigne la valeur de la patience et de la gestion prudente des ressources.
+### 2. L’humilité face à la correction  
+**Proverbes 15:5** : « Celui qui rejette la discipline méprise son âme, mais celui qui écoute la réprimande acquiert du bon sens. »
 
-- Enfin, le chapitre insiste sur la nécessité de la discipline dans l’éducation des enfants, comme le montre le verset 24. Il en ressort que la correction, lorsqu’elle est motivée par l’amour, est bénéfique pour l’enfant et contribue à sa formation.
+Accepter la correction n’est jamais facile, car cela touche à notre orgueil. Pourtant, ce verset montre que l’humilité est essentielle pour progresser. Celui qui accepte d’être repris reconnaît qu’il a encore à apprendre et qu’il peut s’améliorer. Cette attitude permet d’éviter de répéter les mêmes erreurs et d’acquérir une véritable sagesse. À l’inverse, rejeter toute remarque, c’est se priver d’une occasion de grandir et, à long terme, cela peut nuire à notre bien-être. L’humilité face à la correction est donc une force, pas une faiblesse.
+
+---
+
+### 3. La valeur de la prière  
+**Proverbes 15:8** : « Le sacrifice des méchants est en horreur à Jéhovah, mais la prière des hommes droits lui est agréable. »
+
+Ce verset rappelle que Dieu ne se contente pas des apparences ou des rituels : il recherche la sincérité du cœur. La prière, quand elle vient d’une personne qui cherche à faire ce qui est juste, est précieuse à ses yeux. Cela signifie que, même si l’on se sent imparfait ou faible, on peut s’approcher de Dieu avec confiance, sachant qu’il écoute et qu’il se soucie de nous. La prière devient alors une source de réconfort, de force et de guidance, surtout dans les moments de doute ou de difficulté.
+
+---
+
+### 4. L’importance de la joie intérieure  
+**Proverbes 15:13** : « Un cœur joyeux rend le visage serein, mais quand le cœur est triste, l’esprit est abattu. »
+
+Ce verset souligne le lien entre notre état d’esprit et notre bien-être général. La joie intérieure ne dépend pas seulement des circonstances extérieures, mais aussi de notre façon de voir la vie. Cultiver la gratitude, l’optimisme et la confiance en Dieu permet de garder un esprit positif, même face aux épreuves. Cette attitude rayonne sur notre entourage : un sourire sincère, une parole encourageante ou une attitude positive peuvent remonter le moral de ceux qui nous entourent. À l’inverse, se laisser envahir par la tristesse ou le découragement peut assombrir notre vie et celle des autres.
+
+---
+
+### 5. Le discernement dans les choix  
+**Proverbes 15:14** : « Le cœur intelligent cherche la connaissance, mais la bouche des insensés se repaît de folie. »
+
+Ce verset invite à faire preuve de discernement dans ce que l’on choisit de nourrir notre esprit. Chercher la connaissance, c’est s’intéresser à ce qui est vrai, utile et constructif, que ce soit dans la lecture, les discussions ou les choix de vie. Cela implique aussi de s’entourer de personnes qui nous tirent vers le haut et de fuir ce qui est futile ou nuisible. Ce principe est particulièrement important à notre époque, où l’information abonde mais où tout n’est pas bénéfique. Le discernement nous aide à faire des choix qui contribuent à notre croissance personnelle et spirituelle.
+
+---
+
+### 6. L’intégrité  
+**Proverbes 15:3** : « Les yeux de Jéhovah sont en tout lieu, observant les méchants et les bons. »
+
+Ce verset rappelle que rien n’échappe à Dieu : il voit aussi bien nos actions publiques que nos pensées ou nos choix privés. L’intégrité, c’est agir avec honnêteté et droiture, même quand personne ne nous regarde. Ce principe donne du sens à nos efforts pour rester fidèles à nos valeurs, même dans les petites choses. Savoir que Dieu observe tout peut être une source de motivation pour faire ce qui est juste, non pas par peur, mais par respect pour lui et pour soi-même. L’intégrité inspire la confiance des autres et construit une réputation solide, mais surtout, elle nous rapproche de Dieu.
+
+
 
 
 ### Étude biblique de l’assemblée
 
-9-10. Quelles difficultés ont surgi au voisinage de la Crète ?
 
-Après avoir longé la Crète, le navire a été surpris par un vent violent appelé l’Euroaquilon (Actes 27:14). Ce vent a rapidement transformé la situation, rendant la navigation incontrôlable. Le bateau a été emporté loin de la côte, et l’équipage n’a pas pu maintenir le cap. Ils ont dû se laisser porter par la tempête, ce qui a créé une situation très dangereuse pour tous à bord (Actes 27:15-17).
+1. Quelle confiance Paul et ses compagnons avaient-ils, et pourquoi ?
 
-Euroaquilon est le nom d'un vent violent et impétueux venant du nord-est. Imagine un vent très fort, capable de soulever des vagues énormes et de rendre la navigation extrêmement dangereuse. C'est un peu comme un ouragan, mais localisé en Méditerranée.
+Paul, Luc et Aristarque avaient une confiance inébranlable en Jéhovah. Contrairement à l'équipage du navire qui invoquait les "fils de Zeus" pour obtenir protection, ils plaçaient leur foi en Jéhovah, le Dieu qui avait promis à Paul qu'il témoignerait à Rome et se présenterait devant César. Leur confiance reposait sur la certitude que Jéhovah accomplirait sa parole, peu importe les circonstances.
 
-11. Quel conseil Paul a-t-il donné, mais quelle décision a été prise ?
+2-3. Quel a été le trajet du bateau qui transportait Paul, et qui soutenait Paul depuis le début ?
 
-Paul avait conseillé de ne pas quitter le port de Beaux-Ports, car il prévoyait que le voyage serait périlleux et causerait de grandes pertes, non seulement pour la cargaison et le navire, mais aussi pour les vies humaines (Actes 27:9-10). Cependant, le centurion a préféré écouter le pilote et le propriétaire du navire, qui voulaient continuer le voyage, pensant trouver un meilleur port pour passer l’hiver (Actes 27:11-12).
+Le bateau a quitté Malte et a fait escale à Syracuse, en Sicile, avant de se diriger vers Rhegium, à la pointe de l'Italie. Ensuite, il a rejoint Puteoli, près de Naples. Tout au long de ce voyage, Paul a été soutenu par le "Dieu de toute consolation" (2 Corinthiens 1:3). Ce soutien divin s'est manifesté de différentes manières, lui donnant la force de persévérer et de rester zélé dans son ministère.
 
-12. Quels périls le bateau a-t-il rencontrés après avoir quitté la Crète, et qu’a fait l’équipage pour éviter la catastrophe ?
+4-5. a) Quel accueil Paul et ses compagnons ont-ils reçu à Puteoli, et pourquoi Paul avait-il autant de liberté ? b) Comment, même en prison, les chrétiens sont-ils récompensés de leur bonne conduite ?
 
-Après avoir quitté la Crète, le navire a été pris dans une tempête si violente que l’équipage a dû renforcer le bateau en le ceinturant de cordages pour éviter qu’il ne se brise (Actes 27:16-17). Ils ont aussi jeté la cargaison et une partie de l’équipement à la mer pour alléger le navire (Actes 27:18-19). Malgré tous leurs efforts, ils ont été ballottés par la tempête pendant de nombreux jours, sans voir ni soleil ni étoiles, ce qui a accru leur désespoir.
+À Puteoli, Paul et ses compagnons ont été accueillis chaleureusement par des frères qui ont insisté pour qu'ils restent avec eux pendant sept jours. L'hospitalité de ces chrétiens a été un encouragement précieux pour Paul et ses compagnons. Paul bénéficiait d'une certaine liberté, probablement parce qu'il avait gagné la confiance de ses gardes romains grâce à sa conduite exemplaire.
 
-13. Quelle devait être la situation sur le bateau pendant la tempête ?
+Même en prison, les chrétiens peuvent être récompensés pour leur bonne conduite. L'exemple de l'homme en Roumanie, qui a radicalement changé après avoir étudié la Bible et qui a obtenu des privilèges exceptionnels en prison, illustre comment une bonne conduite peut glorifier Jéhovah et apporter des bénédictions inattendues.
 
-La situation à bord était extrêmement tendue et angoissante. Les passagers et l’équipage étaient épuisés, n’ayant pas mangé depuis longtemps à cause de la peur et du mal de mer (Actes 27:20-21, 33). Beaucoup avaient perdu tout espoir de survie, tant la tempête semblait interminable et la situation désespérée.
+6-7. Quel amour extraordinaire les frères romains ont-ils montré ?
 
-14-15.
+Les frères de Rome ont manifesté un amour extraordinaire en venant à la rencontre de Paul et de ses compagnons. Certains ont fait le voyage jusqu'à la place du marché d'Appius, à environ 70 km de Rome, tandis que d'autres ont attendu aux Trois-Auberges, à 50 km de Rome. Malgré les désagréments du voyage et le peu de confort de la place du marché d'Appius, ils ont volontiers fait cet effort pour accueillir et encourager Paul et ses compagnons.
 
-a) Pourquoi Paul a-t-il rappelé sa mise en garde précédente ?
-b) Quelle leçon tirons-nous du message d’espoir transmis par Paul ?
+8. Pourquoi Paul a-t-il remercié Dieu en « apercevant » ses frères ?
 
-a) Paul a rappelé sa mise en garde pour souligner qu’il avait déjà averti du danger, mais aussi pour préparer les esprits à écouter le message d’espoir qu’il allait transmettre (Actes 27:21). Cela montrait qu’il n’agissait pas par orgueil, mais pour renforcer la confiance dans ce qu’il allait dire ensuite.
+En "apercevant" ses frères, Paul a remercié Dieu et a pris courage. La simple vue de ces chrétiens, dont il connaissait peut-être certains personnellement, l'a revigoré et consolé. Il a remercié Dieu parce qu'il savait que l'amour désintéressé était un aspect du fruit de l'esprit de Jéhovah (Galates 5:22). Cet amour fraternel lui a rappelé qu'il n'était pas seul et que ses frères et sœurs en la foi étaient là pour le soutenir.
 
-b) Le message d’espoir de Paul, basé sur la promesse reçue d’un ange de Dieu, a redonné du courage à tous. Il a affirmé que, malgré la perte du navire, aucune vie ne serait perdue (Actes 27:22-25). La leçon à en tirer est que, même dans les situations les plus désespérées, la foi en Dieu et l’écoute de ses instructions peuvent apporter réconfort et espoir.
+9. Comment imiter l’attitude des frères qui sont venus au-devant de Paul ?
 
-16-17.
+Nous pouvons imiter l'attitude des frères qui sont venus au-devant de Paul en étant hospitaliers envers les responsables itinérants, les missionnaires et les autres serviteurs à plein temps. Nous pouvons leur offrir l'hospitalité, les accompagner dans la prédication et les encourager par nos paroles et nos actions. En faisant cela, nous pouvons nous attendre à de grandes joies, comme celles qu'ont éprouvées les frères romains en écoutant les anecdotes encourageantes de Paul et de ses compagnons (Actes 15:3, 4).
 
-a) Quelle occasion de prier Paul a-t-il saisie ?
-b) Comment l’avertissement de Paul s’est-il vérifié ?
-
-a) Paul a saisi l’occasion de prier et de remercier Dieu publiquement avant de manger, alors que la tempête faisait toujours rage (Actes 27:35). Ce geste a encouragé les autres à reprendre des forces et a montré l’importance de la reconnaissance envers Dieu, même dans l’épreuve.
-
-b) L’avertissement de Paul s’est vérifié lorsque le navire s’est effectivement échoué, mais, conformément à la promesse divine, tous les passagers ont survécu (Actes 27:41-44). Cela a confirmé que la confiance en la parole de Dieu n’est jamais vaine, même lorsque la situation semble sans issue.
