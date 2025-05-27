@@ -1,6 +1,11 @@
-LCL
-- LCL Banque et assurance, 77 Rue Sommeville, 77380 Combs-la-Ville
-- LCL Banque et assurance, 3 All. du Préambule, 77127 Lieusaint
+Bonjour Monsieur KACHOURI,
+
+J'espère que vous allez bien !
+
+J'ai essayé d'accéder à ce lien "https://efrei365net-my.sharepoint.com/:x:/r/personal/rostom_kachouri_efrei_fr/_layouts/15/Doc2.aspx?action=editNew&sourcedoc=%7bd2faa652-87aa-4e64-9666-fe468c520f78%7d&wdOrigin=TEAMS-MAGLEV.teamsSdk_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1748161020482&web=1" mais sans succès, je viens de faire la demande d'accès. 
+Francesco sera disponible le 27 Juin 2025 à 9h pour la soutenance. Cette date vous va-t-elle ?
+
+Bonne journée !
 
 ### Perles spirituelles
 
