@@ -1,3 +1,8 @@
+
+Formule de la cellule C3 : =SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE")
+
+Formule de la cellule D3 : =SIERREUR(MOYENNE.SI.ENS('Suivi DEMO - 2024+2025'!$F$2:$F$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE"); 0)
+
 ## Perles spirituelles
 
 Q1/
