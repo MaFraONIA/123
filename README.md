@@ -1,4 +1,4 @@
-Les macros "DiagnostiquerCellulesFusionnees" et "TesterUneCellule" ont bien fonctionnées, mais la maro "Sub CompleterTableauFrancescoAvecVendeursLigne1" me génère l'eereur d'exécution '1004' à cause de cette ligne "ws.Cells(i, j).Formula = formuleMoyenne". Corrige STP, et donnes moi les codes au complet avec toutes les lignes de codes.
+
 
 
 
