@@ -1,13 +1,14 @@
 Voici la liste des vendeurs utiisés par le tableau "2024_Francesco_Tableau" : 
-AP
-BH
-CT
-JB
-JBBIS
-QF
-RW
-XJ
-YA
+AP,
+BH,
+CT,
+JB,
+JBBIS,
+QF,
+RW,
+XJ,
+YA.
+
 Pas les autres vendeurs.
 
 
