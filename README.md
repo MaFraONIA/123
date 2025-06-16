@@ -1,482 +1,58 @@
-Sub CompleterTableauFrancescoAvecVendeursLigne1()
-    Dim ws As Worksheet
-    Dim wsSource As Worksheet
-    Dim i As Long, j As Long
-    Dim mois As String
-    Dim produit As String
-    Dim vendeur As String
-    Dim typeDonnees As String
-    Dim formuleBase As String
-    Dim formuleMoyenne As String
-    Dim cellulesCrees As Long
-    Dim erreursRencontrees As Long
-    
-    ' Définir les feuilles de travail
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    Set wsSource = ThisWorkbook.Sheets("Suivi DEMO - 2024+2025")
-    
-    ' Désactiver les calculs automatiques pour améliorer les performances
-    Application.Calculation = xlCalculationManual
-    Application.ScreenUpdating = False
-    
-    cellulesCrees = 0
-    erreursRencontrees = 0
-    
-    ' Parcourir toutes les lignes de produits
-    For i = 3 To 200 ' Ajustez selon le nombre total de lignes
-        
-        ' Récupérer le nom du produit depuis la colonne B
-        produit = Trim(ws.Cells(i, 2).Value)
-        
-        If produit <> "" Then
-            ' Parcourir toutes les colonnes de données
-            For j = 3 To 200 ' Ajustez selon le nombre de colonnes
-                
-                ' Vérifier si la cellule est vide
-                If IsEmpty(ws.Cells(i, j).Value) Or ws.Cells(i, j).Value = "" Or ws.Cells(i, j).Value = 0 Then
-                    
-                    ' Lire les en-têtes
-                    Dim enTeteLigne1 As String ' Vendeur (cellules fusionnées)
-                    Dim enTeteLigne2 As String ' Type de données (DEMO/DUREE/VENTE)
-                    Dim enTeteMois As String   ' Mois depuis la colonne A
-                    
-                    enTeteLigne1 = Trim(CStr(ws.Cells(1, j).Value))  ' Vendeur
-                    enTeteLigne2 = UCase(Trim(CStr(ws.Cells(2, j).Value)))  ' Type
-                    enTeteMois = UCase(Trim(CStr(ws.Cells(i, 1).Value)))    ' Mois depuis colonne A
-                    
-                    ' Réinitialiser les variables
-                    mois = ""
-                    vendeur = ""
-                    typeDonnees = ""
-                    
-                    ' Extraire le vendeur directement depuis la ligne 1 (cellules fusionnées)
-                    vendeur = enTeteLigne1
-                    
-                    ' Vérifier que c'est un vendeur valide
-                    If vendeur = "AP" Or vendeur = "BH" Or vendeur = "CT" Or vendeur = "JB" Or _
-                       vendeur = "JBBIS" Or vendeur = "QF" Or vendeur = "RW" Or vendeur = "XJ" Or vendeur = "YA" Then
-                        ' Vendeur valide, continuer
-                    Else
-                        ' Essayer de trouver le vendeur dans une cellule fusionnée précédente
-                        Dim k As Long
-                        For k = j To 1 Step -1
-                            Dim vendeurTest As String
-                            vendeurTest = Trim(CStr(ws.Cells(1, k).Value))
-                            If vendeurTest = "AP" Or vendeurTest = "BH" Or vendeurTest = "CT" Or vendeurTest = "JB" Or _
-                               vendeurTest = "JBBIS" Or vendeurTest = "QF" Or vendeurTest = "RW" Or vendeurTest = "XJ" Or vendeurTest = "YA" Then
-                                vendeur = vendeurTest
-                                Exit For
-                            End If
-                        Next k
-                    End If
-                    
-                    ' Extraire le mois depuis la colonne A de la ligne courante
-                    If InStr(enTeteMois, "JANVIER") > 0 Then mois = "1"
-                    If InStr(enTeteMois, "FEVRIER") > 0 Or InStr(enTeteMois, "FÉVRIER") > 0 Then mois = "2"
-                    If InStr(enTeteMois, "MARS") > 0 Then mois = "3"
-                    If InStr(enTeteMois, "AVRIL") > 0 Then mois = "4"
-                    If InStr(enTeteMois, "MAI") > 0 Then mois = "5"
-                    If InStr(enTeteMois, "JUIN") > 0 Then mois = "6"
-                    If InStr(enTeteMois, "JUILLET") > 0 Then mois = "7"
-                    If InStr(enTeteMois, "AOUT") > 0 Or InStr(enTeteMois, "AOÛT") > 0 Then mois = "8"
-                    If InStr(enTeteMois, "SEPTEMBRE") > 0 Then mois = "9"
-                    If InStr(enTeteMois, "OCTOBRE") > 0 Then mois = "10"
-                    If InStr(enTeteMois, "NOVEMBRE") > 0 Then mois = "11"
-                    If InStr(enTeteMois, "DECEMBRE") > 0 Or InStr(enTeteMois, "DÉCEMBRE") > 0 Then mois = "12"
-                    
-                    ' Si pas de mois trouvé dans la colonne A, chercher dans les en-têtes fusionnés
-                    If mois = "" Then
-                        For k = 1 To 2
-                            Dim enTeteMoisTest As String
-                            enTeteMoisTest = UCase(Trim(CStr(ws.Cells(k, j).Value)))
-                            If InStr(enTeteMoisTest, "JANVIER") > 0 Then mois = "1"
-                            If InStr(enTeteMoisTest, "FEVRIER") > 0 Or InStr(enTeteMoisTest, "FÉVRIER") > 0 Then mois = "2"
-                            If InStr(enTeteMoisTest, "MARS") > 0 Then mois = "3"
-                            If InStr(enTeteMoisTest, "AVRIL") > 0 Then mois = "4"
-                            If InStr(enTeteMoisTest, "MAI") > 0 Then mois = "5"
-                            If InStr(enTeteMoisTest, "JUIN") > 0 Then mois = "6"
-                            If InStr(enTeteMoisTest, "JUILLET") > 0 Then mois = "7"
-                            If InStr(enTeteMoisTest, "AOUT") > 0 Or InStr(enTeteMoisTest, "AOÛT") > 0 Then mois = "8"
-                            If InStr(enTeteMoisTest, "SEPTEMBRE") > 0 Then mois = "9"
-                            If InStr(enTeteMoisTest, "OCTOBRE") > 0 Then mois = "10"
-                            If InStr(enTeteMoisTest, "NOVEMBRE") > 0 Then mois = "11"
-                            If InStr(enTeteMoisTest, "DECEMBRE") > 0 Or InStr(enTeteMoisTest, "DÉCEMBRE") > 0 Then mois = "12"
-                            If mois <> "" Then Exit For
-                        Next k
-                    End If
-                    
-                    ' Extraire le type de données depuis la ligne 2
-                    If InStr(enTeteLigne2, "DEMO") > 0 Then typeDonnees = "DEMO"
-                    If InStr(enTeteLigne2, "DUREE") > 0 Or InStr(enTeteLigne2, "DURÉE") > 0 Then typeDonnees = "DUREE"
-                    If InStr(enTeteLigne2, "VENTE") > 0 Then typeDonnees = "VENTE"
-                    
-                    ' Générer la formule appropriée si tous les éléments sont présents
-                    If mois <> "" And vendeur <> "" And typeDonnees <> "" And produit <> "" Then
-                        
-                        ' Activer la gestion d'erreurs
-                        On Error GoTo GestionErreur
-                        
-                        If typeDonnees = "DEMO" Then
-                            ' Formule SOMME pour DEMO
-                            formuleBase = "=SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955;" & _
-                                        "'Suivi DEMO - 2024+2025'!$K$2:$K$955,""DEMO""," & _
-                                        "'Suivi DEMO - 2024+2025'!$M$2:$M$955,""ULTRASOUND""," & _
-                                        "'Suivi DEMO - 2024+2025'!$A$2:$A$955,""2024""," & _
-                                        "'Suivi DEMO - 2024+2025'!$C$2:$C$955,""" & mois & """," & _
-                                        "'Suivi DEMO - 2024+2025'!$G$2:$G$955,""" & vendeur & """," & _
-                                        "'Suivi DEMO - 2024+2025'!$I$2:$I$955,""" & produit & """)"
-                            
-                            ws.Cells(i, j).Formula = formuleBase
-                            cellulesCrees = cellulesCrees + 1
-                        
-                        ElseIf typeDonnees = "DUREE" Then
-                            ' Formule MOYENNE pour DUREE
-                            formuleMoyenne = "=SIERREUR(MOYENNE.SI.ENS('Suivi DEMO - 2024+2025'!$F$2:$F$955," & _
-                                           "'Suivi DEMO - 2024+2025'!$K$2:$K$955,""DEMO""," & _
-                                           "'Suivi DEMO - 2024+2025'!$M$2:$M$955,""ULTRASOUND""," & _
-                                           "'Suivi DEMO - 2024+2025'!$A$2:$A$955,""2024""," & _
-                                           "'Suivi DEMO - 2024+2025'!$C$2:$C$955,""" & mois & """," & _
-                                           "'Suivi DEMO - 2024+2025'!$G$2:$G$955,""" & vendeur & """," & _
-                                           "'Suivi DEMO - 2024+2025'!$I$2:$I$955,""" & produit & """),0)"
-                            
-                            ws.Cells(i, j).Formula = formuleMoyenne
-                            cellulesCrees = cellulesCrees + 1
-                        
-                        ElseIf typeDonnees = "VENTE" Then
-                            ' Formule SOMME pour VENTE
-                            formuleBase = "=SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955," & _
-                                        "'Suivi DEMO - 2024+2025'!$K$2:$K$955,""VENTE""," & _
-                                        "'Suivi DEMO - 2024+2025'!$M$2:$M$955,""ULTRASOUND""," & _
-                                        "'Suivi DEMO - 2024+2025'!$A$2:$A$955,""2024""," & _
-                                        "'Suivi DEMO - 2024+2025'!$C$2:$C$955,""" & mois & """," & _
-                                        "'Suivi DEMO - 2024+2025'!$G$2:$G$955,""" & vendeur & """," & _
-                                        "'Suivi DEMO - 2024+2025'!$I$2:$I$955,""" & produit & """)"
-                            
-                            ws.Cells(i, j).Formula = formuleBase
-                            cellulesCrees = cellulesCrees + 1
-                        End If
-                        
-                        ' Désactiver la gestion d'erreurs
-                        On Error GoTo 0
-                    End If
-                End If
-                
-                ' Continuer vers la cellule suivante
-                GoTo SuiteCellule
-                
-GestionErreur:
-                ' En cas d'erreur, incrémenter le compteur et continuer
-                erreursRencontrees = erreursRencontrees + 1
-                Resume SuiteCellule
-                
-SuiteCellule:
-            Next j
-        End If
-    Next i
-    
-    ' Calculer toutes les formules
-    ws.Calculate
-    
-    ' Réactiver les calculs et la mise à jour de l'écran
-    Application.Calculation = xlCalculationAutomatic
-    Application.ScreenUpdating = True
-    
-    ' Message de fin avec statistiques
-    MsgBox "Tableau complété avec succès !" & vbCrLf & vbCrLf & _
-           "Cellules remplies: " & cellulesCrees & vbCrLf & _
-           "Erreurs rencontrées: " & erreursRencontrees & vbCrLf & vbCrLf & _
-           "Vendeurs détectés depuis la ligne 1 (cellules fusionnées)" & vbCrLf & _
-           "Mois détectés depuis la colonne A" & vbCrLf & _
-           "Types détectés depuis la ligne 2", vbInformation, "Terminé"
-    
-End Sub
+Quand j'exécute la macro "DiagnostiquerCellulesFusionnees" voici ce que me donne le fichier texte généré (partie par partie pour t'expliquer ce qui ne va pas) : 
 
-' Macro alternative simplifiée sans SIERREUR
-Sub CompleterTableauSimpleSansErreur()
-    Dim ws As Worksheet
-    Dim i As Long, j As Long
-    Dim mois As String
-    Dim produit As String
-    Dim vendeur As String
-    Dim typeDonnees As String
-    Dim formule As String
-    Dim cellulesCrees As Long
-    
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    
-    Application.Calculation = xlCalculationManual
-    Application.ScreenUpdating = False
-    
-    cellulesCrees = 0
-    
-    For i = 3 To 100
-        produit = Trim(CStr(ws.Cells(i, 2).Value))
-        
-        If produit <> "" Then
-            For j = 3 To 100
-                
-                If IsEmpty(ws.Cells(i, j).Value) Or ws.Cells(i, j).Value = "" Or ws.Cells(i, j).Value = 0 Then
-                    
-                    ' Lire vendeur depuis ligne 1
-                    vendeur = Trim(CStr(ws.Cells(1, j).Value))
-                    
-                    ' Si pas de vendeur, chercher dans les cellules précédentes (fusion)
-                    If vendeur = "" Then
-                        Dim k As Long
-                        For k = j To 1 Step -1
-                            vendeur = Trim(CStr(ws.Cells(1, k).Value))
-                            If vendeur <> "" Then Exit For
-                        Next k
-                    End If
-                    
-                    ' Lire type depuis ligne 2
-                    typeDonnees = UCase(Trim(CStr(ws.Cells(2, j).Value)))
-                    
-                    ' Lire mois depuis colonne A
-                    Dim moisTexte As String
-                    moisTexte = UCase(Trim(CStr(ws.Cells(i, 1).Value)))
-                    
-                    ' Convertir le mois en numéro
-                    mois = ""
-                    If InStr(moisTexte, "JANVIER") > 0 Then mois = "1"
-                    If InStr(moisTexte, "FEVRIER") > 0 Or InStr(moisTexte, "FÉVRIER") > 0 Then mois = "2"
-                    If InStr(moisTexte, "MARS") > 0 Then mois = "3"
-                    If InStr(moisTexte, "AVRIL") > 0 Then mois = "4"
-                    If InStr(moisTexte, "MAI") > 0 Then mois = "5"
-                    If InStr(moisTexte, "JUIN") > 0 Then mois = "6"
-                    If InStr(moisTexte, "JUILLET") > 0 Then mois = "7"
-                    If InStr(moisTexte, "AOUT") > 0 Or InStr(moisTexte, "AOÛT") > 0 Then mois = "8"
-                    If InStr(moisTexte, "SEPTEMBRE") > 0 Then mois = "9"
-                    If InStr(moisTexte, "OCTOBRE") > 0 Then mois = "10"
-                    If InStr(moisTexte, "NOVEMBRE") > 0 Then mois = "11"
-                    If InStr(moisTexte, "DECEMBRE") > 0 Or InStr(moisTexte, "DÉCEMBRE") > 0 Then mois = "12"
-                    
-                    ' Vérifier que tous les éléments sont présents
-                    If mois <> "" And vendeur <> "" And typeDonnees <> "" And produit <> "" Then
-                        
-                        ' Vérifier que le vendeur est valide
-                        If vendeur = "AP" Or vendeur = "BH" Or vendeur = "CT" Or vendeur = "JB" Or _
-                           vendeur = "JBBIS" Or vendeur = "QF" Or vendeur = "RW" Or vendeur = "XJ" Or vendeur = "YA" Then
-                            
-                            On Error GoTo IgnorerErreur
-                            
-                            If InStr(typeDonnees, "DEMO") > 0 Then
-                                ' Formule SOMME pour DEMO
-                                formule = "=SUMIFS('Suivi DEMO - 2024+2025'!S:S," & _
-                                         "'Suivi DEMO - 2024+2025'!K:K,""DEMO""," & _
-                                         "'Suivi DEMO - 2024+2025'!M:M,""ULTRASOUND""," & _
-                                         "'Suivi DEMO - 2024+2025'!A:A,""2024""," & _
-                                         "'Suivi DEMO - 2024+2025'!C:C,""" & mois & """," & _
-                                         "'Suivi DEMO - 2024+2025'!G:G,""" & vendeur & """," & _
-                                         "'Suivi DEMO - 2024+2025'!I:I,""" & produit & """)"
-                                
-                                ws.Cells(i, j).Formula = formule
-                                cellulesCrees = cellulesCrees + 1
-                                
-                            ElseIf InStr(typeDonnees, "DUREE") > 0 Or InStr(typeDonnees, "DURÉE") > 0 Then
-                                ' Formule MOYENNE pour DUREE (sans SIERREUR)
-                                formule = "=AVERAGEIFS('Suivi DEMO - 2024+2025'!F:F," & _
-                                         "'Suivi DEMO - 2024+2025'!K:K,""DEMO""," & _
-                                         "'Suivi DEMO - 2024+2025'!M:M,""ULTRASOUND""," & _
-                                         "'Suivi DEMO - 2024+2025'!A:A,""2024""," & _
-                                         "'Suivi DEMO - 2024+2025'!C:C,""" & mois & """," & _
-                                         "'Suivi DEMO - 2024+2025'!G:G,""" & vendeur & """," & _
-                                         "'Suivi DEMO - 2024+2025'!I:I,""" & produit & """)"
-                                
-                                ws.Cells(i, j).Formula = formule
-                                cellulesCrees = cellulesCrees + 1
-                                
-                            ElseIf InStr(typeDonnees, "VENTE") > 0 Then
-                                ' Formule SOMME pour VENTE
-                                formule = "=SUMIFS('Suivi DEMO - 2024+2025'!S:S," & _
-                                         "'Suivi DEMO - 2024+2025'!K:K,""VENTE""," & _
-                                         "'Suivi DEMO - 2024+2025'!M:M,""ULTRASOUND""," & _
-                                         "'Suivi DEMO - 2024+2025'!A:A,""2024""," & _
-                                         "'Suivi DEMO - 2024+2025'!C:C,""" & mois & """," & _
-                                         "'Suivi DEMO - 2024+2025'!G:G,""" & vendeur & """," & _
-                                         "'Suivi DEMO - 2024+2025'!I:I,""" & produit & """)"
-                                
-                                ws.Cells(i, j).Formula = formule
-                                cellulesCrees = cellulesCrees + 1
-                            End If
-                            
-                            On Error GoTo 0
-                        End If
-                    End If
-                End If
-                
-                GoTo SuiteCellule2
-                
-IgnorerErreur:
-                Resume SuiteCellule2
-                
-SuiteCellule2:
-            Next j
-        End If
-    Next i
-    
-    Application.Calculation = xlCalculationAutomatic
-    Application.ScreenUpdating = True
-    
-    MsgBox "Tableau complété avec succès !" & vbCrLf & _
-           "Cellules créées: " & cellulesCrees, vbInformation, "Terminé"
-           
-End Sub
+1)Trouver tous les vendeurs "VENDEURS DÉTECTÉS (Ligne 1) :
+Colonne 1 (A): COMMERCIAUX
+Colonne 3 (C): AP
+Colonne 6 (F): BH
+Colonne 9 (I): CT
+Colonne 12 (L): JB
+Colonne 15 (O): JBBIS
+Colonne 18 (R): QF
+Colonne 21 (U): RW
+Colonne 24 (X): XJ
+Colonne 27 (AA): YA" cette partie fonctionne bien.
 
-' Macro de diagnostic spécialisée pour les cellules fusionnées
-Sub DiagnostiquerCellulesFusionnees()
-    Dim ws As Worksheet
-    Dim i As Long, j As Long
-    Dim rapport As String
-    Dim vendeurActuel As String
-    
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    
-    rapport = "DIAGNOSTIC DES CELLULES FUSIONNÉES" & vbCrLf & vbCrLf
-    
-    ' Analyser la ligne 1 pour les vendeurs (cellules fusionnées)
-    rapport = rapport & "VENDEURS DÉTECTÉS (Ligne 1) :" & vbCrLf
-    vendeurActuel = ""
-    
-    For j = 1 To 100
-        Dim vendeurTest As String
-        vendeurTest = Trim(CStr(ws.Cells(1, j).Value))
-        
-        If vendeurTest <> "" And vendeurTest <> vendeurActuel Then
-            vendeurActuel = vendeurTest
-            rapport = rapport & "Colonne " & j & " (" & Split(Cells(1, j).Address, "$")(1) & "): " & vendeurTest & vbCrLf
-        End If
-        
-        ' Arrêter si on a trouvé tous les vendeurs attendus
-        If j > 50 And vendeurTest = "" Then Exit For
-    Next j
-    
-    rapport = rapport & vbCrLf & "TYPES DE DONNÉES (Ligne 2) :" & vbCrLf
-    For j = 3 To 30
-        If ws.Cells(2, j).Value <> "" Then
-            rapport = rapport & "Colonne " & j & " (" & Split(Cells(1, j).Address, "$")(1) & "): " & ws.Cells(2, j).Value & vbCrLf
-        End If
-    Next j
-    
-    rapport = rapport & vbCrLf & "MOIS DÉTECTÉS (Colonne A) :" & vbCrLf
-    For i = 3 To 20
-        If ws.Cells(i, 1).Value <> "" Then
-            rapport = rapport & "Ligne " & i & ": " & ws.Cells(i, 1).Value & vbCrLf
-        End If
-    Next i
-    
-    rapport = rapport & vbCrLf & "PRODUITS (Colonne B) :" & vbCrLf
-    For i = 3 To 20
-        If ws.Cells(i, 2).Value <> "" Then
-            rapport = rapport & "Ligne " & i & ": " & ws.Cells(i, 2).Value & vbCrLf
-        End If
-    Next i
-    
-    ' Créer un fichier texte avec le rapport pour une lecture plus facile
-    Dim fso As Object
-    Dim fichierTexte As Object
-    Dim cheminFichier As String
-    
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    cheminFichier = ThisWorkbook.Path & "\Diagnostic_Tableau.txt"
-    
-    Set fichierTexte = fso.CreateTextFile(cheminFichier, True)
-    fichierTexte.WriteLine rapport
-    fichierTexte.Close
-    
-    MsgBox "Diagnostic terminé !" & vbCrLf & vbCrLf & _
-           "Un fichier détaillé a été créé :" & vbCrLf & cheminFichier & vbCrLf & vbCrLf & _
-           "Aperçu des vendeurs trouvés dans la ligne 1...", vbInformation, "Diagnostic"
-    
-    ' Afficher un aperçu des vendeurs trouvés
-    Dim apercu As String
-    apercu = "VENDEURS TROUVÉS :" & vbCrLf
-    For j = 1 To 50
-        vendeurTest = Trim(CStr(ws.Cells(1, j).Value))
-        If vendeurTest <> "" And (vendeurTest = "AP" Or vendeurTest = "BH" Or vendeurTest = "CT" Or _
-           vendeurTest = "JB" Or vendeurTest = "JBBIS" Or vendeurTest = "QF" Or vendeurTest = "RW" Or _
-           vendeurTest = "XJ" Or vendeurTest = "YA") Then
-            apercu = apercu & "Col " & j & ": " & vendeurTest & vbCrLf
-        End If
-    Next j
-    
-    MsgBox apercu, vbInformation, "Aperçu vendeurs"
-End Sub
+2) "MOIS DÉTECTÉS (Colonne A) :
+Ligne 3: JANVIER 
+Ligne 17: FÉVRIER", cette partie ne fonctionne pas correctement car les mois de Mars (A31) jusqu'à Décembre (A157) ne sont pas détectés (Ce sont des cellules fusionnées dans la colonne A).
 
-' Macro pour nettoyer le tableau
-Sub NettoyerTableau()
-    Dim ws As Worksheet
-    Dim reponse As VbMsgBoxResult
-    
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    
-    reponse = MsgBox("Voulez-vous effacer toutes les formules du tableau ?", vbYesNo + vbQuestion, "Confirmation")
-    
-    If reponse = vbYes Then
-        ws.Range("C3:ZZ200").ClearContents
-        MsgBox "Tableau nettoyé !", vbInformation
-    End If
-End Sub
+3) "PRODUITS (Colonne B) :
+Ligne 3: HERA W10 ELITE
+Ligne 4: HERA W9
+Ligne 5: HERA Z20
+Ligne 6: HM70
+Ligne 7: HM70 EVO
+Ligne 8: HS40
+Ligne 9: R20
+Ligne 10: RS80 EVO
+Ligne 11: RS85
+Ligne 12: RS85 PRESTIGE
+Ligne 13: V5
+Ligne 14: V6
+Ligne 15: V7
+Ligne 16: V8
+Ligne 17: HERA W10 ELITE
+Ligne 18: HERA W9
+Ligne 19: HERA Z20
+Ligne 20: HM70
+" les autres lignes ne sont pas trouvées. sachant qu'à partir de la ligne 3 de la colonne B, c'est la même série qui se répète jusqu'à la fin (de Janvier à Décembre), Voici la série qui se répète pour tous les mois : "
+HERA W10 ELITE,
+HERA W9,
+HERA Z20,
+HM70,
+HM70 EVO,
+HS40,
+R20
+RS80 EVO,
+RS85,
+RS85 PRESTIGE,
+V5,
+V6,
+V7,
+V8
+".
 
-' Macro de test pour une cellule spécifique
-Sub TesterUneCellule()
-    Dim ws As Worksheet
-    Dim celluleTest As String
-    Dim vendeur As String, mois As String, typeDonnees As String, produit As String
-    
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    
-    ' Demander à l'utilisateur quelle cellule tester
-    celluleTest = InputBox("Entrez l'adresse de la cellule à tester (ex: D5):", "Test cellule", "D5")
-    
-    If celluleTest <> "" Then
-        Dim cel As Range
-        Set cel = ws.Range(celluleTest)
-        
-        ' Extraire les informations
-        vendeur = Trim(CStr(ws.Cells(1, cel.Column).Value))
-        typeDonnees = Trim(CStr(ws.Cells(2, cel.Column).Value))
-        produit = Trim(CStr(ws.Cells(cel.Row, 2).Value))
-        
-        ' Afficher les résultats
-        MsgBox "CELLULE " & celluleTest & " :" & vbCrLf & vbCrLf & _
-               "Vendeur (ligne 1): " & vendeur & vbCrLf & _
-               "Type (ligne 2): " & typeDonnees & vbCrLf & _
-               "Produit (col B): " & produit & vbCrLf & _
-               "Mois (col A): " & Trim(CStr(ws.Cells(cel.Row, 1).Value)), vbInformation, "Diagnostic cellule"
-    End If
-End Sub
-
-' Macro de test pour créer une seule formule manuellement
-Sub TesterUneFormule()
-    Dim ws As Worksheet
-    Dim celluleTest As String
-    Dim formule As String
-    
-    Set ws = ThisWorkbook.Sheets("2024_Francesco_Tableau")
-    
-    celluleTest = InputBox("Entrez l'adresse de la cellule à tester (ex: C3):", "Test formule", "C3")
-    
-    If celluleTest <> "" Then
-        ' Formule simple de test
-        formule = "=SUMIFS('Suivi DEMO - 2024+2025'!S:S," & _
-                 "'Suivi DEMO - 2024+2025'!K:K,""DEMO""," & _
-                 "'Suivi DEMO - 2024+2025'!M:M,""ULTRASOUND""," & _
-                 "'Suivi DEMO - 2024+2025'!A:A,""2024""," & _
-                 "'Suivi DEMO - 2024+2025'!C:C,""1""," & _
-                 "'Suivi DEMO - 2024+2025'!G:G,""AP""," & _
-                 "'Suivi DEMO - 2024+2025'!I:I,""HERA W10 ELITE"")"
-        
-        On Error GoTo ErreurFormule
-        ws.Range(celluleTest).Formula = formule
-        MsgBox "Formule créée avec succès dans " & celluleTest, vbInformation
-        Exit Sub
-        
-ErreurFormule:
-        MsgBox "Erreur lors de la création de la formule : " & Err.Description, vbCritical
-    End If
-End Sub
-
+Pour mieux résoudre ce problème cfr à l'image "2024_Francesco_Tableau" sachant que l'image ne va pas jusqu'à Décembre mais tu auras une idée. Je veux le code complet avec toutes les lignes de codes.
 
 
 ## Perles spirituelles
