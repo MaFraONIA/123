@@ -1,58 +1,5 @@
-Quand j'exécute la macro "DiagnostiquerCellulesFusionnees" voici ce que me donne le fichier texte généré (partie par partie pour t'expliquer ce qui ne va pas) : 
 
-1)Trouver tous les vendeurs "VENDEURS DÉTECTÉS (Ligne 1) :
-Colonne 1 (A): COMMERCIAUX
-Colonne 3 (C): AP
-Colonne 6 (F): BH
-Colonne 9 (I): CT
-Colonne 12 (L): JB
-Colonne 15 (O): JBBIS
-Colonne 18 (R): QF
-Colonne 21 (U): RW
-Colonne 24 (X): XJ
-Colonne 27 (AA): YA" cette partie fonctionne bien.
 
-2) "MOIS DÉTECTÉS (Colonne A) :
-Ligne 3: JANVIER 
-Ligne 17: FÉVRIER", cette partie ne fonctionne pas correctement car les mois de Mars (A31) jusqu'à Décembre (A157) ne sont pas détectés (Ce sont des cellules fusionnées dans la colonne A).
-
-3) "PRODUITS (Colonne B) :
-Ligne 3: HERA W10 ELITE
-Ligne 4: HERA W9
-Ligne 5: HERA Z20
-Ligne 6: HM70
-Ligne 7: HM70 EVO
-Ligne 8: HS40
-Ligne 9: R20
-Ligne 10: RS80 EVO
-Ligne 11: RS85
-Ligne 12: RS85 PRESTIGE
-Ligne 13: V5
-Ligne 14: V6
-Ligne 15: V7
-Ligne 16: V8
-Ligne 17: HERA W10 ELITE
-Ligne 18: HERA W9
-Ligne 19: HERA Z20
-Ligne 20: HM70
-" les autres lignes ne sont pas trouvées. sachant qu'à partir de la ligne 3 de la colonne B, c'est la même série qui se répète jusqu'à la fin (de Janvier à Décembre), Voici la série qui se répète pour tous les mois : "
-HERA W10 ELITE,
-HERA W9,
-HERA Z20,
-HM70,
-HM70 EVO,
-HS40,
-R20
-RS80 EVO,
-RS85,
-RS85 PRESTIGE,
-V5,
-V6,
-V7,
-V8
-".
-
-Pour mieux résoudre ce problème cfr à l'image "2024_Francesco_Tableau" sachant que l'image ne va pas jusqu'à Décembre mais tu auras une idée. Je veux le code complet avec toutes les lignes de codes.
 
 
 ## Perles spirituelles
