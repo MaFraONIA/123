@@ -1,7 +1,15 @@
+J'aimerai que tu me donnes une macro que va compléter tous les cellules du tableau qui se trouve sur la feuille "2024_Francesco_Tableau" en sachant que c'est de Janvier en Décembre (sur l'image on ne voit pas tous les mois) pour tous les vendeurs et en utilisant les informations de l'image de la feuille "Suivi DEMO - 2024+2025" pour comprendre les formules suivantes :
 
-Formule de la cellule C3 : =SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE")
+- Formule de la cellule C3 : =SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE")
 
-Formule de la cellule D3 : =SIERREUR(MOYENNE.SI.ENS('Suivi DEMO - 2024+2025'!$F$2:$F$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE"); 0)
+- Formule de la cellule D3 : =SIERREUR(MOYENNE.SI.ENS('Suivi DEMO - 2024+2025'!$F$2:$F$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "1"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "HERA W10 ELITE"); 0)
+
+- Formule de la cellule C43 : =SOMME.SI.ENS('Suivi DEMO - 2024+2025'!$S$2:$S$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "3"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "V7")
+
+
+- Formule de la cellule D43 : =SIERREUR(MOYENNE.SI.ENS('Suivi DEMO - 2024+2025'!$F$2:$F$955; 'Suivi DEMO - 2024+2025'!$K$2:$K$955; "DEMO"; 'Suivi DEMO - 2024+2025'!$M$2:$M$955; "ULTRASOUND"; 'Suivi DEMO - 2024+2025'!$A$2:$A$955; "2024"; 'Suivi DEMO - 2024+2025'!$C$2:$C$955; "3"; 'Suivi DEMO - 2024+2025'!$G$2:$G$955; "AP"; 'Suivi DEMO - 2024+2025'!$I$2:$I$955; "V7"); 0)
+
+Je veux le code de la macro que va compléter tous les autres cellules, le code au complet avec toutes les lignes des codes.
 
 ## Perles spirituelles
 
