@@ -1,35 +1,75 @@
-**Excellente approche.** Voici comment structurer cette présentation concrète :
+On va commerce d'abord par ce partie et utliser les mages tableau pour compléter ce qui est écris ci-desous : ### 4.1 Migration réalisée vers Tableau Server
+{- **Dashboards migrés** : Lister précisément lesquels (WSP View ? Order Analysis ? etc.)
+Tous est sur Tableau Server, certains plus complets que d'autres, j'ai plus utiliser des paramètres sur tableau que sur Power BI  pour limiter les modifications manuelles.
+1. Billing
+- Il me faut ajouter les double filtres du POWER BI Privé/ Public (Capex/Opex) mais aussi les différents canaux (distributions, brokers, commerciaux) et leurs membres.
+Ce n'est pas possible de faire de double filtre tableau sans utiliser les extensions, le problème avec les extensions est que :
+- ça a lourdi le chargement du Dashboard (plus on en utilise plus le chargement sera long), surtout parce que ça va traiter plusieurs milliers des lignes et une trentaine de colonne 
+- Sur le serveur Samsung, c'est la version tableau 2023 qui est installé, s'il utilise une extension compatibilité avec Tableau 2023 ça va fonctionne mais si pour X, Y raisons on faissez la mise à jour du tableau server Samsung (par exemple 2025), l'extension peut ne plus fonctionner car la mise à jour des extensions peuvent ne pas être régilier
+Pour toutes ces raisons, le mieux serait de splitter ces fitres. 
+Il me faut aussi améliorer la partie UX/UI de la version tableau du billing.
+Sur la version tableau : 
+- il est possible de passer de la devise euro en dollar grâce à un filtre, ainsi que convertir tout le Dashboard Billing.
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
+- sur tableau, le tableau  "GROWTH RATE 2025 VS 2024" est dynamique et s'adapter à tout le dashboard
+- sur POWER Bi, j'avais utiliser ces formules pour calculer le montant accumulé "ACC_Y2025 BILLING AMOUNT 2025 = VAR yearN = 2025
+VAR monthM = MAX(SEF_BILLING[BILLING MONTH ])
+RETURN CALCULATE(SUM(SEF_BILLING[TOTAL BILLING AMOUNT (HT) €]),SEF_BILLING[BILLING YEAR]= yearN, SEF_BILLING[BILLING MONTH ]<=monthM)" et"ACC_Y2024 BILLING AMOUNT 2024 = VAR yearN = 2024
+VAR monthM = MAX(SEF_BILLING[BILLING MONTH ])
+RETURN CALCULATE(SUM(SEF_BILLING[TOTAL BILLING AMOUNT (HT) €]),SEF_BILLING[BILLING YEAR]= yearN, SEF_BILLING[BILLING MONTH ]<=monthM)", le problème avec cette approche il faut changer l'année en cours et l'année passé à chaque début d'année. sur tableau ces sont des parametres dont plus besoin de changer quoi ce soit car on a "INT([Billing Year])=YEAR(TODAY())" et "INT([Billing Year])=YEAR(TODAY())-1" 
 
-## Structure recommandée pour la section 4
+2. ORDER INTAKE
+- Il me faut ajouter les double filtres du POWER BI Privé/ Public (Capex/Opex) mais aussi les différents canaux (distributions, brokers, commerciaux) et leurs membres. (idem que le billing)
+- Il me faut aussi améliorer la partie UX/UI de la version tableau du ORDER INTAKE.
+Sur la version tableau : 
+- il est possible de passer de la devise euro en dollar grâce à un filtre, ainsi que convertir tout le Dashboard Billing.
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
+- sur POWER Bi, j'avais utiliser ces formules pour calculer le montant accumulé "ACC BILLING AMOUNT 2022 = VAR yearN = 2022
+VAR weekW = MAX('Calendar'[Week])
+RETURN CALCULATE(SUM(SEF_ACTIVITY[TOTAL BILLING AMOUNT (HT) €]),SEF_ACTIVITY[CONTRACT RECEIPT YEAR]= yearN, 'Calendar'[Week]<=weekW)", "ACC BILLING AMOUNT 2023 = VAR yearN = 2023
+VAR weekW = MAX('Calendar'[Week])
+RETURN CALCULATE(SUM(SEF_ACTIVITY[TOTAL BILLING AMOUNT (HT) €]),SEF_ACTIVITY[CONTRACT RECEIPT YEAR]= yearN, 'Calendar'[Week]<=weekW)", "ACC BILLING AMOUNT 2024 = VAR yearN = 2024
+VAR weekW = MAX('Calendar'[Week])
+RETURN CALCULATE(SUM(SEF_ACTIVITY[TOTAL BILLING AMOUNT (HT) €]),SEF_ACTIVITY[CONTRACT RECEIPT YEAR]= yearN, 'Calendar'[Week]<=weekW)" et "ACC BILLING AMOUNT 2025 = VAR yearN = 2025
+VAR weekW = MAX('Calendar'[Week])
+RETURN CALCULATE(SUM(SEF_ACTIVITY[TOTAL BILLING AMOUNT (HT) €]),SEF_ACTIVITY[CONTRACT RECEIPT YEAR]= yearN, 'Calendar'[Week]<=weekW)" le problème avec cette approche il faut changer l'année en cours,l'année passé (year-2 et year-3) à chaque début d'année. sur tableau ces sont des parametres dont plus besoin de changer quoi ce soit car on a "YEAR(date([Contract Receipt Date]))= YEAR(TODAY())", "YEAR(date([Contract Receipt Date]))=YEAR(TODAY())-1", "YEAR(date([Contract Receipt Date]))=YEAR(TODAY())-2", "YEAR(date([Contract Receipt Date]))=YEAR(TODAY())-3" idem que le billing.
 
-### 4.1 Migration réalisée vers Tableau Server
-- **Dashboards migrés** : Lister précisément lesquels (WSP View ? Order Analysis ? etc.)
-- **Fonctionnalités opérationnelles** : Quoi fonctionne déjà en production
-- **Utilisateurs actifs** : Qui utilise quoi sur Tableau
-- **Permissions mises en place** : Créateur vs Visualiseur
+3. WSP VIEW
 
-### 4.2 Dashboards maintenus sur Power BI 
-- **Quels dashboards restent sur Power BI** et pourquoi
-- **Contraintes techniques non résolues** sur ces dashboards
-- **Impact utilisateurs** : qui est encore dépendant de Power BI
+Etat donné que les besoins évolutifs de la division, la version du WSP VIEW de fin mars 2025 est différente de la version JUIN 205, la quasi totalité des tableaux, filtres et graphes doivent être changé, c'est le dashboard où il y'a beaucoup à refaire.
 
-### 4.3 Roadmap de migration
-- **Prochaines étapes** : quels dashboards migrer en priorité
-- **Timeline** : échéances prévues
-- **Blocages identifiés** : ce qui empêche la migration complète
+- Il me faut aussi améliorer la partie UX/UI de la version tableau 
 
-## Questions factuelles nécessaires
+4. CUSTOMER DATA
 
-**Sur Tableau :**
-- Combien de dashboards avez-vous effectivement migrés ?
-- Lesquels fonctionnent en production aujourd'hui ?
-- Combien d'utilisateurs y accèdent régulièrement ?
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
 
-**Sur Power BI :**
-- Quels dashboards n'ont PAS été migrés ?
-- Pourquoi ces dashboards restent-ils sur Power BI ?
+La version du POWER BI et Tableau est la même c'est le dashboard où il y'a plus presque rien à modifier 
+- Il me faut aussi améliorer la partie UX/UI de la version tableau 
+ 
+5. Business Opportunities
 
-**Donnez-moi ces informations concrètes et je structure votre section 4 factuellement.**
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
+
+La version du POWER BI et Tableau est la même c'est le dashboard où il y'a presque plus rien à modifier
+- Il me faut aussi améliorer la partie UX/UI de la version tableau 
+
+
+6. Billing, Backlog & Forecast vs Target
+
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
+
+La version du POWER BI et Tableau est la même c'est le dashboard où il y'a presque plus rien à modifier
+- Il me faut aussi améliorer la partie UX/UI de la version tableau 
+
+7. INSTALLED BASE HME
+
+- au lieu d'avoir un champ text pour modifier la date de mise à jour, c'est un paramètre qui prendre la date et l'heure du dernier changement du fichier source, plus champ date à modifier à chaque fois 
+
+La version du POWER BI et Tableau est la même c'est le dashboard où il y'a presque plus rien à modifier
+- Il me faut aussi améliorer la partie UX/UI de la version tableau mais ajouter ajouter de nouveaux filtres sur base de nouvelles demandes qui sont déjà présentent sur POWER BI.
+
+} tu auras la suite dans les prochaines prompts.
 
 
 
