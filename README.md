@@ -1,57 +1,36 @@
-GLOSSAIRE
+**Excellente approche.** Voici comment structurer cette présentation concrète :
 
+## Structure recommandée pour la section 4
 
+### 4.1 Migration réalisée vers Tableau Server
+- **Dashboards migrés** : Lister précisément lesquels (WSP View ? Order Analysis ? etc.)
+- **Fonctionnalités opérationnelles** : Quoi fonctionne déjà en production
+- **Utilisateurs actifs** : Qui utilise quoi sur Tableau
+- **Permissions mises en place** : Créateur vs Visualiseur
 
-POUR TOUTES LES FEUILLES
+### 4.2 Dashboards maintenus sur Power BI 
+- **Quels dashboards restent sur Power BI** et pourquoi
+- **Contraintes techniques non résolues** sur ces dashboards
+- **Impact utilisateurs** : qui est encore dépendant de Power BI
 
+### 4.3 Roadmap de migration
+- **Prochaines étapes** : quels dashboards migrer en priorité
+- **Timeline** : échéances prévues
+- **Blocages identifiés** : ce qui empêche la migration complète
 
+## Questions factuelles nécessaires
 
-La date à laquelle chaque feuille a été mise à jour se trouve en haut à droite de la feuille.
+**Sur Tableau :**
+- Combien de dashboards avez-vous effectivement migrés ?
+- Lesquels fonctionnent en production aujourd'hui ?
+- Combien d'utilisateurs y accèdent régulièrement ?
 
+**Sur Power BI :**
+- Quels dashboards n'ont PAS été migrés ?
+- Pourquoi ces dashboards restent-ils sur Power BI ?
 
-Toutes les données des mois précédents ont une application affectée (100%). Pour les mois en cours et futurs, Certaines commandes ont cette information (au moins 50%) et d'autres non, cela affecte les données de la « Prise de Commandes », les données du «Backlog : Commande non facturéé» et aussi celles de la vision globale « FACT. + BACKLOG + PRÉVIS. VS OBJET.» par application.
+**Donnez-moi ces informations concrètes et je structure votre section 4 factuellement.**
 
-
-
-
-FACTURATION : Les données de facturation 2024 et 2025.
-
-
-
-Fréquence de mise à jour : La première semaine du mois suivant le mois clôturé.
-
-
-Toutes les données de facturation du mois en cours ne seront ajoutées dans le rapport qu’une fois le mois en cours terminé.
-
-
-Toutes les données ont une application d'affectée.
-
-
-PRISE DE COMMANDES : Les données de prise de commandes 2024 et 2025.
-
-
-
-Fréquence de mise à jour : Après chaque réunion du WSP, généralement le mardi après-midi.
-
-
-Toutes les données sont basées sur la date à laquelle le Bon de command a été reçu. Cela signifie que les données de la slide « Prise de Commandes » sont une combinaison des commandes facturées et non facturées (Facturation + Backlog).
-
-
-PRÉVISIONS DE VENTES : Les prévision de ventes du BDTS pour cette année et les suivantes.
-
-
-
-Fréquence de mise à jour : Avant chaque réunion du WSP, généralement le lundi après-midi.
-
-
-Les chiffres surlignés en gris pour le type d’hôpital sont ceux des BO qui n’ont pas été classés dans la catégorie Privé ou Public 
-
-
-FACT. + BACKLOG + PRÉVISIONS. VS OBJET. : La vision globales de l'année actuelle.
-
-
-
-Fréquence de mise à jour :  Après chaque réunion du WSP, généralement le mardi après-midi.
 
 
 ## Perles spirituelles
