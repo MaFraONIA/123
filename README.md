@@ -2,6 +2,7 @@
 alexandre.berard@efrei.fr
 orlane.van-den-meersschaut@efrei.fr
 rostom.kachouri@efrei.fr
+salibay@cfa-numia.fr
 
 
 OBTENTION BULLETIN SEMESTRE 9 ET 10 HORS MYEFREI
