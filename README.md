@@ -1,39 +1,18 @@
-{### 4.1 Migration réalisée vers Tableau Server
-- **Fonctionnalités opérationnelles** : Quoi fonctionne déjà en production
-Tous les tableaux sont sur le serveur,  certains plus complets que d'autres.
 
-}, {### 4.1 Migration réalisée vers Tableau Server
-- **Utilisateurs actifs** : Qui utilise quoi sur Tableau, Tous les membres du back Office présentent lors de la réunion WSP;
-
-}
-, {### 4.1 Migration réalisée vers Tableau Server
-- **Permissions mises en place** : Créateur vs Visualiseur
-Seul (e) data analyste a la license Créateur et les autres auront la=es licenses viwers
-},  {### 4.2 Dashboards maintenus sur Power BI 
-- **Quels dashboards restent sur Power BI** et pourquoi
-- **Contraintes techniques non résolues** sur ces dashboards
-- **Impact utilisateurs** : qui est encore dépendant de Power BI
-
-### 4.3 Roadmap de migration
-- **Prochaines étapes** : quels dashboards migrer en priorité
-- **Timeline** : échéances prévues
-- **Blocages identifiés** : ce qui empêche la migration complète
-
-## Questions factuelles nécessaires
-
-**Sur Tableau :**
-- Combien de dashboards avez-vous effectivement migrés ?
-- Lesquels fonctionnent en production aujourd'hui ?
-- Combien d'utilisateurs y accèdent régulièrement ?
-
-**Sur Power BI :**
-- Quels dashboards n'ont PAS été migrés ?
-- Pourquoi ces dashboards restent-ils sur Power BI ?
+alexandre.berard@efrei.fr
+orlane.van-den-meersschaut@efrei.fr
+rostom.kachouri@efrei.fr
 
 
-}. J'ai déjà repondu à ces questions. Essaie de compléter ce qu'il y'a à compléter sans répéter le contenu du précédant prompt et en tenant compte des remarques et retours mentionés dans le premier propt de cette conversation.
+OBTENTION BULLETIN SEMESTRE 9 ET 10 HORS MYEFREI
 
+Bonjour à tous,
 
+Je vous espère bien portants !
+
+Je me permets de vous écrire afin de vous demander si c'est possible d'avoir par mail mes bulletins de semestres 9 et 10 car je n'ai pas accès à mon compte MyEfrei pour le moment et J'ai peur que le service informatique règle le problème de mon compte MyEfrei après la deadline IZIA pour soumettre les bulletins. Est-ce possible de me faire cette faveur, s'il vous plaît ?
+
+Merci d'avance et bonne journée !
 
 ## Perles spirituelles
 
