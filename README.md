@@ -1,9 +1,9 @@
-
-alexandre.berard@efrei.fr
-orlane.van-den-meersschaut@efrei.fr
-rostom.kachouri@efrei.fr
-salibay@cfa-numia.fr
-
+Votre position à 37 Rue Emile Zola sur Google Maps
+https://maps.app.goo.gl/wu9vMcYLtKVP83dx9
+----
+Votre position à 3 Rue Charles Schmidt sur Google Maps
+https://maps.app.goo.gl/fhb52rSQnH6m84hL9
+---
 
 OBTENTION BULLETIN SEMESTRE 9 ET 10 HORS MYEFREI
 
