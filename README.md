@@ -1,3 +1,4 @@
+fraude amazon : https://www.amazon.fr/gp/help/customer/display.html?nodeId=G33XVXQPUV79Z2ZC
 reportascam@amazon.com
 
 Vol de données / Reçu colis non commandé / Prélèvement non autorisé
