@@ -3,23 +3,12 @@ reportascam@amazon.com
 Vol de données / Reçu colis non commandé / Prélèvement non autorisé
 
 Bonjour,
-
 J'espère que vous allez bien!
-
-J'ai un problème avec une commande non effectuée, c'est dû au fait que j'avais cliqué sur un lien en passant que c'était Amazon, maintenant j'ai une commande d'un produit que je dois payer tous les mois comme si c'était un abonnement avec cette mention "Livraison automatique : Chaque 1 mois" que je n'ai jamais fait.
-
-Voici les informations dont vous pouvez avoir besoin : 
-- Mail Amazon : mafraonia2@gmail.com
-- N° de commande :  403-3689888-9546723
-- Date de la commande :  21 juin 2025
-- Nom  du produit: GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)
-- Lien du produit : [GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)
-](https://www.amazon.fr/dp/B0BBFDBYH1?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1#)
+J'ai un problème avec une commande non effectuée, c'est dû au fait que j'avais cliqué sur un lien en passant que c'était Amazon, maintenant j'ai une commande d'un produit que je dois payer tous les mois comme si c'était un abonnement avec cette mention "Livraison automatique : Chaque 1 mois" que je n'ai jamais fait et surtout impossible de l'annuler car quand je clique sur "AbonnementAucun frais. Ignorez ou annulez à tout moment" ça ne marche pas.
+Voici les informations dont vous pouvez avoir besoin : - Mail Amazon : mafraonia2@gmail.com- N° de commande :  403-3689888-9546723- Date de la commande :  21 juin 2025- Nom  du produit: GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)- Lien du produit :GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir) : Amazon.fr: Beauté et Parfum- Vendu par  : GeeRicDirect
 Le prochain prélèvement de cette escroquerie est pour le 4 août pour une livraison prévue pour le 29 juillet 2025 .
-
-Aides moi, s'il vous plaît !!!
-
-Merci d'avance et bonne journée ! 
+Aidez- moi, s'il vous plaît !!!
+Merci d'avance et bonne journée ! 
 
 
 ## Perles spirituelles
