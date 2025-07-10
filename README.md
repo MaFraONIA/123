@@ -1,19 +1,26 @@
-Votre position à 37 Rue Emile Zola sur Google Maps
-https://maps.app.goo.gl/wu9vMcYLtKVP83dx9
-----
-Votre position à 3 Rue Charles Schmidt sur Google Maps
-https://maps.app.goo.gl/fhb52rSQnH6m84hL9
----
+reportascam@amazon.com
 
-OBTENTION BULLETIN SEMESTRE 9 ET 10 HORS MYEFREI
+Vol de données / Reçu colis non commandé / Prélèvement non autorisé
 
-Bonjour à tous,
+Bonjour,
 
-Je vous espère bien portants !
+J'espère que vous allez bien!
 
-Je me permets de vous écrire afin de vous demander si c'est possible d'avoir par mail mes bulletins de semestres 9 et 10 car je n'ai pas accès à mon compte MyEfrei pour le moment et J'ai peur que le service informatique règle le problème de mon compte MyEfrei après la deadline IZIA pour soumettre les bulletins. Est-ce possible de me faire cette faveur, s'il vous plaît ?
+J'ai un problème avec une commande non effectuée, c'est dû au fait que j'avais cliqué sur un lien en passant que c'était Amazon, maintenant j'ai une commande d'un produit que je dois payer tous les mois comme si c'était un abonnement avec cette mention "Livraison automatique : Chaque 1 mois" que je n'ai jamais fait.
 
-Merci d'avance et bonne journée !
+Voici les informations dont vous pouvez avoir besoin : 
+- Mail Amazon : mafraonia2@gmail.com
+- N° de commande :  403-3689888-9546723
+- Date de la commande :  21 juin 2025
+- Nom  du produit: GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)
+- Lien du produit : [GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)
+](https://www.amazon.fr/dp/B0BBFDBYH1?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1#)
+Le prochain prélèvement de cette escroquerie est pour le 4 août pour une livraison prévue pour le 29 juillet 2025 .
+
+Aides moi, s'il vous plaît !!!
+
+Merci d'avance et bonne journée ! 
+
 
 ## Perles spirituelles
 
