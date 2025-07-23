@@ -13,7 +13,7 @@ Le prochain prélèvement de cette escroquerie est pour le 4 août pour une livr
 Aidez- moi, s'il vous plaît !!!
 Merci d'avance et bonne journée ! 
 
-
+EFREI BROCHURE / https://www.efrei.fr/wp-content/uploads/2024/10/BrochurePGE-web-planche.pdf?hsLang=fr&__hstc=205882892.de2d339e4811c69ecaf73ae09b4a3360.1753276992799.1753276992799.1753276992799.1&__hssc=205882892.1.1753276992799&__hsfp=3476571477
 ## Perles spirituelles
 
 Q1/
