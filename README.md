@@ -1,6 +1,14 @@
-0 969 320 616
+Bonjour Madame LABASTIE,
 
+J'espère que vous allez bien !
 
+Je me permets de vous écrire par rapport au TOEIC car j'étais tombée malade, je n'ai pas pu faire le TOEIC en début d'année. Et je me demande comme je peux rattraper car cela fait parti des choses obligatoires pour l'obtention du diplôme d'Ingénieur.
+
+Je reste dans l'attente de votre retour.
+
+Bonne journée !
+
+_______________________________
 fraude amazon : https://www.amazon.fr/gp/help/customer/display.html?nodeId=G33XVXQPUV79Z2ZC
 Lien du produit : https://www.amazon.fr/dp/B0BBFDBYH1?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1
 
