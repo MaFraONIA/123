@@ -3,35 +3,24 @@ Cours
 - Big Data Frameworks I(Apache Hadoop {MapReduce, Hadoop MapReduce}, Apache Spark) : (https://app.datascientist.fr/ : Email EFREI)
 - Data Visualization (Pandas, Numpy, Matplotlib, Streamlit) : (https://app.datascientist.fr/ : Email ICAM)
 - Functional Programming with Scala (voir : https://drive.google.com/drive/folders/1ffX6-dlCLKSe_qmg7iWrNK7q96ouFbc4?usp=drive_link)
-- Advanced Databases (NoSQL{MongoDB, Neo4J, Cassandra, [PL/SQL], SQL3, …)
+- Advanced Databases (MySQL, NoSQL{MongoDB, Neo4J, Cassandra, [PL/SQL], SQL3, …)
 - Machine Learning I & Machine Learning II (Voir : https://nowledgeable.com/student) Email EFREI /--- Apprentissage supervisé{Régression linéeaire, Régression Logisitque, Deciion Tree Classifier} , Apprentissage non supervisé {Auto-encodeur, Isolation Forest, KMeans, DBSCAN, PCA, …}, Apprentissage auto-supervisé, Apprentissage semi-supervisé (Active Learning)
 - Mathematics for Data Scientists (Linear Algebra, Language R, Convergences of random Variables, Statistiques descriptives, Théorème de la limite centrale, Tests d'hypothèses, ACP, Linear regression)
 - Cloud Computing {EMAIL MAFRAONIA} :(AZ-900 :IaaS, PaaS, and SaaS; Core Azure Solutions, Core Services, Azure management and governance,...)
-- Data Engineering I (CAP Theorem, Apache Spark, Apache Kafka,{Storage : No-SQL, Data-Lake), Processing(Batch, stream}, Streaming  ---Voir les notes du cours dans mes mails EFREI---)
-- DevOps (Terraform {Création d'une machine virtuel}, CI/CD{GitHub Actions}, GitOps, Monitoring {Prometheus(collecting), VictoriaMetrics (aggregating), Grafana (dashboards)}, Airflow)
+- Data Engineering I (Git, GitHub, Data Lakes et Data Warehouses, CAP Theorem, Apache Spark, Apache Kafka,{Storage : No-SQL, Data-Lake), Processing(Batch, stream}, Streaming  ---Voir les notes du cours dans mes mails EFREI---)
+- DevOps (Git, GitHub, Docker, Terraform {Machine virtuel}, CI/CD{GitHub Actions}, GitOps, Monitoring {Prometheus(collecting), VictoriaMetrics (aggregating), Grafana (dashboards)}, Apache Airflow)
 - NoSQL Databases (MongoDB, Cassandra, Redis, Neo4J)
 - Convex Optimization (Linear programming, Convex optimization, Gradient descent, Optimization algorithms within Machine Learning methods, …)
 - Deep Learning (Deep Neural Network, Deep computer vision (CNN, R-CNN), Deep Sequence Modeling, Deep Generative Modeling(AUTOENCODERS, VARIATIONAL
 AUTOENCODERS, GENERATIVE ADVERSARIAL NETWORKS GAN ), Deep Renforcement Learning) 
+- Cloud Certification for Big Data (DevOps et MLOps)
+- Data Management and Ethics (Data management, Data governance, Data Quality management, Data strategy & Maturity Mode,Agile data management)
+- Datalakes and Data Integration II (Raw {S3 :  AWS CLI},  Staging (MySQL),  Curated (MongoDB), Docker,  LocalStack, SQLite, Pipelines ETL{DVC, Apache Airflow, Apache  Kafka}, API Gateway avec FastAPI, Elasticsearch)
+- Generative AI for Computer Vision (Variational Autoencoder (VAE), Generative Adversarial Network (GAN), Attention mechanisms, Natural Language Processing (NLP), Transformer for NLP, Vision Transformer (ViT), Stable Diffusion)
+- Large Language Models {LLM} (NLP {embeddings (Word2Vec, GloVe, etc.)}, TensorFlow, Hugging Face Transformers, Prétraitement {NLTK et SpaCy}, BERT, GPT, T5, Fine-Tuning,)
+- Reinforcement Learning (Markov Decision Processes, Dynamic Programming (DP) for RL, Policy and Value Functions, Model-Free methods, Policy-Gradient and Actor-Critic Methods, Deep RL)
 
 
-Cours à voir sur teams
-
-
-
-
-
-
-
-
-
-- Cloud Certification for Big Data
-- Data Management and Ethics
-- Datalakes and Data Integration II
-- Generative AI for Computer Vision
-- Large Language Models
-- Reinforcement Learning
-- 
 -----------------------------------
 
 Cours 
