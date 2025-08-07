@@ -5,7 +5,7 @@ Bonjour,
 J'espère que vous allez bien !
 
 Je vous écris car j'ai reçu un code de vérification par Mail de la part 'Aca', je ne sais pas exactement ce que c'est mais il y'a une année (voir deux), j'ai été victime de l'arnaque au logement, des personnes non-identifiées ont à leurs possesions mes documents d'identités, mon RIB, nom numéro de téléphone et mon numéro de sécurité sociale.
-Je vous afin de savoir si j'étais inscrit sans mon autorisation au près de votre entreprise, si c'est le cas je ne suis pas à l'origine de cette inscription.
+Je vous écris afin de savoir si j'étais inscrit sans mon autorisation au près de votre entreprise, si c'est le cas je ne suis pas à l'origine de cette inscription.
 
 - Mon nom complet  : Marie-France ONIA EFUTO
 - N° Téléphone : + 33 7 69 79 41 02.
