@@ -1,4 +1,4 @@
-Mail : aca@aca.lu ; info@acacertification.com;  siege@acafrance.fr, acadir@aca.paris, info@aca-france.com, info@aca-europe.eu, info@acaindustry.com, contact@aca-animation.fr, contact@aca-surete.com 
+Mail : aca@aca.lu ; info@acacertification.com;  siege@acafrance.fr, acadir@aca.paris, info@aca-france.com, info@aca-europe.eu, info@acaindustry.com, contact@aca-animation.fr, contact@aca-surete.com, secretariat@aca-courtiers.ch, contact@aca-courtier.fr,  
 
 Bonjour,
 
@@ -6,8 +6,9 @@ J'espère que vous allez bien !
 
 Je vous écris car j'ai reçu un code de vérification par Mail de la part 'Aca', je ne sais pas exactement ce que c'est mais il y'a une année (voir deux), j'ai été victime de l'arnaque au logement, des personnes non-identifiées ont à leurs possesions mes documents d'identités, mon RIB, nom numéro de téléphone et mon numéro de sécurité sociale.
 Je vous afin de savoir si j'étais inscrit sans mon autorisation au près de votre entreprise, si c'est le cas je ne suis pas à l'origine de cette inscription.
-Mon nom complet  : Marie-France ONIA EFUTO
-N° Téléphone : + 33 7 69 79 41 02.
+
+- Mon nom complet  : Marie-France ONIA EFUTO
+- N° Téléphone : + 33 7 69 79 41 02.
 
 Espérant que ces informations vous soient utiles.
 
@@ -20,7 +21,8 @@ Marie-France ONIA EFUTO
 + 33 7 69 79 41 02
 
 
-
+----------------
+A voir : 6 RUE DES BATELIERS 92110 CLICHY : https://www.pappers.fr/entreprise/aca-alem-courtage-assurances-917562043
 _______________________________
 fraude amazon : https://www.amazon.fr/gp/help/customer/display.html?nodeId=G33XVXQPUV79Z2ZC
 Lien du produit : https://www.amazon.fr/dp/B0BBFDBYH1?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1
