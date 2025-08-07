@@ -1,12 +1,25 @@
-Bonjour Madame LABASTIE,
+Mail : aca@aca.lu ; info@acacertification.com;  siege@acafrance.fr, acadir@aca.paris, info@aca-france.com, info@aca-europe.eu, info@acaindustry.com, contact@aca-animation.fr, contact@aca-surete.com 
+
+Bonjour,
 
 J'espère que vous allez bien !
 
-Je me permets de vous écrire par rapport au TOEIC car j'étais tombée malade, je n'ai pas pu faire le TOEIC en début d'année. Et je me demande comme je peux rattraper car cela fait parti des choses obligatoires pour l'obtention du diplôme d'Ingénieur.
+Je vous écris car j'ai reçu un code de vérification par Mail de la part 'Aca', je ne sais pas exactement ce que c'est mais il y'a une année (voir deux), j'ai été victime de l'arnaque au logement, des personnes non-identifiées ont à leurs possesions mes documents d'identités, mon RIB, nom numéro de téléphone et mon numéro de sécurité sociale.
+Je vous afin de savoir si j'étais inscrit sans mon autorisation au près de votre entreprise, si c'est le cas je ne suis pas à l'origine de cette inscription.
+Mon nom complet  : Marie-France ONIA EFUTO
+N° Téléphone : + 33 7 69 79 41 02.
+
+Espérant que ces informations vous soient utiles.
 
 Je reste dans l'attente de votre retour.
 
 Bonne journée !
+
+Cordialement
+Marie-France ONIA EFUTO
++ 33 7 69 79 41 02
+
+
 
 _______________________________
 fraude amazon : https://www.amazon.fr/gp/help/customer/display.html?nodeId=G33XVXQPUV79Z2ZC
