@@ -1,4 +1,4 @@
-https://maps.app.goo.gl/B8gSVtUpSW3dEysy7
+58 passage brady 75010 paris 
 _______________________________
 Voir un médicine :  Fibromyalgie
 _____________________________
