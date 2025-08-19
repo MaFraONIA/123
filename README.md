@@ -1,4 +1,4 @@
-58 passage brady 75010 paris 
+EFREI BROCHURE / https://www.efrei.fr/wp-content/uploads/2024/10/BrochurePGE-web-planche.pdf?hsLang=fr&__hstc=205882892.de2d339e4811c69ecaf73ae09b4a3360.1753276992799.1753276992799.1753276992799.1&__hssc=205882892.1.1753276992799&__hsfp=3476571477
 _______________________________
 Voir un médicine :  Fibromyalgie
 _____________________________
@@ -7,102 +7,99 @@ Lien du produit : https://www.amazon.fr/dp/B0BBFDBYH1?ref=ppx_yo2ov_dt_b_fed_asi
 
 reportascam@amazon.com
 
-Vol de données / Reçu colis non commandé / Prélèvement non autorisé
-
-Bonjour,
-J'espère que vous allez bien!
-J'ai un problème avec une commande non effectuée, c'est dû au fait que j'avais cliqué sur un lien en passant que c'était Amazon, maintenant j'ai une commande d'un produit que je dois payer tous les mois comme si c'était un abonnement avec cette mention "Livraison automatique : Chaque 1 mois" que je n'ai jamais fait et surtout impossible de l'annuler car quand je clique sur "AbonnementAucun frais. Ignorez ou annulez à tout moment" ça ne marche pas.
-Voici les informations dont vous pouvez avoir besoin : - Mail Amazon : mafraonia2@gmail.com- N° de commande :  403-3689888-9546723- Date de la commande :  21 juin 2025- Nom  du produit: GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir)- Lien du produit :GeeRic Rouleaux de glace en silicone pour le visage, contour du visage cubique pour le cou des yeux, rouleau de massage du visage de beauté Supprimer les cernes Outils de soin de la peau (Noir) : Amazon.fr: Beauté et Parfum- Vendu par  : GeeRicDirect
-Le prochain prélèvement de cette escroquerie est pour le 4 août pour une livraison prévue pour le 29 juillet 2025 .
-Aidez- moi, s'il vous plaît !!!
-Merci d'avance et bonne journée ! 
-
-EFREI BROCHURE / https://www.efrei.fr/wp-content/uploads/2024/10/BrochurePGE-web-planche.pdf?hsLang=fr&__hstc=205882892.de2d339e4811c69ecaf73ae09b4a3360.1753276992799.1753276992799.1753276992799.1&__hssc=205882892.1.1753276992799&__hsfp=3476571477
+_____________________________
 ## Perles spirituelles
 
 Q1/
 
 
-Pour répondre à la question sur Proverbe 16:22, qui affirme que « les stupides sont punis par leur bêtise », il est essentiel d'explorer le sens de cette affirmation dans le contexte des Proverbes et de la sagesse biblique.
-
-Compréhension du Proverbe
-
-Le Proverbe 16:22 souligne que la sagesse et la compréhension sont des atouts précieux, tandis que la stupidité peut mener à des conséquences néfastes. Dans ce verset, la « bêtise » fait référence à un manque de discernement et à des choix imprudents. Les personnes qualifiées de « stupides » ne tiennent pas compte des conseils sages et des enseignements, ce qui les conduit souvent à des situations difficiles.
-
-La Bêtise comme Source de Punition
-
-La notion que les stupides sont « punis par leur bêtise » peut être interprétée de plusieurs manières :
-
-Conséquences Naturelles : Les décisions imprudentes entraînent souvent des résultats négatifs. Par exemple, quelqu'un qui ignore les avertissements concernant des comportements risqués (comme la négligence financière ou des choix de vie malsains) peut faire face à des difficultés qui découlent directement de ses actions. Ces conséquences sont une forme de punition, car elles résultent de leur propre manque de sagesse.
-
-Isolement Social : La stupidité peut également mener à l'isolement. Les personnes qui prennent des décisions irréfléchies peuvent perdre la confiance de leurs amis et de leur famille, ce qui les laisse seules face à leurs problèmes. Cette solitude peut être perçue comme une punition, car elle découle de leur incapacité à agir avec sagesse.
-
-Apprentissage par la Souffrance : Parfois, les individus doivent faire face à des échecs ou à des souffrances pour apprendre. Cette forme d'apprentissage peut être douloureuse, mais elle est souvent nécessaire pour développer la sagesse. Ainsi, la punition par la bêtise peut être vue comme un moyen d'inciter à la réflexion et à la croissance personnelle.
-
-Réflexion sur la Sagesse
-
-Le contraste entre la sagesse et la stupidité est un thème récurrent dans les Proverbes. La sagesse est souvent présentée comme une voie qui mène à la vie, à la prospérité et à des relations saines. En revanche, la stupidité est associée à la destruction et à la souffrance. En ce sens, le verset nous rappelle l'importance de rechercher la sagesse et d'apprendre des erreurs.
-
+Sens de Pr 27:21: Les compliments agissent comme un creuset: ils révèlent ce qu’il y a dans notre cœur. Ils testent si nous restons humbles et centrés sur Jéhovah ou si l’ego prend le dessus.
+Le piège: Chercher l’approbation humaine ne rassasie jamais (Pr 27:20) et peut étouffer la correction (Pr 27:5-6). L’épreuve, c’est de rester coachable malgré l’éloge.
+Réaction saine: Dire merci, attribuer le mérite à Jéhovah et aux autres (Pr 27:2), prier pour garder de bonnes motivations, et transformer l’éloge en service discret (Pr 27:17, 19).
+Résumé en une phrase: Les félicitations « chauffent » notre cœur; si elles produisent plus d’humilité et de reconnaissance, elles nous affinent. Sinon, elles dévoilent des scories à retirer.
 
 Q2/
 
-Le chapitre 16 du livre des Proverbes regorge de sagesse pratique et de leçons profondes sur la vie, la conduite humaine et la relation avec Dieu. Voici quelques leçons clés que l'on peut tirer de ce chapitre, accompagnées de réflexions sur des versets spécifiques.
+### Pr 27:1 — L’humilité face à l’avenir
+Idée: « Ne te vante pas du lendemain » nous apprend à planifier avec modestie. La vraie sagesse reconnaît que notre contrôle est limité et que Dieu peut changer nos plans du jour au lendemain.
+Application: Je fais des projets, mais je dis “si Jéhovah le veut”. Cela m’aide à rester flexible, à ne pas m’angoisser quand un imprévu arrive, et à garder un cœur reconnaissant quel que soit le résultat.
 
-### La Souveraineté de Dieu
+### Pr 27:2 — L’auto-promotion vs l’approbation de Dieu
+Idée: Laisser “un autre” faire l’éloge décape notre ego. Chercher à se mettre en avant crée des attentes malsaines et fragilise la coopération.
+Application: Après un service ou un discours, je remercie pour l’aide reçue et je redirige le mérite. Cela protège l’unité et garde ma motivation centrée sur Jéhovah, pas sur l’applaudimètre.
 
-Un des thèmes centraux de Proverbe 16 est la souveraineté de Dieu sur les plans humains. Le verset 1 déclare : « L'homme propose, mais c'est l'Éternel qui dispose. » Cela nous rappelle que, bien que nous puissions avoir nos propres projets et intentions, c'est finalement Dieu qui guide nos pas. Cette vérité nous incite à faire preuve d'humilité et à reconnaître que nos plans doivent être alignés avec la volonté divine. En acceptant cette réalité, nous pouvons trouver la paix même lorsque nos projets ne se déroulent pas comme prévu.
+### Pr 27:4 — Gérer jalousie et rivalité
+Idée: La jalousie est plus corrosive que la colère, car elle s’alimente de comparaisons constantes. Elle détruit la joie de servir.
+Application: Quand je sens la comparaison monter, je prie pour me réjouir des réussites des autres et je cherche activement à les encourager. La gratitude éteint la jalousie.
 
-### La Valeur de la Sagesse
+### Pr 27:5-6 — Aimer la correction qui fait grandir
+Idée: La franche correction d’un ami est un acte d’amour. Les compliments flatteurs qui évitent la vérité nous laissent immatures.
+Application: Je demande un retour honnête après mes tâches. J’écris un point à améliorer et un petit plan d’action. Cela transforme une remarque en progrès concret.
 
-Le verset 16 souligne l'importance de la sagesse : « Quelle est la sagesse ? Elle vaut mieux que l'or ! » Cela met en lumière que la sagesse est un trésor inestimable, bien plus précieux que les richesses matérielles. La sagesse nous aide à prendre des décisions éclairées et à naviguer dans les défis de la vie. En cherchant la sagesse, nous investissons dans notre avenir et dans notre bien-être spirituel. Cela nous pousse à prioriser l'acquisition de connaissances et de discernement plutôt que de nous concentrer uniquement sur des gains matériels.
+### Pr 27:7 — Le cœur comble notre appétit
+Idée: Quand le cœur est nourri, il refuse les “sucres rapides” de l’approbation. Un cœur affamé, lui, se contente de peu et peut tomber dans de mauvais choix.
+Application: Je remplis mon cœur de la Parole et de la prière. Ainsi, je cherche moins les gratifications immédiates et je prends de meilleures décisions à long terme.
 
-### La Communication et les Relations
+### Pr 27:9 — La valeur d’un conseil chaleureux
+Idée: Un conseil sincère, donné avec affection, a un parfum qui réconforte et oriente. Il allie vérité et douceur.
+Application: Quand je conseille, je commence par reconnaître ce qui est bien. Puis je propose une piste concrète, courte et faisable. Cela donne envie d’avancer.
 
-Le verset 24 dit : « Les paroles agréables sont un rayon de miel, douces à l'âme et salutaires au corps. » Ce verset souligne l'impact des mots que nous utilisons dans nos interactions. Des paroles bienveillantes et encourageantes peuvent apporter du réconfort et de la guérison. Cela nous rappelle l'importance de cultiver des relations positives et de choisir nos mots avec soin. En pratiquant une communication constructive, nous pouvons renforcer nos liens avec les autres et créer un environnement harmonieux.
+### Pr 27:10 — Entretenir les liens avant la crise
+Idée: Une relation solide se construit avant le jour de détresse. Le “voisin proche” est précieux parce qu’on l’a cultivé dans la paix.
+Application: Je prends l’initiative d’envoyer un message, d’inviter, de rendre un petit service. Le jour où j’aurai besoin d’aide, le pont sera déjà là.
 
-### La Justice et l'Honnêteté
+### Pr 27:12 — La prudence proactive
+Idée: Le perspicace voit le danger et s’abrite; l’aveuglement coûte cher. La sagesse n’est pas pessimisme, c’est anticipation.
+Application: Je me pose la question “et si…?” avant de m’engager: et si la charge augmente? et si je suis fatigué? Je prévois un plan B pour ne pas décevoir.
 
-Le verset 11 affirme : « La balance et les poids justes sont à l'Éternel ; tous les poids dans le sac sont son œuvre. » Ce passage met en avant l'importance de l'intégrité et de la justice dans nos affaires. Dieu valorise l'honnêteté et la droiture, et il attend de nous que nous agissions de manière équitable dans nos transactions et nos relations. Cela nous incite à examiner nos propres pratiques et à nous assurer que nous agissons avec équité, tant dans nos affaires personnelles que professionnelles.
+### Pr 27:17 — Le mentorat réciproque
+Idée: “Le fer aiguise le fer”: la qualité d’un disciple dépend des frottements bienveillants avec d’autres. On s’affûte par l’échange et la relecture fraternelle.
+Application: Je me choisis un “binôme spirituel”: on se donne un objectif mensuel, on se fait un retour honnête, on prie l’un pour l’autre. Les progrès deviennent visibles.
 
-### La Confiance en Dieu
+### Pr 27:19 — Le miroir du cœur
+Idée: La vie d’un homme reflète son cœur comme l’eau reflète un visage. Ce que je cultive en dedans se verra en dehors tôt ou tard.
+Application: J’observe mes réactions “à chaud”. Elles me révèlent mes vraies valeurs. Ensuite, je travaille une vertu à la fois: patience, douceur, pudeur.
 
-Enfin, le verset 3 nous exhorte : « Recommande à l'Éternel tes œuvres, et tes projets réussiront. » Cela nous encourage à confier nos efforts à Dieu. En plaçant notre confiance en lui et en cherchant sa direction, nous pouvons être assurés que nos efforts seront bénis. Cette leçon nous rappelle que la réussite ne dépend pas uniquement de nos compétences ou de notre travail acharné, mais aussi de notre dépendance à Dieu.
+### Pr 27:20 — Le puits sans fond des désirs
+Idée: Le désir humain ne se rassasie pas de lui-même. Chasser toujours “plus” rend ingrat pour le “déjà là”.
+Application: Je pratique un rituel d’action de grâce quotidien: trois mercis spécifiques. Cela freine la surenchère et restaure la paix intérieure.
 
+### Pr 27:21 — Le test des compliments
+Idée: L’éloge agit comme un feu qui révèle la qualité du métal. Il expose l’orgueil caché ou consolide l’humilité.
+Application: Quand je suis félicité, je réponds brièvement, je rends grâce à Dieu, puis je retourne à la tâche suivante. Cela neutralise l’ego et maintient la joie de servir.
+
+### Pr 27:23-27 — Responsabilité et constance dans le quotidien
+Idée: Connaître “l’état de ses troupeaux” invite à une vigilance constante: gérer bien le présent prépare aux jours sans “richesses” apparentes.
+Application: Je fais un point régulier sur mes priorités: santé, famille, spiritualité, ministère. De petites attentions répétées construisent une grande stabilité.
 
 
 
 ## Étude biblique de l’assemblée
 
 
-Pour répondre aux questions basées sur les paragraphes 10 à 18 des publications mentionnées, nous allons examiner la situation de Paul à Rome, sa manière de prêcher, et les leçons que nous pouvons en tirer.
 
-### 10. Quelle était la situation de Paul à Rome, et qu’a-t-il fait peu après son arrivée ?
 
-À son arrivée à Rome, Paul se trouvait sous la garde d'un soldat, vivant dans un domicile privé. Bien qu'il fût en détention, cela ne l'a pas empêché de continuer sa mission de proclamation du Royaume. Après un court repos, il a convoqué les notables juifs de la ville pour leur parler de sa foi. Cela montre son engagement à partager le message chrétien, même dans des circonstances difficiles. Paul a utilisé cette opportunité pour établir un dialogue avec ses compatriotes, démontrant ainsi sa détermination à prêcher, peu importe les obstacles.
+### HISTOIRE 10
 
-### 11-12. Comment Paul s’y est-il pris pour faire tomber les probables préjugés de ses compatriotes ?
+Question 1: Pourquoi Jéhovah a-t-il détruit Sodome et Gomorrhe ?
 
-Paul a commencé par se présenter comme un « frère », cherchant à établir un terrain d’entente avec les Juifs. En précisant qu'il n'avait rien fait contre leur peuple ou leurs coutumes, il a cherché à dissiper les préjugés qu'ils pouvaient avoir à son égard. En expliquant qu'il avait été emprisonné non pas à cause de ses actions, mais en raison de l'opposition des Juifs à Jérusalem, il a voulu montrer qu'il n'était pas là pour accuser sa nation, mais pour partager un message d'espoir. Cette approche diplomatique est essentielle dans notre propre témoignage, car elle nous rappelle l'importance de créer des liens et de comprendre les préoccupations des autres avant de partager notre foi.
+Réponse directe: Parce que leurs habitants étaient profondément corrompus et persistaient dans des pratiques mauvaises, au point que la ville entière était devenue un exemple d’avertissement. Genèse 19 montre que la méchanceté était publique et violente; 2 Pierre 2:6-8 dit que Dieu en a fait un modèle pour prévenir ceux qui se mettent à faire le mal.
+Application: Cela m’apprend à ne pas banaliser un environnement moralement dangereux, même s’il paraît attractif (Genèse 13:10-13). Je choisis mes influences avec soin.
 
-### 13-14. Comment Paul a-t-il introduit le thème du Royaume, et comment l’imiter ?
+Question 2: Pourquoi la femme de Loth est-elle devenue une statue de sel ?
 
-Paul a introduit le thème du Royaume en déclarant que c'était en raison de l'espérance d'Israël qu'il portait des chaînes. Cette déclaration a éveillé la curiosité de ses interlocuteurs, car elle touchait à des attentes profondes liées au Messie et à son royaume. Pour imiter Paul, nous pouvons commencer nos conversations sur la foi en posant des questions ou en faisant des affirmations qui suscitent l'intérêt. Par exemple, en partageant des expériences personnelles ou des réflexions sur des sujets spirituels, nous pouvons engager les autres de manière significative. Utiliser des ressources comme des livres sur la prédication peut également nous aider à affiner notre approche.
+Réponse directe: Parce qu’elle a désobéi à l’ordre clair de ne pas regarder en arrière (Genèse 19:17, 26). Son regard a trahi un attachement du cœur à ce qu’elle laissait. Jésus dit: « Souvenez-vous de la femme de Loth » (Luc 17:32) pour nous avertir contre la nostalgie du monde.
+Application: Quand Jéhovah me demande de quitter une habitude ou une ambiance malsaine, je ne “regarde pas en arrière” par le regret; je me concentre sur où il me conduit. Je coupe proprement, sans retours.
 
-### 15. Quels points forts distingue-t-on dans la façon de prêcher de Paul ?
 
-Paul a démontré plusieurs points forts dans sa prédication :
+### HISTOIRE 11
 
-Concentration sur le Royaume de Dieu : Il a centré son message sur le royaume, qui est le cœur de l'espérance chrétienne.
-Persuasion : Il a cherché à convaincre ses auditeurs, montrant l'importance de la passion et de l'engagement dans notre témoignage.
-Raisonnement à partir des Écritures : En utilisant la Loi de Moïse et les Prophètes, il a fondé son message sur des bases scripturaires solides, ce qui est crucial pour établir la crédibilité.
-Dévouement : Prêcher toute la journée montre son engagement et sa détermination à partager la bonne nouvelle.
+Question 1: Comment Abraham a-t-il montré qu’il avait confiance en Jéhovah ?
 
-Ces éléments sont des exemples à suivre pour nous, car ils illustrent comment une prédication efficace nécessite à la fois une préparation spirituelle et une passion pour le message.
+Réponse directe: Il a obéi immédiatement à un ordre extrêmement difficile: offrir Isaac, son fils promis (Genèse 22:1-3). Hébreux 11:17-19 montre sa pensée: il croyait que Dieu pouvait même relever Isaac. Sa foi s’est traduite en actes, pas seulement en paroles (Jacques 2:21-23).
+Application: La vraie confiance obéit même quand on ne voit pas tout le plan. Je peux imiter Abraham en obéissant d’abord, et en demandant la compréhension ensuite.
 
-### 16-18. Pourquoi Paul ne s’est-il pas étonné du peu d’enthousiasme des Juifs de Rome, et comment devrions-nous réagir quand on rejette notre prédication ?
+Question 2: Qu’a promis Jéhovah à Abraham ?
 
-Paul n’a pas été surpris par le manque d’enthousiasme des Juifs, car il connaissait les prophéties qui annonçaient une insensibilité de leur part. Il a cité le prophète Isaïe pour illustrer que leur cœur était devenu insensible, ce qui est une réalité que nous pouvons rencontrer dans notre propre ministère. Lorsque nous faisons face à des rejets, il est important de ne pas le prendre personnellement. Comme Paul, nous devons comprendre que peu de gens trouveront le chemin de la vie, et cela ne doit pas nous décourager. Au contraire, nous devrions nous réjouir lorsque des personnes bien disposées acceptent notre message, car cela témoigne de l'œuvre de Dieu dans leur cœur.
-
-Conclusion
-
-Les leçons tirées de l'expérience de Paul à Rome sont riches et variées. Elles nous enseignent l'importance de l'engagement, de la compréhension des autres, de la persuasion par des bases scripturaires, et de la résilience face au rejet. En suivant l'exemple de Paul, nous pouvons devenir des témoins plus efficaces du Royaume de Dieu, en nous appuyant sur la sagesse et la force que Dieu nous offre.
+Réponse directe: Dieu a confirmé qu’il le bénirait, multiplierait sa descendance, et que la bénédiction pour toutes les nations viendrait par sa lignée (Genèse 22:16-18). Cette promesse culmine en Christ, le « descendant » par qui vient la vie éternelle (Jean 3:16).
+Application: Les promesses de Dieu dépassent l’instant présent. Rester fidèle aujourd’hui contribue à un bien plus grand que ce que je vois.
