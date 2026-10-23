@@ -1,0 +1,218 @@
+import pandas as pd
+
+portefeuille = pd.read_excel(
+    "U:/DG/DGDR/50.RISQUES FINANCIERS/550. Pilotage et Innovation/A_BASES/BDT/2_DP-DCB-DI/DataBrutes/31_08_2026/VF Portefeuille DI 31-08-26.xlsx", # chemin du PF DI
+    sheet_name="Synthèse PTF",
+    header = 7
+) # à modifier
+
+portefeuille = portefeuille[portefeuille["Portefeuille"] != "Total"]
+
+portefeuille = portefeuille.dropna(how="all") # supprime toutes les lignes où toutes les colonnes sont vides, cad ici les deux premières
+portefeuille = portefeuille.reset_index(drop=True)
+
+print(portefeuille.head)
+
+reporting = pd.DataFrame()
+
+portefeuille.columns.to_list() # récupérer le nom de la dernière colonne qui correspond à la colonne 'Classe de risque'
+
+
+
+reporting["N° Tiers"] = portefeuille["N° Tiers"]
+reporting["Date arrêté"] = "31/08/2026" # à modifier
+reporting["N°Tiers_9_Car"] = portefeuille["N° Tiers"].astype(str).str.zfill(9)
+reporting.loc[reporting["N° Tiers"] == "CAA ESS", "N°Tiers_9_Car"] = "0000CAA ESS" # clé de jointure, gestion particulière
+reporting["Nom courant de la société"] = portefeuille["Nom courant de la société"]
+reporting["Direction Régionale"] = portefeuille["Direction Régionale"]
+reporting["Segment_DI"] = portefeuille["Portefeuille"]
+reporting["Sous_Segment_DI"] = portefeuille["Segment d'intervention"]
+reporting["Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes"] = portefeuille["Valeur Brute des invest. à la Clôture (en €)"] # [de la colonne Synthèse portefeuille investisseur en ligne 7)
+reporting["Plus et moins values latentes du portefeuille à la Clôture"] = portefeuille["Plus et moins values latentes du portefeuille à la Clôture (en €)"]  # [de la colonne Synthèse portefeuille investisseur en ligne 7)
+reporting[" Valorisation  du portefeuille à la Clôture (Encours en €) avec Plus/moins values latentes"] = portefeuille["Valorisation  du portefeuille à la Clôture (en €)"] #de la colonne Synthèse portefeuille investisseur en ligne 7)
+reporting["Titres (en €)"] = portefeuille["Valeur Brute des invest.  à la clôture (en €)"]  #[de la colonne "Titres" qui est inscrite en ligne 7)
+reporting["Avances & Obligations (en €)"] = portefeuille["Valeur Brute des invest.  à la clôture (en €).1"] #[de la colonne Avances & Obligations )
+reporting["Provision Hors prêts (en €)"] =  portefeuille["Provision Dep. et R&C  à la Clôture (en €)"]  #[de la colonne Estimation des Provisions [hors Prêts) )
+reporting["Prêts suivis par DPH (en €)"] = portefeuille["Valeur Brute des invest.  à la clôture (en €).2"] #[de la colonne Prêts suivis par DPH)
+reporting["Provision dses prêts (en €)"] =  portefeuille["Provision Dep. et R&C  à la Clôture (en €).1"] #[de la colonne Provisions suivies par DPH)
+reporting["HB (en €) dont garanties et nantissements"] = portefeuille["HB à la cloture (en €)"] #[de la colonne HORS BILAN [yc nant. et gar))
+reporting["classes de risque validées /comptes 2024"] = portefeuille["Unnamed: 87"]
+
+
+prets = pd.read_excel(
+    "C:/Users/mgramdi/Downloads/perso/test scripts/30-06-2026/Portefeuille DI 30-06-26.xlsx",
+    sheet_name="Prêts",
+    header=8
+)
+
+nb_prets = prets["Tiers CDC"].value_counts()
+
+reporting["Nb prêts"] = (
+    reporting["N° Tiers"]
+    .map(nb_prets)
+    .fillna(1)
+    .astype(int)
+)
+
+
+reporting["Sous_Segment_DI"] = (
+    reporting["Sous_Segment_DI"]
+    .fillna("NR")
+)
+
+
+a_dupliquer = reporting[
+    (
+        reporting["Titres (en €)"]
+        + reporting["Avances & Obligations (en €)"]
+    > 0
+    )
+    &
+    (
+        reporting["Prêts suivis par DPH (en €)"] > 0
+    )
+].copy()
+
+doublons = a_dupliquer.copy()
+
+
+
+import numpy as np
+
+reporting.loc[a_dupliquer.index, "Prêts suivis par DPH (en €)"] = np.nan
+
+reporting.loc[a_dupliquer.index, "Provision dses prêts (en €)"] = np.nan
+
+reporting.loc[
+    a_dupliquer.index,
+    "HB (en €) dont garanties et nantissements"
+] = np.nan
+
+reporting.loc[
+    a_dupliquer.index,
+    "classes de risque validées /comptes 2022"
+] = np.nan
+
+
+doublons["Titres (en €)"] = np.nan
+
+doublons["Avances & Obligations (en €)"] = np.nan
+
+doublons["Provision Hors prêts (en €)"] = np.nan
+
+doublons[
+    "Plus et moins values latentes du portefeuille à la Clôture"
+] = np.nan
+
+reporting.loc[
+    a_dupliquer.index,
+    "Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes"
+] = (
+    reporting.loc[a_dupliquer.index, "Titres (en €)"].fillna(0)
+    + reporting.loc[a_dupliquer.index, "Avances & Obligations (en €)"].fillna(0)
+)
+
+doublons[
+    "Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes"
+] = (
+    doublons["Prêts suivis par DPH (en €)"].fillna(0)
+)
+
+reporting.loc[
+    a_dupliquer.index,
+    " Valorisation  du portefeuille à la Clôture (Encours en €) avec Plus/moins values latentes"
+] = (
+    reporting.loc[
+        a_dupliquer.index,
+        "Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes"
+    ]
+    + reporting.loc[
+        a_dupliquer.index,
+        "Plus et moins values latentes du portefeuille à la Clôture"
+    ].fillna(0)
+)
+
+doublons[
+    " Valorisation  du portefeuille à la Clôture (Encours en €) avec Plus/moins values latentes"
+] = (
+    doublons[
+        "Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes"
+    ]
+)
+
+
+reporting = pd.concat(
+    [reporting, doublons],
+    ignore_index=True
+)
+
+
+
+colonnes = [
+    "Date arrêté",
+    "N°Tiers_9_Car",
+    "N° Tiers",
+    "Nom courant de la société",
+    "Direction Régionale",
+    "Segment_DI",
+    "Sous_Segment_DI",
+    "Nb prêts",
+    "Valeur Brute des invest. à la Clôture (en €) sans Plus/moins values latentes",
+    "Plus et moins values latentes du portefeuille à la Clôture",
+    " Valorisation  du portefeuille à la Clôture (Encours en €) avec Plus/moins values latentes",
+    "Titres (en €)",
+    "Avances & Obligations (en €)",
+    "Provision Hors prêts (en €)",
+    "Prêts suivis par DPH (en €)",
+    "Provision dses prêts (en €)",
+    "HB (en €) dont garanties et nantissements",
+    "classes de risque validées /comptes 2024"
+]
+
+reporting = reporting[colonnes]
+
+
+
+import pandas as pd
+from openpyxl import load_workbook
+from pathlib import Path
+import shutil
+
+# =====================================================================
+# PARAMÈTRES
+# =====================================================================
+fichier_historique = "U:/DG/DGDR/50.RISQUES FINANCIERS/550. Pilotage et Innovation/A_BASES/BDT/2_DP-DCB-DI/DataBrutes/31_08_2026/Portefeuille_DI_30_06_2026.xlsx"
+dossier_destination = "U:/DG/DGDR/50.RISQUES FINANCIERS/550. Pilotage et Innovation/A_BASES/BDT/2_DP-DCB-DI/DataBrutes/"
+# =====================================================================
+# RÉCUPÉRATION DE LA DATE D'ARRÊTÉ
+# =====================================================================
+date_arrete = pd.to_datetime(reporting["Date arrêté"].iloc[0], dayfirst=True)
+date_str = date_arrete.strftime("%d_%m_%Y")
+nom_fichier_final = f"{dossier_destination}Portefeuille_DI_{date_str}.xlsx"
+
+# =====================================================================
+# COPIE DU FICHIER HISTORIQUE VERS UN NOUVEAU FICHIER
+# =====================================================================
+# 1. Copier le fichier historique vers le fichier final (pour conserver les formules)
+shutil.copy2(fichier_historique, nom_fichier_final)
+
+# 2. Charger le nouveau fichier et ajouter la feuille de reporting
+wb_final = load_workbook(nom_fichier_final)
+
+# 3. Créer une nouvelle feuille pour le reporting
+with pd.ExcelWriter(
+    nom_fichier_final,
+    engine="openpyxl",
+    mode="a",  # Mode "append" pour ajouter une feuille
+    if_sheet_exists="replace"  # Remplacer si la feuille existe déjà
+) as writer:
+    reporting.to_excel(
+        writer,
+        sheet_name=date_str,
+        index=False
+    )
+
+print(f"Fichier généré : {nom_fichier_final} (copie de l'historique + feuille '{date_str}')")
+
+
+
