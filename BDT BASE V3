@@ -1,0 +1,1734 @@
+# I.0.Initialisation de la BDT
+------------------------------
+
+
+import pandas as pd
+import numpy as np
+from pathlib import Path
+import time
+
+# Un timer pour mesurer le temps d'exécution du script
+start_time = time.time()
+
+# Définition du répertoire principal
+base_dir = Path(r"U:\DG\DGDR\50.RISQUES FINANCIERS\550. Pilotage et Innovation\A_BASES\BDT\2_DP-DCB-DI")
+
+# Définition des chemins spécifiques
+source_path = base_dir / "DataBrutes" /"Base_Risque_de_crédit_DRG35_BDT_En_cours_de_stabilisation_31_08_2026.xlsx" # Modifier le nom du fichier
+
+# Chemin du fichier Excel contenant les coordonnées GPS
+chemin_coordonnees_gps = r"U:\DG\DGDR\50.RISQUES FINANCIERS\550. Pilotage et Innovation\C_DEVELOPPEMENT\RiskCredit\DataBrutes\Base_coordonnées_GPS\Base_coordonnées_GPS_Arnaud_Bely.xlsx"
+
+# Extraction de la date à la fin du fichier source
+date_part = source_path.stem.split("_")[-1]  
+
+# Génération de BDT avec la date
+bdt_filename = f"BDT_{date_part}.xlsx"
+
+# Définition du chemin BDT mis à jour
+bdt_path = base_dir / "Data" / bdt_filename
+
+# Chemin du fichier de log
+log_path = base_dir / "Logs" / f"log_{date_part}.txt"
+
+# Définition des chemins spécifiques
+chemins = {
+    "bdt": bdt_path,
+    "source": source_path,
+    "inventaire": base_dir / "DataBrutes" / "Inventaire CSSD DCB M8 2026 - validé.xlsx",# Modifier le nom du fichier DCB
+    "provisions": base_dir / "DataBrutes" / "Fichier provisions DCB - T2 2026.xlsx",# Modifier le nom du fichier DCB
+    "tables_de_correspondances":base_dir / "DataBrutes" /"Tables de correspondances.xlsx",
+    "tiers_actifs":base_dir / "DataBrutes" /"Extraction Tiers actifs pour compta (1).xlsx",
+    "chemin_di_inventaire":base_dir / "DataBrutes" / "Inventaire T3 26_M8 CSD DI définitif.xlsx",# Modifier le nom du fichier DI
+    "chemin_Notations_Etablissements_de_crédit": base_dir / "DataBrutes" / "Notations_Etablissements de crédit au 30_09_2024.xlsx", 
+    "impaye": base_dir / "DataBrutes" / "Impayés sur fichier Themis au 30 06 2026.xlsx"
+}
+
+# Définitions de chemins
+chemin_bdt = chemins["bdt"]
+chemin_source = chemins["source"]
+chemin_inventaire = chemins["inventaire"]
+chemin_provisions_dcp = chemins["provisions"]
+chemin_Tb_correspondances = chemins["tables_de_correspondances"]
+chemin_tiers_actifs = chemins["tiers_actifs"]
+chemin_di_inventaire = chemins["chemin_di_inventaire"]
+chemin_Notations_Etablissements_de_crédit = chemins["chemin_Notations_Etablissements_de_crédit"]
+chemin_impaye = chemins["impaye"]
+Base_DI = pd.read_excel(chemin_source, sheet_name= 'Base DI_Excel_31_08_2026',header=3 ,usecols = "B:AK") # Modifier le nom du fichier
+
+
+# I.0.1. colonnes de la BDD
+
+
+# Définir les colonnes de la structure
+colonnes = [
+    "Direction", "Ressources","Produit" ,"Date", "Identifiant emprunteur", "Libellé court emprunteur",
+    "N° SIREN emprunteur", "Structure", "DR", "Département", "Code postal",
+    "Libellé famille emprunteur", "Libellé catégorie emprunteur", "Segment risque FE",
+    "Sous-segment risque FE", "Segment", "Sous-Segment", "Score",
+    "Milésime", "Va score", "Etat du tiers", "Motif Defaut / SS", "Date entrée Defaut SS",
+    "Montant résiduel impayé à date du jour", "CRD comptable M fin mois", "Nb Prêts", "Encours comptable",
+    "DA", "DNA", "HB prêt", "Nb prêts provisionnés", "Provision","Impayés techniques", "Nb prêts réaménagés", "Encours réaménagés","GAPD", "Exposition",
+    "Intitulé de l'affaire","Montant TP","classe de risque",
+    "Valorisation  du pf à la Clôture (Encours en €) sans Plus/moins values latentes",
+    "Exposition sans plus/moins values latentes (en €)"]
+# Créer un DataFrame vide avec les colonnes spécifiées
+df_bdt = pd.DataFrame(columns=colonnes)
+
+# Fonction pour écrire dans le fichier de log
+def log_message(message):
+    with open(log_path, 'a') as log_file:
+        log_file.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {message}\n")
+
+# Enrigistrer la bdt vide
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+
+
+# I.1.1.Base_DCB (Encours)
+
+# Charger le fichier source avec header spécifié
+df_source = pd.read_excel(chemin_source, sheet_name='Base_DCB (Encours)', skiprows=3, header=0, engine='openpyxl')
+log_message(f"Chargement du fichier source terminé. Nombre de lignes : {len(df_source)}")
+# Supprimer la première ligne de données 
+df_source = df_source.drop(index=0)
+# Réinitialiser les index après suppression
+df_source = df_source.reset_index(drop=True)
+log_message("Première ligne de données supprimée et index réinitialisé.")
+
+# Créer un DataFrame vide avec les colonnes spécifiées et le même nombre de lignes que df_source
+df_bdt = pd.DataFrame(columns=colonnes, index=range(len(df_source)))
+
+# Liste des indices de colonnes à remplir (A à P, W à AE, AM à AN)
+colonnes_indices = list(range(0, 9)) + list(range(10, 17)) + list(range(28, 32)) + list(range(39, 41))
+correspondance = list(range(0, 9)) + list(range(10, 17))+ list(range(23, 27)) + list(range(33, 35))
+
+# Vérifier que les listes ont la même longueur
+if len(colonnes_indices) != len(correspondance):
+    raise ValueError("Les listes d'indices de source et de correspondance doivent avoir la même longueur.")
+
+# Sélectionner uniquement les colonnes nécessaires de df_source
+nouvelles_donnees = df_source.iloc[:, colonnes_indices]
+
+# Remplir les colonnes de df_bdt avec les données de df_source
+for col_source, col_bdt in zip(colonnes_indices, correspondance):
+    if col_source < df_source.shape[1] and col_bdt < df_bdt.shape[1]:
+        df_bdt.iloc[:, col_bdt] = df_source.iloc[:, col_source]
+    else:
+        raise IndexError(f"Indices< hors limites: col_bdt={col_bdt}, col_source={col_source}")
+
+# Formater l'identifiant emprunteur
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.zfill(9)
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.2.Copie de Inventaire POST CSDP
+
+# Charger l'onglet "Inventaire " du fichier inventaire
+df_inventaire = pd.read_excel(chemin_inventaire, sheet_name='Inventaire M8 2026 ', header = 2, engine='openpyxl')
+log_message(f"Chargement de l'inventaire terminé. Nombre de lignes : {len(df_inventaire)}")
+
+# Mettre à jour le champ "Identifiant emprunteur" pour qu'il ait 9 caractères
+df_inventaire['Réf. Tiers'] = df_inventaire['Réf. Tiers'].astype(str).str.zfill(9)
+
+
+def choisir_motif(row):
+    """Retourne Impayés si non vide, sinon UTP."""
+    impayes = row['Impayés']
+    if pd.notna(impayes) and str(impayes).strip() != '':
+        return impayes
+    return row['UTP']
+
+
+# mettre à jour / ajouter des lignes dans df_bdt
+def mettre_a_jour_ou_ajouter(df_bdt, df_inventaire):
+    nouvelles_lignes = []
+    for index, row in df_inventaire.iterrows():
+        ref_tiers = row['Réf. Tiers']
+        # Vérifier si l'identifiant existe déjà dans df_bdt
+        correspondance = df_bdt[df_bdt['Identifiant emprunteur'] == ref_tiers]
+        if not correspondance.empty:
+            # Mettre à jour les champs existants
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'Etat du tiers'] = row['Statut du tiers post comité M8 2026']
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'Motif Defaut / SS'] = choisir_motif(row)
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'Date entrée Defaut SS'] = row['Date comité entrée DEFAUT / SS SURVEILLANCE']
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'GAPD'] = row['GAPD']
+        else:
+            # Ajouter une nouvelle ligne
+            nouvelle_ligne = {
+                'Identifiant emprunteur': ref_tiers,
+                'Direction': 'DCB',
+                'Ressources': 'SG',
+                "Produit" : 'Crédit',
+                'Date': df_bdt['Date'].iloc[0],  # Utiliser la date de la BDT
+                'Libellé court emprunteur': row['Libellé client'],
+                'Structure':row['DDFIP / DRFIP'],
+                'Libellé catégorie emprunteur': row['Catégorie client'],
+                'DR': row['DR'],
+                'GAPD': row['GAPD'],
+                'Etat du tiers': row['Statut du tiers post comité M8 2026'],
+                'Motif Defaut / SS': choisir_motif(row),
+                'Date entrée Defaut SS': row['Date comité entrée DEFAUT / SS SURVEILLANCE']
+            }
+            nouvelles_lignes.append(pd.DataFrame([nouvelle_ligne]))
+            
+    # Concaténer les nouvelles lignes avec le DataFrame existant
+    if nouvelles_lignes:
+        nouvelles_lignes_df = pd.concat(nouvelles_lignes, ignore_index=True)
+        start_index = len(df_bdt)
+        df_bdt = pd.concat([df_bdt, nouvelles_lignes_df], ignore_index=True)
+        end_index = len(df_bdt) - 1
+        log_message(f"Nombre de nouvelles lignes ajoutées : {len(nouvelles_lignes_df)}, de l'index {start_index + 1} à {end_index + 1}")
+    
+    return df_bdt
+
+
+# Mettre à jour ou ajouter des lignes dans df_bdt
+df_bdt = mettre_a_jour_ou_ajouter(df_bdt, df_inventaire)
+log_message("Mise à jour ou ajout des lignes dans df_bdt terminé.")
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+print("Mise à jour réussie de la base BDT.")
+
+
+ # I.1.3.Provisions DCB-prov PJ
+
+# Lire les fichiers Excel
+df_provisions_dcp = pd.read_excel(chemin_provisions_dcp, sheet_name='PJ provisions', engine='openpyxl', skiprows=1)
+log_message(f"Chargement des provisions DCP terminé. Nombre de lignes : {len(df_provisions_dcp)}")
+# Mettre à jour le champ "Numéro de Client" pour qu'il ait 9 caractères
+df_provisions_dcp['Numéro de Client'] = df_provisions_dcp['Numéro de Client'].astype(str).str.zfill(9)
+
+# Grouper par 'Numéro de Client' et agréger les champs nécessaires
+provisions_dcp_groupated = df_provisions_dcp.groupby('Numéro de Client').agg(
+    Intitulé_client=('Intitulé client', 'first'),
+    NATURE_CLIENT=('NATURE CLIENT', 'first'),
+    # ETAT_DU_TIERS=('ETAT DU TIERS', 'first'), # mettre à défaut, ne provisionne que les tiers à défaut
+    nbr_ID_PRÊT=('ID PRÊT', 'count'),
+    PROVISION=('TOTAL PROVISION T2 2026', 'sum') # à modifier
+).reset_index()
+
+# Variables pour suivre les indices de mise à jour
+updated_indices = []
+
+# Mettre à jour la BDT avec les informations agrégées
+for index, row in provisions_dcp_groupated.iterrows():
+    client_id = row['Numéro de Client']
+    matching_rows = df_bdt['Identifiant emprunteur'] == client_id
+
+    if matching_rows.any():
+        df_bdt.loc[matching_rows, 'Nb prêts provisionnés'] = row['nbr_ID_PRÊT']
+        df_bdt.loc[matching_rows, 'Provision'] = row['PROVISION']
+        updated_indices.extend(df_bdt[matching_rows].index.tolist())
+
+# Enregistrer les indices de début et de fin des mises à jour
+if updated_indices:
+    start_update_index = min(updated_indices)
+    end_update_index = max(updated_indices)
+    log_message(f"Nombre de lignes mises à jour : {len(updated_indices)}, de l'index {start_update_index + 1} à {end_update_index + 1}")
+
+# Sauvegarder le fichier mis à jour
+# df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour terminée et sauvegardée dans 'BDT.xlsx'.")
+
+
+df_provisions_dcp.columns
+
+
+
+# I.1.4.Provisions DCB-prov IIG
+
+# Lire les fichiers Excel
+df_provisions_dcp = pd.read_excel(chemin_provisions_dcp, sheet_name='Provisions hors PJ', engine='openpyxl', skiprows=22)
+log_message(f"Chargement des Provisions DCB-prov IIG terminé. Nombre de lignes : {len(df_provisions_dcp )}")
+# Mettre à jour le champ "Numéro de Client" pour qu'il ait 9 caractères
+df_provisions_dcp['Numéro de client'] = df_provisions_dcp['Numéro de client'].astype(str).str.zfill(9)
+
+# Variables pour suivre les indices de mise à jour
+updated_indices = []
+
+# Mettre à jour la BDT avec les informations agrégées
+for index, row in df_provisions_dcp.iterrows():
+    client_id = row['Numéro de client']
+    matching_rows = df_bdt['Identifiant emprunteur'] == client_id
+    
+    if matching_rows.any():
+        df_bdt.loc[matching_rows, 'Provision'] = row['PROVISION HORS ICNE 31/03/2026']
+        updated_indices.extend(df_bdt[matching_rows].index.tolist())
+# Enregistrer les indices de début et de fin des mises à jour
+if updated_indices:
+    start_update_index = min(updated_indices)
+    end_update_index = max(updated_indices)
+    log_message(f"Nombre de lignes mises à jour : {len(updated_indices)}, de l'index {start_update_index + 1} à {end_update_index + 1}")
+
+# Sauvegarder le fichier mis à jour
+# df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour terminée et sauvegardée dans 'BDT.xlsx'.")
+
+
+# I.1.5.Imp techn
+
+
+# Lire les fichiers Excel
+df_provisions_dcp = pd.read_excel(chemin_impaye, sheet_name='Imp techn', engine='openpyxl')
+
+log_message(f"Chargement des Provisions Imp techn terminé. Nombre de lignes : {len(df_provisions_dcp)}")
+
+# Mettre à jour le champ "Numéro de Client" pour qu'il ait 9 caractères
+df_provisions_dcp['ID TIERS'] = df_provisions_dcp['ID TIERS'].astype(str).str.zfill(9)
+
+# Regrouper par 'Réf. tiers' en sommant 'Arriéré total (Impayés & DNA)'
+df_grouped = df_provisions_dcp.groupby('ID TIERS')['MONTANT IMP RESID'].sum().reset_index()
+
+# Variables pour suivre les indices de mise à jour
+updated_indices = []
+
+# Mettre à jour la BDT avec les informations agrégées
+for index, row in df_grouped.iterrows():
+    client_id = row['ID TIERS']
+    matching_rows = df_bdt['Identifiant emprunteur'] == client_id
+
+    if matching_rows.any():
+        df_bdt.loc[matching_rows, 'Impayés techniques'] = row['MONTANT IMP RESID']
+        updated_indices.extend(df_bdt[matching_rows].index.tolist())
+
+# Enregistrer les indices de début et de fin des mises à jour
+if updated_indices:
+    start_update_index = min(updated_indices)
+    end_update_index = max(updated_indices)
+    log_message(f"Nombre de lignes mises à jour : {len(updated_indices)}, de l'index {start_update_index + 1} à {end_update_index + 1}")
+
+# Sauvegarder le fichier mis à jour
+df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour terminée et sauvegardée dans 'BDT.xlsx'.")
+
+
+# I.1.6.DCB (DNA)
+
+# Charger les deux onglets DNA
+df_DCB_DNA_siege = pd.read_excel(chemin_source, sheet_name='DCB (DNA siege)', engine='openpyxl', skiprows=2, usecols=lambda x: x != 'Unnamed: 0')
+df_DCB_DNA_hors_siege = pd.read_excel(chemin_source, sheet_name='DCB (DNA hors siege )', engine='openpyxl', skiprows=2, usecols=lambda x: x != 'Unnamed: 0')
+
+log_message(f"Chargement de DNA siège terminé. Nombre de lignes : {len(df_DCB_DNA_siege)}")
+log_message(f"Chargement de DNA hors siège terminé. Nombre de lignes : {len(df_DCB_DNA_hors_siege)}")
+
+# Fusionner les deux DataFrames
+df_DCB_DNA = pd.concat([df_DCB_DNA_siege, df_DCB_DNA_hors_siege], ignore_index=True)
+
+# Mettre à jour le champ "Code tiers" pour qu'il ait 9 caractères
+df_DCB_DNA['Code tiers'] = df_DCB_DNA['Code tiers'].apply(lambda x: str(int(x)).zfill(9) if pd.notna(x) else "")
+
+# Supprimer les lignes avec NaN dans "Code postal de l'adresse fiscale"
+df_DCB_DNA.dropna(subset=["Code postal de l'adresse fiscale"], inplace=True)
+
+# Remplacer les tirets par des zéros dans la colonne 'Dépassement non autorisé EUR'
+df_DCB_DNA['Dépassement non autorisé EUR'] = df_DCB_DNA['Dépassement non autorisé EUR'].replace('-', '0')
+
+# Remplacer les valeurs non numériques par NaN dans la colonne 'Dépassement non autorisé EUR'
+df_DCB_DNA['Dépassement non autorisé EUR'] = pd.to_numeric(df_DCB_DNA['Dépassement non autorisé EUR'], errors='coerce')
+
+# Remplacer les valeurs NaN par 0
+df_DCB_DNA['Dépassement non autorisé EUR'].fillna(0, inplace=True)
+
+# Agrégation des données par "Code tiers" pour sommer les "Dépassement non autorisé EUR"
+df_DCB_DNA_agg = df_DCB_DNA.groupby('Code tiers', as_index=False).agg({
+    'Dépassement non autorisé EUR': 'sum',
+    'Code postal de l\'adresse fiscale': 'first',
+    'Libellé structure': 'first',
+    'Libellé court (Tiers)': 'first',
+    'Libellé catégorie de clientèle (Tiers)': 'first',
+    'Libellé Direction Régionale': 'first'
+})
+
+# Mettre à jour / ajouter des lignes dans df_bdt
+def mettre_a_jour_ou_ajouter(df_bdt, df_DCB_DNA_agg):
+    nouvelles_lignes = []
+    for index, row in df_DCB_DNA_agg.iterrows():
+        ref_tiers = row['Code tiers']
+        # Vérifier si l'identifiant existe déjà dans df_bdt
+        correspondance = df_bdt[df_bdt['Identifiant emprunteur'] == ref_tiers]
+        if not correspondance.empty:
+            # Mettre à jour les champs existants
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'DNA'] = row['Dépassement non autorisé EUR']
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'Code postal'] = row['Code postal de l\'adresse fiscale']
+        else:
+            # Ajouter une nouvelle ligne
+            nouvelle_ligne = {
+                'Identifiant emprunteur': ref_tiers,
+                'Direction': 'DCB',
+                'Ressources': 'SG',
+                'Produit': 'DNA',
+                'Date': df_bdt['Date'].iloc[0],  # Utiliser la date de la BDT
+                'Structure': row['Libellé structure'],
+                'Libellé court emprunteur': row['Libellé court (Tiers)'],
+                'Libellé catégorie emprunteur': row['Libellé catégorie de clientèle (Tiers)'],
+                'Code postal': row['Code postal de l\'adresse fiscale'],
+                'DR': row['Libellé Direction Régionale'],
+                'DNA': row['Dépassement non autorisé EUR']
+            }
+            nouvelles_lignes.append(pd.DataFrame([nouvelle_ligne]))
+
+    # Concaténer les nouvelles lignes avec le DataFrame existant
+    if nouvelles_lignes:
+        nouvelles_lignes_df = pd.concat(nouvelles_lignes, ignore_index=True)
+        start_index = len(df_bdt)
+        df_bdt = pd.concat([df_bdt, nouvelles_lignes_df], ignore_index=True)
+        end_index = len(df_bdt) - 1
+        log_message(f"Nombre de nouvelles lignes ajoutées : {len(nouvelles_lignes_df)}, de l'index {start_index + 1} à {end_index + 1}")
+
+    return df_bdt
+
+# Mettre à jour ou ajouter des lignes dans df_bdt
+df_bdt = mettre_a_jour_ou_ajouter(df_bdt, df_DCB_DNA_agg)
+
+# Sauvegarder le fichier mis à jour
+# df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.7.DCB (DA)
+
+# Lire les fichiers Excel
+df_DCB_DA = pd.read_excel(chemin_source, sheet_name='DCB (DA)', engine='openpyxl', skiprows=3,usecols=lambda x: x != 'Unnamed: 0')
+log_message(f"Chargement de DA terminé. Nombre de lignes : {len(df_DCB_DA)}")
+#Supprimer la dernière ligne
+df_DCB_DA.drop(df_DCB_DA.tail(1).index,inplace=True)
+#Supprimer NaN 
+df_DCB_DA["Code postal de l'adresse fiscale"].dropna()
+
+# Mettre à jour le champ "Numéro de Client" pour qu'il ait 9 caractères
+df_DCB_DA['Code tiers'] = df_DCB_DA['Code tiers'].apply(lambda x: str(int(x)).zfill(9) if pd.notna(x) else "")
+# Grouper par 'Numéro de Client' et agréger les champs nécessaires
+df_DCB_DA_groupated = df_DCB_DA.groupby('Code tiers').agg(
+    Libelle_court=('Libellé court (Tiers)', 'first'),
+    Libelle_structure=('Libellé structure', 'first'),
+    #Libelle_segment_de_clientele_DCB=('Libellé segment de clientèle DCB', 'first'),
+    #Libelle_famille_de_clientele_DCB=('Libellé famille de clientèle DCB', 'first'),
+    Libelle_catégorie_de_clientele=('Libellé catégorie de clientèle (Tiers)', 'first'),
+    Libelle_Direction_Regionale=('Libellé Direction Régionale', 'first'),
+    Code_postal=("Code postal de l'adresse fiscale", 'first'),
+    #Libelle_département=('Libellé département', 'first'),
+    Découvert_confirme_EUR=('Découvert confirmé EUR', 'sum')
+).reset_index()
+
+
+# mettre à jour / ajouter des lignes dans df_bdt
+def mettre_a_jour_ou_ajouter(df_bdt, df_DCB_DA_groupated):
+    nouvelles_lignes = []
+    for index, row in df_DCB_DA_groupated.iterrows():
+        ref_tiers = row['Code tiers']
+        # Vérifier si l'identifiant existe déjà dans df_bdt
+        correspondance = df_bdt[df_bdt['Identifiant emprunteur'] == ref_tiers]
+        if not correspondance.empty:
+            # Mettre à jour les champs existants
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'DA'] = row['Découvert_confirme_EUR']
+            df_bdt.loc[df_bdt['Identifiant emprunteur'] == ref_tiers, 'Code postal'] = row['Code_postal']
+        else:
+            # Ajouter une nouvelle ligne
+            nouvelle_ligne = {
+                'Identifiant emprunteur': ref_tiers,
+                'Direction': 'DCB',
+                'Ressources': 'SG',
+                'Produit'   : 'DA',
+                'Date': df_bdt['Date'].iloc[0],  # Utiliser la date de la BDT
+                'Structure': row['Libelle_structure'],
+                'Libellé court emprunteur': row['Libelle_court'],
+                #'Libellé famille emprunteur': row['Libelle_famille_de_clientele_DCB'],
+                'Libellé catégorie emprunteur': row['Libelle_catégorie_de_clientele'],
+                'Code postal': row['Code_postal'],
+                #'Département': row['Libelle_département'],
+                'DR': row['Libelle_Direction_Regionale'],
+                'DA': row['Découvert_confirme_EUR']
+                
+            }
+            nouvelles_lignes.append(pd.DataFrame([nouvelle_ligne]))
+
+    # Concaténer les nouvelles lignes avec le DataFrame existant
+    if nouvelles_lignes:
+        nouvelles_lignes_df = pd.concat(nouvelles_lignes, ignore_index=True)
+        print(f"Indices avant ajout : {df_bdt.index}")
+        start_index = len(df_bdt)
+        df_bdt = pd.concat([df_bdt, nouvelles_lignes_df], ignore_index=True)
+        end_index = len(df_bdt) - 1
+        print(f"Indices après ajout : {df_bdt.index}")
+        log_message(f"Nombre de nouvelles lignes ajoutées : {len(nouvelles_lignes_df)}, de l'index {start_index + 1} à {end_index + 1}")
+    
+    return df_bdt
+# Mettre à jour ou ajouter des lignes dans df_bdt
+df_bdt = mettre_a_jour_ou_ajouter(df_bdt, df_DCB_DA_groupated)
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+
+# I.1.8.DCB (Score)
+
+
+# Charger les deux tableaux séparément à partir du même onglet
+df_score_PJ = pd.read_excel(chemin_source, sheet_name='DCB (Score)', engine='openpyxl', skiprows=2, usecols='B:F')
+df_score_APL = pd.read_excel(chemin_source, sheet_name='DCB (Score)', engine='openpyxl', skiprows=2, usecols='H:K')
+
+# Renommer les colonnes de df_score_APL pour correspondre à celles attendues
+df_score_APL.rename(columns={
+    'Identifiant emprunteur.1': 'Identifiant emprunteur',
+    'Score notation emprunteur.1': 'Score notation emprunteur'
+}, inplace=True)
+
+# Supprimer les lignes avec des valeurs NaN dans 'Identifiant emprunteur'
+df_score_APL.dropna(subset=['Identifiant emprunteur'], inplace=True)
+# Convertir les identifiants en chaînes de caractères et supprimer les espaces
+df_score_APL['Identifiant emprunteur'] = df_score_APL['Identifiant emprunteur'].astype(str).str.strip()
+
+# Convertir la colonne en entier en supprimant la partie décimale
+df_score_APL['Identifiant emprunteur'] = pd.to_numeric(df_score_APL['Identifiant emprunteur'], errors='coerce').fillna(0).astype(int)
+df_score_APL['Identifiant emprunteur'] = df_score_APL['Identifiant emprunteur'].astype(str).str.strip()
+
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.strip()
+df_score_PJ['Identifiant emprunteur'] = df_score_PJ['Identifiant emprunteur'].astype(str).str.strip()
+
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.strip()
+
+# Mettre à jour le champ "Identifiant emprunteur" pour qu'il ait 9 caractères
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].str.zfill(9)
+df_score_PJ['Identifiant emprunteur'] = df_score_PJ['Identifiant emprunteur'].str.zfill(9)
+df_score_APL['Identifiant emprunteur'] = df_score_APL['Identifiant emprunteur'].str.zfill(9)
+
+
+# Fonction pour obtenir les valeurs les plus récentes de "Date création dossier" et "Score dossier PJ" pour PJ
+def obtenir_valeurs_recentes_PJ(identifiant, df_score):
+    filtre = df_score[df_score['Identifiant emprunteur'] == identifiant]
+    if not filtre.empty:
+        ligne_recente = filtre.loc[filtre['Date création dossier'].idxmax()]
+        return ligne_recente['Date création dossier'], ligne_recente['Score dossier PJ'], ligne_recente['Tranches de Score']
+    return None, None, None
+
+# Parcourir chaque identifiant dans df_bdt et mettre à jour les colonnes en fonction du segment
+for index, row in df_bdt.iterrows():
+    identifiant = row['Identifiant emprunteur']
+    segment = row['Segment']
+    #print(f"Processing Identifiant: {identifiant}, Segment: {segment}")  # Debug print
+
+    if segment == 'APL':
+        # Pour APL, on prend le score de notation emprunteur
+        score_APL = df_score_APL[df_score_APL['Identifiant emprunteur'] == identifiant]['Score notation emprunteur']
+        Annee_ref_notation = df_score_APL[df_score_APL['Identifiant emprunteur'] == identifiant]['Année référence notation emprunteur']
+        #print(f"APL Score for {identifiant}: {score_APL.values}")  # Debug print
+        if not score_APL.empty:
+            score_value = score_APL.values[0]
+            df_bdt.at[index, 'Score'] = score_APL.values[0]
+            df_bdt.at[index, 'Milésime'] = Annee_ref_notation.values[0]
+             # Mettre à jour 'Va score' en fonction de la valeur du score APL
+            if score_value <= 60:
+                df_bdt.at[index, 'Va score'] = '0 - 60'
+            elif 60 < score_value <= 80:
+                df_bdt.at[index, 'Va score'] = '60 - 80'
+            elif 80 < score_value <= 100:
+                df_bdt.at[index, 'Va score'] = '80 - 100'
+            #print(f"Updated Va score for {identifiant} to {score_APL.values[0]}")  # Debug print
+    elif segment == 'PJ':
+        # Pour PJ, on utilise la fonction pour obtenir les valeurs les plus récentes
+        date_recente, score_recent, Tranches_recent = obtenir_valeurs_recentes_PJ(identifiant, df_score_PJ)
+        if date_recente is not None and score_recent is not None:
+            df_bdt.at[index, 'Milésime'] = date_recente
+            df_bdt.at[index, 'Score'] = score_recent
+            df_bdt.at[index, 'Va score'] = Tranches_recent
+            #print(f"Updated PJ scores for {identifiant}: Date={date_recente}, Score={score_recent}, Tranches={Tranches_recent}")  # Debug print
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.9.DCB (Hors Bilan)
+
+# Lire les fichiers Excel
+df_DCB_HB = pd.read_excel(chemin_source, sheet_name='DCB (Hors Bilan)', engine='openpyxl', skiprows=3,usecols=lambda x: x != 'Unnamed: 0')
+
+#Supprimer la dernière ligne
+df_DCB_HB.drop(df_DCB_HB.tail(1).index,inplace=True)
+# Nettoyer et formater la colonne "Tiers de contrepartie (Tiers) SLD - ATT"
+df_DCB_HB['Tiers de contrepartie (Tiers) SLD - ATT'] = df_DCB_HB['Tiers de contrepartie (Tiers) SLD - ATT'].astype(str).str[2:]
+df_DCB_HB['Tiers de contrepartie (Tiers) SLD - ATT'] = df_DCB_HB['Tiers de contrepartie (Tiers) SLD - ATT'].str.zfill(9)
+
+# Agréger la table par "Tiers de contrepartie (Tiers) SLD - ATT" et somme positive de "Solde cumulé depuis le début ex CV"
+aggregated_df = df_DCB_HB.groupby('Tiers de contrepartie (Tiers) SLD - ATT')['Solde cumulé depuis le début ex CV'].sum().abs().reset_index()
+
+# Mettre à jour la colonne "HB prêt" dans df_bdt avec les valeurs agrégées
+for index, row in aggregated_df.iterrows():
+    tiers = row['Tiers de contrepartie (Tiers) SLD - ATT']
+    solde_cumule = row['Solde cumulé depuis le début ex CV']
+    if tiers in df_bdt['Identifiant emprunteur'].values:
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == tiers, 'HB prêt'] = solde_cumule
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.10 Croisement avec Base_DCB (Sans Encours) pour enrichissement de données
+
+# Charger les données
+df_DCB_SANS_ENCOURS = pd.read_excel(chemin_source, sheet_name='Base_DCB (Sans Encours)', engine='openpyxl', skiprows=3)
+
+# Supprimer la dernière ligne
+df_DCB_SANS_ENCOURS.drop(df_DCB_SANS_ENCOURS.tail(1).index, inplace=True)
+
+# Formater les identifiants
+df_DCB_SANS_ENCOURS['Identifiant emprunteur'] = df_DCB_SANS_ENCOURS['Identifiant emprunteur'].astype(str).str.zfill(9)
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.zfill(9)
+
+# Filtrer les lignes où "Libellé famille emprunteur" est vide
+df_bdt_filtered = df_bdt[df_bdt['Libellé famille emprunteur'].isna()]
+
+# Mettre à jour les valeurs manquantes
+for index, row in df_bdt_filtered.iterrows():
+    Identifiant_emprunteur = row['Identifiant emprunteur']
+    correspondance = df_DCB_SANS_ENCOURS[df_DCB_SANS_ENCOURS['Identifiant emprunteur'] == Identifiant_emprunteur]
+
+    if not correspondance.empty:
+        # Remplir les champs manquants
+        df_bdt.at[index, 'N° SIREN emprunteur'] = correspondance['N° SIREN emprunteur'].values[0]
+        #df_bdt.at[index, 'Département'] = correspondance['Département'].values[0]
+        df_bdt.at[index, 'Code postal'] = correspondance['Code postal'].values[0]
+        df_bdt.at[index, 'Libellé famille emprunteur'] = correspondance['Libellé famille emprunteur'].values[0]
+        df_bdt.at[index, 'Libellé catégorie emprunteur'] = correspondance['Libellé catégorie emprunteur'].values[0]
+        df_bdt.at[index, 'Segment'] = correspondance['Segment DCB'].values[0]
+        df_bdt.at[index, 'Sous-Segment'] = correspondance['Sous-Segment DCB'].values[0]
+
+# Filtrer les lignes où "Montant résiduel impayé à date du jour" est null dans df_bdt
+df_bdt_to_update_montant = df_bdt[df_bdt['Montant résiduel impayé à date du jour'].isna()]
+
+# Mettre à jour les valeurs de "Montant résiduel impayé à date du jour"
+for index, row in df_bdt_to_update_montant.iterrows():
+    Identifiant_emprunteur = row['Identifiant emprunteur']
+    correspondance = df_DCB_SANS_ENCOURS[df_DCB_SANS_ENCOURS['Identifiant emprunteur'] == Identifiant_emprunteur]
+
+    if not correspondance.empty and not pd.isna(correspondance['Montant résiduel impayé à date du jour'].values[0]):
+        # Remplir le champ "Montant résiduel impayé à date du jour"
+        df_bdt.at[index, 'Montant résiduel impayé à date du jour'] = correspondance['Montant résiduel impayé à date du jour'].values[0]
+        print(f"Mise à jour de la ligne {index} pour l'identifiant {Identifiant_emprunteur}.")
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.11.Tables de correspondances/Nomenclature_Famille_Emp
+# Charger les données
+df_Tb_correspondance = pd.read_excel(chemin_Tb_correspondances, sheet_name='Nomenclature_Famille_Emp')
+
+# Filtrer les lignes où "Libellé famille emprunteur" est vide
+df_bdt_filtered = df_bdt[df_bdt['Libellé famille emprunteur'].isna()]
+
+# Remplir les valeurs manquantes
+for index, row in df_bdt_filtered.iterrows():
+    categorie_client = row['Libellé catégorie emprunteur']
+
+    # Vérifier si categorie_client n'est pas NaN
+    if pd.notna(categorie_client):
+        # Si categorie_client commence par EPL _* c'est un EPL
+        if categorie_client.startswith('EPL '):
+            df_bdt.at[index, 'Libellé famille emprunteur'] = 'EPL'
+        # Si categorie_client contient "ASSOCIATIONS" (en majuscules ou minuscules)
+        elif 'associations' in categorie_client.lower():
+            df_bdt.at[index, 'Libellé famille emprunteur'] = 'Associations'
+        else:
+            correspondance = df_Tb_correspondance[df_Tb_correspondance['catégorie client'] == categorie_client]
+            if not correspondance.empty:
+                famille_emp = correspondance['famille emp'].values[0]
+                df_bdt.at[index, 'Libellé famille emprunteur'] = famille_emp
+
+# Sauvegarder le fichier mis à jour
+# df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+
+# I.1.12.Tables de correspondances/Nomenclature_Seg_Prov
+
+#Renseigner les valeurs manquantes du champs 'Segment' en utilsant une table de correspondance
+# Charger les données 
+df_Tb_correspondance = pd.read_excel(chemin_Tb_correspondances, sheet_name='Nomenclature_Seg_Prov')
+
+# Filtrer les lignes où "Libellé famille emprunteur" est vide
+df_bdt_filtered = df_bdt[df_bdt['Segment'].isna()]
+
+# Remplir les valeurs manquantes
+for index, row in df_bdt_filtered.iterrows():
+    Libelle_famille = row['Libellé famille emprunteur']
+    correspondance = df_Tb_correspondance[df_Tb_correspondance['famille emp'] == Libelle_famille]
+    if not correspondance.empty:
+        seg = correspondance['Seg_Prov'].values[0]
+        df_bdt.at[index, 'Segment'] = seg
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# I.1.13 Completer les scores manquants des APL en se basant sur les données Histo
+# Charger la table de correspondance depuis l'onglet Score_APL
+df_correspondance = pd.read_excel(chemin_Tb_correspondances, sheet_name='Score_APL', engine='openpyxl')
+
+# Convertir les identifiants en chaînes de caractères 
+df_correspondance['Identifiant emprunteur'] = df_correspondance['Identifiant emprunteur'].astype(str).str.strip()
+df_correspondance['Identifiant emprunteur'] = df_correspondance['Identifiant emprunteur'].str.zfill(9)
+# Identifier les identifiants sans score dans df_bdt
+identifiants_sans_score = df_bdt[df_bdt['Score'].isna()]['Identifiant emprunteur']
+
+# Mettre à jour df_bdt avec les valeurs de la table de correspondance
+for identifiant in identifiants_sans_score:
+    correspondance = df_correspondance[df_correspondance['Identifiant emprunteur'] == identifiant]
+    if not correspondance.empty:
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == identifiant, 'Score'] = correspondance['Score dossier PJ'].values[0]
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == identifiant, 'Milésime'] = correspondance['Milésime'].values[0]
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == identifiant, 'Va score'] = correspondance['Va score'].values[0]
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+print("Mise à jour réussie des identifiants sans score dans la base BDT.")
+
+# I.1.14 MàJ de la bdt:on calcule l'expo, et on met les tiers qui ne sont pas dans l'inventaires à "SAIN"
+# Mettre à jour la colonne 'Etat du tiers'
+df_bdt['Etat du tiers'] = df_bdt['Etat du tiers'].fillna('SAIN')
+
+# Vérifier les colonnes et remplir les valeurs manquantes par zéro
+colonnes_numeriques = ['Encours comptable', 'HB prêt', 'DA', 'DNA', 'GAPD']
+for colonne in colonnes_numeriques:
+    if colonne in df_bdt.columns:
+        df_bdt[colonne] = pd.to_numeric(df_bdt[colonne], errors='coerce').fillna(0)
+    else:
+        print(f"La colonne {colonne} n'existe pas dans le DataFrame.")
+
+# Calculer la colonne 'Exposition'
+df_bdt['Exposition'] = df_bdt[colonnes_numeriques].sum(axis=1)
+# Copier 'Libellé famille emprunteur' dans 'Sous-Segments' si 'Sous-Segments' est vide
+mask = df_bdt['Sous-Segment'].isna() | (df_bdt['Sous-Segment'] == '')
+df_bdt.loc[mask, 'Sous-Segment'] = df_bdt.loc[mask, 'Libellé famille emprunteur']
+# Sauvegarder le fichier mis à jour
+log_message(f" Nombre de lignes BDT Après l'ajout de la DCB : {len(df_bdt)}")
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message("Sauvegarde du fichier BDT terminée.")
+print("Mise à jour réussie de la base BDT.")
+
+
+# II.1.1 Ajouter la Base FE
+# Lire le fichier Excel
+df_base_fe = pd.read_excel(chemin_source, sheet_name='Base FE', skiprows=3)
+log_message(f"Chargement de la BDD FE. Nombre de lignes : {len(df_base_fe )}")
+# Supprimer la ligne qui suit le header et la première colonne
+df_base_fe = df_base_fe.drop(df_base_fe.index[0])
+df_base_fe = df_base_fe.iloc[:, 1:]
+
+# Supprimer la dernière ligne
+df_base_fe.drop(df_base_fe.tail(1).index, inplace=True)
+
+# Convertir les colonnes en entier en supprimant la partie décimale
+df_base_fe['Identifiant emprunteur (1)'] = pd.to_numeric(df_base_fe['Identifiant emprunteur (1)'], errors='coerce').fillna(0).astype(int)
+df_base_fe['Identifiant emprunteur (1)'] = df_base_fe['Identifiant emprunteur (1)'].astype(str).str.strip()
+df_base_fe['Identifiant emprunteur (1)'] = df_base_fe['Identifiant emprunteur (1)'].str.zfill(9)
+df_base_fe['N° SIREN emprunteur'] = pd.to_numeric(df_base_fe['N° SIREN emprunteur'], errors='coerce').fillna(0).astype(int)
+# Convertir la colonne de date
+df_base_fe['Date'] = df_base_fe["Date d'arrêté"].dt.strftime("%m/%Y")
+
+# Renommer les colonnes pour correspondre à celles de df_bdt
+df_base_fe.rename(columns={
+    'Identifiant emprunteur (1)': 'Identifiant emprunteur',
+    'N° SIREN emprunteur': 'N° SIREN emprunteur',
+    'Libellé structure suivi géré emprunteur FE': 'Structure',
+    'Libellé DR suivi géré emprunteur FE': 'DR',
+    #'Libellé département siège social emprunteur': 'Département',
+    'Code postal siège social emprunteur': 'Code postal',
+    'Libellé famille emprunteur': 'Libellé famille emprunteur',
+    'Libellé catégorie emprunteur': 'Libellé catégorie emprunteur',
+    'Segment risque emprunteur': 'Segment',
+    'Sous-segment risque emprunteur': 'Sous-Segment',
+    'Score notation emprunteur': 'Score',
+    'Etat': 'Etat du tiers',
+    'Motif associé emprunteur': 'Motif Defaut / SS',
+    'Date effet entrée défaut / sous surveillance emprunteur': 'Date entrée Defaut SS',
+    'Engagements Hors Bilan':'HB prêt',
+    'CRD comptable':'CRD comptable M fin mois',
+    'Exposition au risque (EAD)':'Exposition',
+    'Provisions':'Provision',
+    'Code classe de risque finale emprunteur':'classe de risque',
+    'Nb Prêts réam':'Nb prêts réaménagés',
+    'Année référence classe de risque finale emprunteur':'Milésime',
+    'Encours comptable ream':'Encours réaménagés'
+}, inplace=True)
+
+# Créer une liste pour stocker les nouvelles lignes
+new_rows = []
+# Ajouter les valeurs de df_base_fe à df_bdt
+for index, row in df_base_fe.iterrows():
+    new_row = {
+        'Identifiant emprunteur': row['Identifiant emprunteur'],
+        'Date': row['Date'],
+        'N° SIREN emprunteur': row['N° SIREN emprunteur'],
+        'Direction': row.get('Direction', None),
+        'Ressources': row.get('Ressource', None),
+        'Produit': row.get('Produit', None),
+        'Structure': row.get('Structure', None),
+        'DR': row.get('DR', None),
+        #'Département': row.get('Département', None),
+        'Code postal': row.get('Code postal', None),
+        'Libellé court emprunteur': row.get('Libellé court emprunteur', None),
+        'Libellé famille emprunteur': row.get('Libellé famille emprunteur', None),
+        'Libellé catégorie emprunteur': row.get('Libellé catégorie emprunteur', None),
+        'Segment': row.get('Segment', None),
+        'Sous-Segment': row.get('Sous-Segment', None),
+        'Score': row.get('Score', None),
+        'Milésime': row.get('Milésime', None),
+        'classe de risque': row.get('classe de risque', None),   
+        'Etat du tiers': row.get('Etat du tiers', None),
+        'Motif Defaut / SS': row.get('Motif Defaut / SS', None),
+        'Date entrée Defaut SS': row.get('Date entrée Defaut SS', None),
+        'Montant résiduel impayé à date du jour': row.get('Montant résiduel impayé à date du jour', None),
+        'HB prêt': row.get('HB prêt', None),
+        'CRD comptable M fin mois': row.get('CRD comptable M fin mois', None),
+        'Nb Prêts': row.get('Nb Prêts', None),
+        'Provision': row.get('Provision', None),
+        'Encours comptable': row.get('Encours comptable', None),
+        'Impayés techniques': row.get('Impayés techniques', None),
+        'Nb prêts provisionnés': row.get('Nb prêts provisionnés', None),
+        'Nb prêts réaménagés': row.get('Nb prêts réaménagés', None),
+        'Encours réaménagés': row.get('Encours réaménagés', None),
+        'Exposition': row.get('Exposition', None)
+    }
+    new_rows.append(new_row)
+
+# Convertir la liste de dictionnaires en DataFrame
+new_df = pd.DataFrame(new_rows)
+# Ajouter les nouvelles lignes à df_bdt
+df_bdt = pd.concat([df_bdt, new_df], ignore_index=True)
+start_index = len(df_bdt) - len(new_df)
+end_index = len(df_bdt) - 1
+log_message(f"Nombre de nouvelles lignes ajoutées : {len(new_df)}, de l'index {start_index + 1} à {end_index + 1}")
+
+# Convertir la colonne 'Score' en numérique, en gérant les erreurs
+df_bdt['Score'] = pd.to_numeric(df_bdt['Score'], errors='coerce')
+# Formater le champ 'Score' pour avoir un seul chiffre après la virgule
+df_bdt['Score'] = df_bdt['Score'].round(1)
+
+# Supprimer les espaces avant et après les valeurs du champ 'Va score'
+df_bdt['Va score'] = df_bdt['Va score'].str.strip()
+
+# Fonction pour extraire les 4 premiers caractères de Milésime
+def extract_year(milesime):
+    if pd.isnull(milesime) or milesime == '':
+        return None
+    return str(milesime)[:4]
+
+# Appliquer la fonction à la colonne Milésime
+df_bdt['Milésime'] = df_bdt['Milésime'].apply(extract_year)
+# Remplir Va score en fonction du Score
+for index, row in df_bdt.iterrows():
+    if pd.isnull(row['Va score']) and not pd.isnull(row['Score']):
+        score_value = row['Score']
+        
+        if score_value <= 60:
+            df_bdt.at[index, 'Va score'] = '0 - 60'
+        elif 60 < score_value <= 80:
+            df_bdt.at[index, 'Va score'] = '60 - 80'
+        elif 80 < score_value <= 100:
+            df_bdt.at[index, 'Va score'] = '80 - 100'
+
+# Remplacer les valeurs de classe de risque ND par vide
+df_bdt['classe de risque'] = df_bdt['classe de risque'].replace(['ND'], '')
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message(f" Nombre de lignes BDT Après l'ajout de la BASE FE : {len(df_bdt)}")
+log_message("Sauvegarde du fichier BDT terminée.")
+print("Mise à jour réussie de la base BDT.")
+
+
+# II.1.2 Ajouter SFIL + DP sur SG (Habitat spé)
+
+DP_SG = pd.read_excel(chemin_source, sheet_name= "SFIL + DP sur SG (Habitat spé)",skiprows=1,usecols = "B:AF")
+log_message(f"Chargement de SFIL + DP sur SG (Habitat spé) terminé. Nombre de lignes : {len(DP_SG)}")
+aggregated_DP_SG = DP_SG.groupby('Identifiant emprunteur').agg(
+    Direction = ('Direction', 'first'),
+    Ressource = ('Ressource', 'first'),
+    Date = ('Date', 'first'),
+    SIREN = ('N° SIREN emprunteur', 'first'),
+    Produit = ('Produit', 'first'),
+    Libelle_court_emprunteur = ('Libellé court emprunteur', 'first'),
+    structure = ('Libellé structure suivi géré emprunteur FE', 'first'),
+    DR = ('Libellé DR suivi géré emprunteur FE', 'first'),
+    #DEP = ('Libellé département siège social emprunteur', 'first'),
+    Code_postal = ('Code postal siège social emprunteur', 'first'),
+    Segment = ("Segment FE", 'first'),
+    Sous_Segment = ("Sous segment FE", 'first'),
+    Catégorie_emprunteur = ('Libellé catégorie emprunteur', 'first'),
+    Famille_emprunteur=('Libellé famille emprunteur', 'first'),
+    Etat_emprunteur = ('Etat emprunteur', 'first'),
+    Motif_Emprunteur = ('Motif associé emprunteur', 'first'),
+    Date_Effet_E_D_SS = ('Date effet entrée Défaut / SS', 'first'),
+    Nb_prets = ('Nb prêts', 'sum'),
+    CRD = ('Capital restant dû (CRD)', 'sum'),
+    Hb = ('Montant restant à verser (Hors Bilan)', 'sum'),
+    Exposition = ('Exposition', 'sum'),
+    Nb_pretsprov = ('Nb prêts provisionnés', 'sum'),
+    Provision = ('Provision', 'sum'),
+    Impayes_techniques = ('Impayés techniques', 'sum'),
+    Nb_prets_ream = ('Nb prêts réam', 'sum'),
+    #Code_classe = ('Code classe de risque emp', 'sum'),
+    CRD_ream = ('CRD ream', 'sum')
+).reset_index()
+aggregated_DP_SG ['Identifiant emprunteur'] = pd.to_numeric(aggregated_DP_SG['Identifiant emprunteur'], errors='coerce').fillna(0).astype(int)
+aggregated_DP_SG ['Identifiant emprunteur'] = aggregated_DP_SG ['Identifiant emprunteur'].astype(str).str.strip()
+aggregated_DP_SG ['Identifiant emprunteur'] = aggregated_DP_SG ['Identifiant emprunteur'].str.zfill(9)
+
+# Créer une liste pour stocker les nouvelles lignes
+new_rows = []
+
+# Ajouter les valeurs de df_base_fe à df_bdt
+for index, row in aggregated_DP_SG.iterrows():
+    new_row = {
+        'Identifiant emprunteur': row['Identifiant emprunteur'],
+        'Date': row['Date'],
+        'N° SIREN emprunteur': row['SIREN'],
+        'Direction': row.get('Direction', None),
+        'Ressources': row.get('Ressource', None),
+        'Produit': row.get('Produit', None),
+        'Structure': row.get('structure', None),
+        'DR': row.get('DR', None),
+        #'Département': row.get('DEP', None),
+        'Code postal': row.get('Code_postal', None),
+        'Libellé court emprunteur': row.get('Libelle_court_emprunteur', None),
+        'Libellé famille emprunteur': row.get('Famille_emprunteur', None),
+        'Libellé catégorie emprunteur': row.get('Catégorie_emprunteur', None),
+        'Segment': row.get('Segment', None),
+        'Sous-Segment': row.get('Sous_Segment', None),
+        'Etat du tiers': row.get('Etat_emprunteur', None),
+        'Motif Defaut / SS': row.get('Motif_Emprunteur', None),
+        'Date effet entrée Défaut / SS': row.get(' Date_Effet_E_D_SS', None),
+        'HB prêt': row.get('Hb', None),
+        'CRD comptable M fin mois': row.get('CRD', None),
+        'Nb Prêts': row.get('Nb_prets', None),
+        'Provision': row.get('Provision', None),
+        'Impayés techniques': row.get('Impayes_techniques', None),
+        'Nb prêts provisionnés': row.get(' Nb_pretsprov', None),
+        'Nb prêts réaménagés': row.get('Nb_prets_ream', None),
+        'Encours réaménagés': row.get('CRD_ream', None),
+        #'classe de risque': row.get('Code_classe', None),
+        'Exposition': row.get('Exposition', None)
+    }
+    new_rows.append(new_row)
+
+# Convertir la liste de dictionnaires en DataFrame
+new_df = pd.DataFrame(new_rows)
+# Ajouter les nouvelles lignes à df_bdt
+df_bdt = pd.concat([df_bdt, new_df], ignore_index=True)
+start_index = len(df_bdt) - len(new_df)
+end_index = len(df_bdt) - 1
+print(f"Indices avant ajout : {start_index + 1} à {end_index + 1}")
+log_message(f"Nombre de nouvelles lignes ajoutées : {len(new_df)}, de l'index {start_index + 1} à {end_index + 1}")
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message(f" Nombre de lignes BDT Après l'ajout de SFIL + DP sur SG (Habitat spé): {len(df_bdt)}")
+log_message("Sauvegarde du fichier BDT terminée.")
+print("Mise à jour réussie de la base BDT.")
+
+
+# II.1.3.DP sur SG (Projets int. gén.)
+DP_SG_Pr = pd.read_excel(chemin_source, sheet_name= "DP sur SG (Projets int. gén.)",skiprows=1,usecols = "B:AD")
+log_message(f"Chargement de DP sur SG (Projets int. gén.) terminé. Nombre de lignes : {len(DP_SG_Pr)}")
+# Suppression des espaces en début et fin des noms de colonnes
+DP_SG_Pr.columns =DP_SG_Pr.columns.str.strip()
+aggregated_DP_SG_Pr = DP_SG_Pr.groupby('Identifiant emprunteur').agg(
+    Direction = ('Direction', 'first'),
+    Ressource = ('Ressource', 'first'),
+    Produit = ('Produit', 'first'),
+    Date = ('Date', 'first'),
+    SIREN = ('N° SIREN emprunteur', 'first'),
+    Libelle_court_emprunteur = ('Libellé court emprunteur', 'first'),
+    structure = ('Libellé structure commercialisation', 'first'),
+    DR = ('Libellé DR instruction', 'first'),
+    #DEP = ('Département siège social emprunteur', 'first'),
+    Code_postal = ('Code postal siège social emprunteur', 'first'),
+    Segment = ("Segment risque FE", 'first'),
+    Sous_Segment = ("Sous-segment risque FE", 'first'),
+    Catégorie_emprunteur = ('Catégorie emprunteur', 'first'),
+    Famille_emprunteur=('Famille emprunteur', 'first'),
+    Etat_emprunteur = ('Etat', 'first'),
+    Motif_Emprunteur = ('Motif', 'first'),
+    Date_Effet_E_D_SS = ('Date Entrée D/SS/Sain', 'first'),
+    Nb_prets = ('Nb Prêts', 'sum'),
+    CRD = ('Capital restant dû (CRD)', 'sum'),
+    Hb = ('Montant restant à verser', 'sum'),
+    Exposition = ('Exposition', 'sum'),
+    Nb_pretsprov = ('Nb Prêts provisionnés', 'sum'),
+    Provision = ('Provisions', 'sum'),
+    Impayes_techniques = ('Impayés techniques', 'sum'),
+    Nb_prets_ream = ('Nb prêts ream', 'sum'),
+    CRD_ream = ('CRD ream', 'sum')
+).reset_index()
+aggregated_DP_SG_Pr['Identifiant emprunteur'] = pd.to_numeric(aggregated_DP_SG_Pr['Identifiant emprunteur'], errors='coerce').fillna(0).astype(int)
+aggregated_DP_SG_Pr['Identifiant emprunteur'] = aggregated_DP_SG_Pr['Identifiant emprunteur'].astype(str).str.strip()
+aggregated_DP_SG_Pr['Identifiant emprunteur'] = aggregated_DP_SG_Pr['Identifiant emprunteur'].str.zfill(9)
+
+# Créer une liste pour stocker les nouvelles lignes
+new_rows = []
+
+# Ajouter les valeurs de df_base_fe à df_bdt
+for index, row in aggregated_DP_SG_Pr.iterrows():
+    new_row = {
+        'Identifiant emprunteur': row['Identifiant emprunteur'],
+        'Date': row['Date'],
+        'N° SIREN emprunteur': row['SIREN'],
+        'Direction': row.get('Direction', None),
+        'Ressources': row.get('Ressource', None),
+        'Produit': row.get('Produit', None),
+        'Structure': row.get('structure', None),
+        'DR': row.get('DR', None),
+        #'Département': row.get('DEP', None),
+        'Code postal': row.get('Code_postal', None),
+        'Libellé court emprunteur': row.get('Libelle_court_emprunteur', None),
+        'Libellé famille emprunteur': row.get('Famille_emprunteur', None),
+        'Libellé catégorie emprunteur': row.get('Catégorie_emprunteur', None),
+        'Segment': row.get('Segment', None),
+        'Sous-Segment': row.get('Sous_Segment', None),
+        'Etat du tiers': row.get('Etat_emprunteur', None),
+        'Motif Defaut / SS': row.get('Motif_Emprunteur', None),
+        'Date entrée Defaut SS': row.get(' Date_Effet_E_D_SS', None),
+        'HB prêt': row.get('Hb', None),
+        'CRD comptable M fin mois': row.get('CRD', None),
+        'Nb Prêts': row.get('Nb_prets', None),
+        'Provision': row.get('Provision', None),
+        'Nb prêts réaménagés': row.get('Nb_prets_ream', None),
+        'Encours réaménagés': row.get('CRD_ream', None),
+        'Exposition': row.get('Exposition', None)
+    }
+    new_rows.append(new_row)
+
+# Convertir la liste de dictionnaires en DataFrame
+new_df = pd.DataFrame(new_rows)
+# Ajouter les nouvelles lignes à df_bdt
+df_bdt = pd.concat([df_bdt, new_df], ignore_index=True)
+start_index = len(df_bdt) - len(new_df)
+end_index = len(df_bdt) - 1
+log_message(f"Nombre de nouvelles lignes ajoutées : {len(new_df)}, de l'index {start_index + 1} à {end_index + 1}")
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message(f" Nombre de lignes BDT Après l'ajout de DP sur SG (Projets int. gén.): {len(df_bdt)}")
+log_message("Sauvegarde du fichier BDT terminée.")
+print("Mise à jour réussie de la base BDT.")
+
+# III.1.1.Base DI
+
+# Supprimer la dernière ligne
+Base_DI.drop(Base_DI.tail(1).index, inplace=True)
+log_message(f"Chargement de la Base_DI terminée. Nombre de lignes : {len(Base_DI)}")
+Base_DI  = Base_DI.drop(Base_DI.index[0])
+# Suppression des espaces en début et fin des noms de colonnes
+Base_DI.columns =Base_DI.columns.str.strip()
+# Convertir la colonne 'Date' au format MM/YYYY
+Base_DI['Date'] = pd.to_datetime(Base_DI['Date'], errors='coerce').dt.strftime('%m/%Y')
+# Créer une liste pour stocker les nouvelles lignes
+new_rows = []
+# Ajouter les valeurs de df_base_di à df_bdt
+for index, row in Base_DI.iterrows():
+    provision_value = None
+    if row['Produit'] == 'PE':
+        provision_value = row.get('Provision Hors prêts (en €)', None)
+    elif row['Produit'] == 'Crédit':
+        provision_value = row.get('Provision dses prêts (en €)', None)
+    
+    new_row = {
+        'Identifiant emprunteur': row['N°Tiers_9_Car'],
+        'Date': row['Date'],
+        'N° SIREN emprunteur': row['N° SIREN emprunteur'],
+        'Direction': row.get('Direction', None),
+        'Ressources': row.get('Ressource', None),
+        'Produit': row.get('Produit', None),
+        'Segment': row.get('Segment_DI', None),
+        'Sous-Segment': row.get('Sous_Segment_DI', None),
+        'DR': row.get('Direction Régionale', None),
+        #'Département': row.get('Libellé département siège social emprunteur', None),
+        'Code postal': row.get('Code postal siège social emprunteur', None),
+        'Libellé court emprunteur': row.get('Nom courant de la société', None),
+        'Libellé famille emprunteur': row.get('Libellé famille emprunteur', None),
+        'Libellé catégorie emprunteur': row.get('Libellé catégorie emprunteur', None),
+        'HB prêt': row.get('HB (en €) dont garanties et nantissements', None),
+        'Provision': provision_value,
+        'classe de risque': row.get('classes de risque validées /comptes 2022', None),
+        'Milésime': row.get('Année référence notation emprunteur', None),
+        'Montant résiduel impayé à date du jour': row.get('Montant résiduel impayé à date du jour', None),
+        'Nb Prêts': row.get('Nb_prets', None),
+        'Nb prêts réaménagés': row.get('Nb_prets_ream', None),
+        'Encours réaménagés': row.get('CRD Reaménagé', None),
+        'Exposition': row.get('Exposition (Prêts, titres et obligations) avec plus/moins values latentes (en €)', None),
+        'Exposition sans plus/moins values latentes (en €)': row.get('Exposition (Prêts, titres et obligations) sans plus/moins values latentes (en €)', None),
+        'Valorisation  du pf à la Clôture (Encours en €) sans Plus/moins values latentes': row.get('Valorisation  du portefeuille à la Clôture (Encours en €) sans Plus/moins values latentes', None)
+        
+    }
+    new_rows.append(new_row)
+
+# Convertir la liste de dictionnaires en DataFrame
+new_df = pd.DataFrame(new_rows)
+# Ajouter les nouvelles lignes à df_bdt
+df_bdt = pd.concat([df_bdt, new_df], ignore_index=True)
+start_index = len(df_bdt) - len(new_df)
+end_index = len(df_bdt) - 1
+log_message(f"Nombre de nouvelles lignes ajoutées : {len(new_df)}, de l'index {start_index + 1} à {end_index + 1}")
+#Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message(f" Nombre de lignes BDT Après l'ajout dela base DI: {len(df_bdt)}")
+
+
+# III.1.2.Ajout d'Etat tiers pour la DI
+
+# Charger l'onglet
+df_di_inventaire = pd.read_excel(chemin_di_inventaire, sheet_name='Inventaire CSD DI T3 2026', header=5, engine='openpyxl')
+log_message(f"Chargement de la Base_DI terminé. Nombre de lignes : {len(df_di_inventaire)}")
+
+# Normaliser les noms de colonnes (espaces parasites, insécables, doublons de header)
+df_di_inventaire.columns = (
+    df_di_inventaire.columns.str.strip().str.replace('\xa0', ' ', regex=False)
+)
+
+# Supprimer la ligne vide (ligne 5)
+df_di_inventaire = df_di_inventaire.drop(index=0)
+
+# Nettoyer la colonne 'N°  Tiers' : conversion str AVANT strip (sinon NaN partout sur colonne numérique)
+df_di_inventaire['N°  Tiers'] = (
+    df_di_inventaire['N°  Tiers']
+    .astype(str)
+    .str.strip()
+    .replace({'': np.nan, 'nan': np.nan, 'None': np.nan, '<NA>': np.nan})
+)
+
+# Filtrer les tiers ayant un N° Tiers non vide (NaN)
+df_di_inventaire = df_di_inventaire.dropna(subset=['N°  Tiers'])
+
+# Convertir les identifiants en entiers, puis en chaînes avec 9 chiffres
+df_di_inventaire['N°  Tiers'] = df_di_inventaire['N°  Tiers'].apply(
+    lambda x: f"{int(float(x)):09d}" if pd.notna(x) else np.nan
+)
+df_di_inventaire = df_di_inventaire.dropna(subset=['N°  Tiers'])  # Au cas où
+
+log_message(f"Nombre de tiers DI valides après nettoyage : {len(df_di_inventaire)}")
+
+# Mettre à jour le champ "Identifiant emprunteur" pour qu'il ait 9 caractères dans df_bdt
+def format_identifiant(identifiant):
+    try:
+        return f"{int(float(identifiant)):09d}"
+    except (ValueError, TypeError):
+        return identifiant
+
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].apply(format_identifiant)
+
+# Mettre à jour / ajouter des lignes dans df_bdt
+def mettre_a_jour_ou_ajouter(df_bdt, df_di_inventaire):
+    nouvelles_lignes = []
+    for index, row in df_di_inventaire.iterrows():
+        ref_tiers = row['N°  Tiers']
+        etat_tiers = row['Retour métier M8 2026 (avis sur col I)'] if pd.notna(row['Retour métier M8 2026 (avis sur col I)']) else 'SAIN'
+        correspondance = df_bdt[(df_bdt['Identifiant emprunteur'] == ref_tiers) &
+                                (df_bdt['Direction'] == 'DI') &
+                                (df_bdt['Ressources'] == 'SG')]
+        if not correspondance.empty:
+            masque = ((df_bdt['Identifiant emprunteur'] == ref_tiers) &
+                      (df_bdt['Direction'] == 'DI') &
+                      (df_bdt['Ressources'] == 'SG'))
+            df_bdt.loc[masque, 'Etat du tiers'] = etat_tiers
+            df_bdt.loc[masque, 'Motif Defaut / SS'] = row['Motif Défaut / Sous Surv']
+            df_bdt.loc[masque, 'Date entrée Defaut SS'] = row['Date entrée Défaut / sous surveillance']
+        else:
+            nouvelle_ligne = {
+                'Identifiant emprunteur': ref_tiers,
+                'Direction': 'DI',
+                'Ressources': 'SG',
+                'Produit': 'Crédit',
+                'Libellé court emprunteur': row['Libellé Tiers'],
+                'Etat du tiers': etat_tiers,
+                'Motif Defaut / SS': row['Motif Défaut / Sous Surv'],
+                'Date entrée Defaut SS': row['Date entrée Défaut / sous surveillance']
+            }
+            nouvelles_lignes.append(pd.DataFrame([nouvelle_ligne]))
+    if nouvelles_lignes:
+        nouvelles_lignes_df = pd.concat(nouvelles_lignes, ignore_index=True)
+        start_index = len(df_bdt)
+        df_bdt = pd.concat([df_bdt, nouvelles_lignes_df], ignore_index=True)
+        end_index = len(df_bdt) - 1
+        log_message(f"Nombre de nouvelles lignes ajoutées : {len(nouvelles_lignes_df)}, de l'index {start_index + 1} à {end_index + 1}")
+    return df_bdt
+
+df_bdt = mettre_a_jour_ou_ajouter(df_bdt, df_di_inventaire)
+
+# Mettre à jour l'état du tiers à "SAIN" pour les lignes DI/SG restées vides
+df_bdt.loc[(df_bdt['Direction'] == 'DI') &
+           (df_bdt['Ressources'] == 'SG') &
+           (df_bdt['Etat du tiers'].isna()), 'Etat du tiers'] = 'SAIN'
+
+# Supprimer les doublons
+df_bdt = df_bdt.drop_duplicates(subset=['Identifiant emprunteur', 'Direction', 'Ressources'], keep='first')
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+log_message(f"Nombre de lignes BDT après l'inventaire DI: {len(df_bdt)}")
+print("Mise à jour réussie de la base BDT.")
+
+
+print(df_di_inventaire.columns.tolist())
+print(df_di_inventaire['Validation sur M5 2026'].value_counts(dropna=False))
+
+
+
+
+# III.1.3 Segmenter les tiers qui proviennent de l'invetaire 
+
+# Charger les données
+df_di_si = pd.read_excel(chemin_source, sheet_name='Base DI_SI_Nomenclature', header=3, usecols="B:AK")
+df_di_si.columns = df_di_si.columns.str.strip()
+
+# Convertir et formater les identifiants
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.strip().str.zfill(9)
+df_di_si['Identifiant emprunteur'] = df_di_si['Identifiant emprunteur'].astype(str).str.replace('.0', '').str.zfill(9)
+df_di_si['N° SIREN emprunteur'] = df_di_si['N° SIREN emprunteur'].astype(str).str.replace('.0', '')
+
+# Filtrer df_bdt pour les lignes où Direction = 'DI', Ressources = 'SG', et Segment est vide
+df_bdt_to_update = df_bdt[
+    (df_bdt['Direction'] == 'DI') &
+    (df_bdt['Ressources'] == 'SG') &
+    (df_bdt['Segment'].isna())
+]
+
+# Fusionner avec df_di_si pour obtenir les informations nécessaires
+df_bdt_to_update = pd.merge(
+    df_bdt_to_update,
+    df_di_si[[
+        'Identifiant emprunteur', 'Produit', 'Date', 'N° SIREN emprunteur', 'Lib structure DI',
+        'Libellé DR suivi géré emprunteur FE', 'Segment_DI', 'Sous-Segment_DI',
+        'Libellé famille emprunteur', 'Montant résiduel impayé à date du jour', 'Exposition (CRD + RAV)',
+        'Nb Prêts', 'Capital restant dû (CRD)', 'Montant restant à verser',
+        'Libellé catégorie emprunteur', 'Score notation emprunteur', 'Année référence notation emprunteur'
+    ]],
+    on='Identifiant emprunteur',
+    how='left',
+    suffixes=('', '_di_si')
+)
+
+# Mettre à jour df_bdt uniquement pour les lignes filtrées
+for index, row in df_bdt_to_update.iterrows():
+    identifiant = row['Identifiant emprunteur']
+
+    # Mettre à jour uniquement si les champs sont non vides dans df_di_si
+    if pd.notna(row['Produit']):
+        df_bdt.loc[
+            (df_bdt['Identifiant emprunteur'] == identifiant) &
+            (df_bdt['Direction'] == 'DI') &
+            (df_bdt['Ressources'] == 'SG'),
+            [
+                'Produit', 'Date', 'N° SIREN emprunteur', 'Structure', 'DR', 'Segment',
+                'Sous-Segment', 'Libellé famille emprunteur', 'Montant résiduel impayé à date du jour',
+                'Nb Prêts', 'CRD comptable M fin mois', 'HB prêt', 'Libellé catégorie emprunteur',
+                'Score', 'Milésime', 'Exposition'
+            ]
+        ] = [
+            row['Produit'], row['Date'], row['N° SIREN emprunteur'],
+            row['Lib structure DI'], row['Libellé DR suivi géré emprunteur FE'],
+            row['Segment_DI'], row['Sous-Segment_DI'], row['Libellé famille emprunteur'],
+            row['Montant résiduel impayé à date du jour'], row['Nb Prêts'],
+            row['Capital restant dû (CRD)'], row['Montant restant à verser'],
+            row['Libellé catégorie emprunteur'], row['Score notation emprunteur'],
+            row['Année référence notation emprunteur'], row['Exposition (CRD + RAV)']
+        ]
+
+# Filtrer les données pour les lignes où Direction = 'DI' et Ressources = 'SG'
+DI = df_bdt[
+    (df_bdt['Direction'] == 'DI') &
+    (df_bdt['Ressources'] == 'SG')
+]
+
+# Mettre à jour 'Sous-Segment' à 'NR' si 'Segment' n'est pas vide et 'Sous-Segment' est vide
+DI.loc[
+    (DI['Segment'].notna()) &
+    (DI['Sous-Segment'].isna()),
+    'Sous-Segment'
+] = 'NR'
+
+# Mettre à jour df_bdt avec les modifications apportées à DI
+df_bdt.update(DI)
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# III.1.4.Mettre à jour les Etats
+
+# Charger la table de correspondance depuis l'onglet Etat
+df_correspondance = pd.read_excel(chemin_Tb_correspondances, sheet_name='Etat', engine='openpyxl')
+# Remplir les valeurs
+for index, row in df_bdt.iterrows():
+    Etat_du_tiers = row['Etat du tiers']
+    correspondance = df_correspondance[df_correspondance['Etat du tiers'] == Etat_du_tiers]
+    if not correspondance.empty:
+        Etat_du_tiers1 = correspondance['Etat du tiers1'].values[0]
+        df_bdt.at[index, 'Etat du tiers'] = Etat_du_tiers1
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+
+# IV.1.1.Titres participatifs_SI
+
+Titres_participatifs_SI = pd.read_excel(chemin_source, sheet_name= "Titres participatifs_SI",skiprows=3,usecols = "B:V")
+log_message(f"Chargement de  TP terminé. Nombre de lignes : {len(Titres_participatifs_SI )}")
+# Supprimer la dernière ligne
+Titres_participatifs_SI.drop(Titres_participatifs_SI.tail(1).index, inplace=True)
+
+Titres_participatifs_SI['N_Tiers_9_Car (SI)'] = pd.to_numeric(Titres_participatifs_SI['N_Tiers_9_Car (SI)'], errors='coerce').fillna(0).astype(int)
+Titres_participatifs_SI['N_Tiers_9_Car (SI)'] = Titres_participatifs_SI['N_Tiers_9_Car (SI)'].astype(str).str.strip()
+Titres_participatifs_SI['N_Tiers_9_Car (SI)'] = Titres_participatifs_SI['N_Tiers_9_Car (SI)'].str.zfill(9)
+Titres_participatifs_SI['Identifiant Opération'] = pd.to_numeric(Titres_participatifs_SI['Identifiant Opération'], errors='coerce').fillna(0).astype(int)
+# Créer un identifiant unique en concaténant les deux colonnes
+Titres_participatifs_SI['ID_Unique'] = Titres_participatifs_SI['N_Tiers_9_Car (SI)'] + Titres_participatifs_SI['Identifiant Opération'].astype(str)
+# Supprimer les doublons basés sur l'ID unique
+Titres_participatifs_SI = Titres_participatifs_SI.drop_duplicates(subset='ID_Unique')
+# Créer une liste pour stocker les nouvelles lignes
+new_rows = []
+# Ajouter les valeurs de df_base_fe à df_bdt
+for index, row in Titres_participatifs_SI.iterrows():
+    if row['N_Tiers_9_Car (SI)'] != '000000000':  
+        new_row = {
+            'Identifiant emprunteur': row['N_Tiers_9_Car (SI)'],
+            'Direction': row.get('Direction', None),
+            'Ressources': row.get('Ressource', None),
+            'Produit': row.get('Produit', None),
+            'N° SIREN emprunteur': row.get('N°SIREN', None),
+            'Segment': row.get('Segment FE', None),
+            'Sous-Segment': row.get('Sous segments FE', None),
+            'Libellé court emprunteur': row.get('Lib_Emprunteur', None),
+            'DR': row.get('DR', None),
+            "Intitulé de l'affaire": row.get("Intitulé de l'affaire", None),
+            "Montant TP": row.get("Affaire - Montant contrat signé", None)
+        }
+        new_rows.append(new_row)
+# Convertir la liste de dictionnaires en DataFrame
+new_df = pd.DataFrame(new_rows)
+# Ajouter les nouvelles lignes à df_bdt
+df_bdt = pd.concat([df_bdt, new_df], ignore_index=True)
+start_index = len(df_bdt) - len(new_df)
+end_index = len(df_bdt) - 1
+log_message(f"Nombre de nouvelles lignes ajoutées : {len(new_df)}, de l'index {start_index + 1} à {end_index + 1}")
+# Remplir les valeurs manquantes avec la date de la première ligne
+date_premiere_ligne = df_bdt.loc[df_bdt['Date'].first_valid_index(), 'Date']
+df_bdt['Date'].fillna(date_premiere_ligne, inplace=True)
+
+# Convertir la colonne N° SIREN emprunteur au même format 
+df_bdt['N° SIREN emprunteur'] = df_bdt['N° SIREN emprunteur'].astype(str)
+# Enlever '.0' des valeurs
+df_bdt['N° SIREN emprunteur'] = df_bdt['N° SIREN emprunteur'].str.replace('.0', '', regex=False)
+
+# Remplacer 'nan' et '0' par NaN
+df_bdt['N° SIREN emprunteur'] = df_bdt['N° SIREN emprunteur'].replace(['nan', '0'], np.nan)
+# Filtrer la base de données pour obtenir les informations nécessaires
+df_bdt_filtered = df_bdt[(df_bdt['Direction'] == 'DP') & (df_bdt['Ressources'] == 'FE')]
+
+# Filtrer df_bdt pour obtenir les lignes où les champs doivent être remplis
+df_bdt_to_fill = df_bdt[(df_bdt['Direction'] == 'DP') & (df_bdt['Ressources'] == 'SG') & (df_bdt['Produit'] == 'TP')]
+
+# Remplir les champs vides avec les informations de df_bdt_filtered
+for index, row in df_bdt_to_fill.iterrows():
+    # Trouver la ligne correspondante dans df_bdt_filtered
+    corresponding_row = df_bdt_filtered[df_bdt_filtered['Identifiant emprunteur'] == row['Identifiant emprunteur']]
+    if not corresponding_row.empty:
+        df_bdt.at[index, 'Structure'] = corresponding_row['Structure'].values[0]
+        df_bdt.at[index, 'Code postal'] = corresponding_row['Code postal'].values[0]
+        df_bdt.at[index, 'Score'] = corresponding_row['Score'].values[0]
+        df_bdt.at[index, 'Milésime'] = corresponding_row['Milésime'].values[0]
+        df_bdt.at[index, 'Va score'] = corresponding_row['Va score'].values[0]
+        df_bdt.at[index, 'Etat du tiers'] = corresponding_row['Etat du tiers'].values[0]
+        df_bdt.at[index, 'Motif Defaut / SS'] = corresponding_row['Motif Defaut / SS'].values[0]
+        df_bdt.at[index, 'Date entrée Defaut SS'] = corresponding_row['Date entrée Defaut SS'].values[0]
+        df_bdt.at[index, 'classe de risque'] = corresponding_row['classe de risque'].values[0]
+    else:
+        # Si le tiers n'est pas dans df_bdt_filtered, mettre à jour l'état du tiers à "Sain"
+        df_bdt.at[index, 'Etat du tiers'] = 'Sain'
+log_message(f" Nombre de lignes BDT Après l'ajout des TP: {len(df_bdt)}")
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+
+# IV.1.2.Mettre à jour les DR
+
+
+# Charger la table de correspondance depuis l'onglet Etat
+df_correspondance = pd.read_excel(chemin_Tb_correspondances, sheet_name='DR', engine='openpyxl')
+# Remplir les valeurs
+for index, row in df_bdt.iterrows():
+    Etat_du_tiers = row['DR']
+    correspondance = df_correspondance[df_correspondance['DR data'] == Etat_du_tiers]
+    if not correspondance.empty:
+        DR_modif = correspondance['DR modif'].values[0]
+        df_bdt.at[index, 'DR'] = DR_modif
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT.")
+
+
+# IV.1.3.MàJ de la bdt: on recupère des sirens vides
+
+df_tiers_actifs = pd.read_excel(chemin_tiers_actifs, engine='openpyxl')
+# Renommer les colonnes 
+df_tiers_actifs.rename(columns={
+    'Code tiers': 'Identifiant emprunteur',
+    'num_nsiren': 'N° SIREN emprunteur'
+}, inplace=True)
+
+# Convertir les identifiants en chaînes de caractères et supprimer les espaces
+df_tiers_actifs['Identifiant emprunteur'] = df_tiers_actifs['Identifiant emprunteur'].astype(str).str.strip()
+df_tiers_actifs['Identifiant emprunteur'] = df_tiers_actifs['Identifiant emprunteur'].str.zfill(9)
+
+# Mettre à jour les valeurs manquantes de 'N° SIREN emprunteur' dans df_bdt
+for index, row in df_bdt.iterrows():
+    identifiant = row['Identifiant emprunteur']
+    if pd.isna(row['N° SIREN emprunteur']):
+        siren_tiers = df_tiers_actifs[df_tiers_actifs['Identifiant emprunteur'] == identifiant]['N° SIREN emprunteur']
+        if not siren_tiers.empty:
+            df_bdt.at[index, 'N° SIREN emprunteur'] = siren_tiers.values[0]
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+print("Mise à jour réussie de la base BDT avec les sirens vides.")
+
+
+# IV.1.4. Recupérer les codes postaux vide à l'aid de Adresse FED
+
+# Lecture des fichiers Excel
+df_tiers_actifs = pd.read_excel(chemin_tiers_actifs, sheet_name='Adresse FED', engine='openpyxl')
+# Renommer les colonnes dans df_tiers_actifs
+df_tiers_actifs.rename(columns={
+    'cod_tiers adresse_postale': 'Identifiant emprunteur',
+    'cod_commune adresse_postale': 'Code postal',
+    'lib_burdistrib': 'Département'
+}, inplace=True)
+
+# Convertir les identifiants en chaînes de caractères et supprimer les espaces
+df_tiers_actifs['Identifiant emprunteur'] = df_tiers_actifs['Identifiant emprunteur'].astype(str).str.strip().str.zfill(9)
+
+# Filtrer df_bdt pour obtenir les lignes où Code postal ou Département est vide
+df_bdt_code_postal_departement_vide = df_bdt[df_bdt['Code postal'].isna() | df_bdt['Département'].isna()]
+
+# Fusionner les DataFrames sur les colonnes Identifiant emprunteur
+df_merged = pd.merge(df_bdt_code_postal_departement_vide, df_tiers_actifs[['Identifiant emprunteur', 'Code postal', 'Département']],
+                     on='Identifiant emprunteur', how='left', suffixes=('', '_tiers'))
+
+# Mettre à jour les champs Code postal et Département dans df_bdt
+for index, row in df_merged.iterrows():
+    if pd.isna(df_bdt.loc[df_bdt['Identifiant emprunteur'] == row['Identifiant emprunteur'], 'Code postal'].values[0]):
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == row['Identifiant emprunteur'], 'Code postal'] = row['Code postal_tiers']
+ 
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+print("Mise à jour réussie de la base BDT avec les codes postaux et départements.")
+
+
+# IV.1.5. MàJ de DEPARTEMENT
+
+# Chargement des départements à partir du fichier Excel, onglet "DEP"
+df_departements = pd.read_excel(chemin_Tb_correspondances, sheet_name='DEP', engine='openpyxl')
+
+# Création d'un dictionnaire de correspondance à partir du DataFrame des départements
+departements = pd.Series(df_departements['Nom_Département'].values, index=df_departements['Code_Postal'].astype(str)).to_dict()
+
+# Fonction pour obtenir le département à partir du code postal
+def get_departement(code_postal):
+    if code_postal.startswith('2A'):
+        return 'Corse-du-Sud'
+    elif code_postal.startswith('2B'):
+        return 'Haute-Corse'
+    elif code_postal.startswith('20'):
+        return 'Corse'
+    code_departement = code_postal[:3] if code_postal.startswith(('97', '98', '99')) else code_postal[:2]
+    departement = departements.get(code_departement, 'Inconnu')
+    return departement
+
+# Convertir les codes postaux en chaînes de caractères et enlever les suffixes ".0"
+df_bdt['Code postal'] = df_bdt['Code postal'].apply(lambda x: str(int(x)) if pd.notna(x) and isinstance(x, (int, float)) else x)
+
+# Mettre "Inconnu" seulement lorsque le code postal est vide ou manquant
+df_bdt['Code postal'] = df_bdt['Code postal'].apply(lambda x: 'Inconnu' if pd.isna(x) or x.strip() == '' else x)
+
+# Enlever les suffixes ".0" des codes postaux
+df_bdt['Code postal'] = df_bdt['Code postal'].str.replace('.0', '', regex=False)
+
+# Vérifier et corriger la longueur des codes postaux pour les mettre à 5 caractères
+df_bdt['Code postal'] = df_bdt['Code postal'].apply(lambda x: x.zfill(5) if x != 'Inconnu' and len(x) <= 5 else x)
+
+# Appliquer la mise à jour du département à toute la base df_bdt
+df_bdt['Département'] = df_bdt['Code postal'].apply(lambda x: get_departement(x) if x != 'Inconnu' else 'Inconnu')
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(bdt_path, index=False, engine='openpyxl')
+
+
+
+# IV.1.6.Récupérer les scores vides de Score Sonate (OLS & COLOC) 
+
+# Lecture du fichier Excel
+df_soore_sonate = pd.read_excel(chemin_source, sheet_name='Score Sonate (OLS & COLOC)', header=3)
+
+# Exclure la première colonne
+df_soore_sonate = df_soore_sonate.iloc[:, 1:]
+
+# Enlever les espaces au début et à la fin des noms de colonnes
+df_soore_sonate.columns = df_soore_sonate.columns.str.strip()
+
+# Filtrer df_bdt pour les segments "OLS" ou "Collectivités locales" et où le score est vide
+df_bdt_filtered = df_bdt[
+    (df_bdt['Segment'].isin(["OLS", "Collectivités locales"])) &
+    (df_bdt['classe de risque'].isna())
+]
+
+# Préparer df_soore_sonate
+df_soore_sonate['Tiers_9 Car_Corise'] = df_soore_sonate['Tiers_9 Car_Corise'].astype(str).str.zfill(9)
+
+# Garder uniquement les lignes avec l'année de notation la plus récente pour chaque Tiers_9 Car_Corise
+df_soore_sonate_max_year = df_soore_sonate.loc[df_soore_sonate.groupby('Tiers_9 Car_Corise')['Année de notation interne'].idxmax()]
+
+# Mettre à jour df_bdt avec les scores de df_soore_sonate, en préservant '7NN'
+for index, row in df_bdt_filtered.iterrows():
+    tiers_id = row['Identifiant emprunteur'].zfill(9)
+    if tiers_id in df_soore_sonate_max_year['Tiers_9 Car_Corise'].values:
+        score_row = df_soore_sonate_max_year[df_soore_sonate_max_year['Tiers_9 Car_Corise'] == tiers_id].iloc[0]
+        df_bdt.loc[index, 'Score'] = score_row['Score Sonate']
+        # Préserver '7NN'
+        if df_bdt.loc[index, 'classe de risque'] != '7NN':
+            df_bdt.loc[index, 'classe de risque'] = score_row['Strate de risque']
+        df_bdt.loc[index, 'Milésime'] = score_row['Année de notation interne']
+
+# Correction de la valeur dans 'Sous-Segment'
+df_bdt['Sous-Segment'] = df_bdt['Sous-Segment'].replace('ADMIN ET MANDAT.JUDICIAIRES', 'ADMIN ET MANDAT JUDICIAIRES')
+
+# Liste des champs à traiter pour remplacer les zéros par des valeurs vides
+champs_a_traiter = [
+    'Montant résiduel impayé à date du jour', 'CRD comptable M fin mois',
+    'Nb Prêts', 'Encours comptable', 'DA', 'DNA', 'HB prêt', 'Nb prêts provisionnés',
+    'Provision', 'Impayés techniques', 'Nb prêts réaménagés', 'Encours réaménagés',
+    'GAPD', 'Exposition', 'Montant TP'
+]
+
+df_bdt['Milésime'] = df_bdt['Milésime'].apply(
+    lambda x: '' if pd.isna(x) or str(x).lower() in ['none', 'nan'] else str(int(float(x))) if isinstance(x, (int, float)) else str(x).strip()
+)
+
+# Convertir les valeurs textuelles en nombres pour les champs spécifiés
+for champ in champs_a_traiter:
+    df_bdt[champ] = pd.to_numeric(df_bdt[champ], errors='coerce')
+
+# Remplacer les zéros par des valeurs vides dans les champs spécifiés
+for champ in champs_a_traiter:
+    df_bdt[champ] = df_bdt[champ].replace(0, '')
+
+# Mettre à jour 'Score' avec 0 si 'Milésime' et 'Va score' ne sont pas vides
+df_bdt.loc[(df_bdt['Score'].isna()) & (df_bdt['Milésime'] != '') & (df_bdt['Va score'] != ''), 'Score'] = '0'
+
+# Convertir toutes les valeurs en chaînes de caractères et enlever les décimales, sauf pour '7NN'
+df_bdt['classe de risque'] = df_bdt['classe de risque'].apply(
+    lambda x: str(int(float(x))) if pd.notna(x) and isinstance(x, (int, float)) and str(x) != '7NN' else x
+)
+
+# Limiter le nombre de chiffres après la virgule dans 'Score'
+df_bdt['Score'] = df_bdt['Score'].apply(lambda x: round(float(x), 1) if pd.notna(x) else x)
+
+# Fonction pour formater le numéro SIREN
+def format_siren(siren):
+    if pd.isna(siren) or siren == '':
+        return ''
+    return str(siren).zfill(9)
+
+# Appliquer la fonction à la colonne 'N° SIREN emprunteur'
+df_bdt['N° SIREN emprunteur'] = df_bdt['N° SIREN emprunteur'].apply(format_siren)
+
+# Formater les dates pour avoir deux chiffres pour le mois
+df_bdt['Date'] = df_bdt['Date'].apply(
+    lambda x: '' if pd.isna(x) or str(x).lower() in ['none', 'nan'] else '/'.join([part.zfill(2) for part in x.split('/')])
+)
+
+# Sauvegarder le fichier mis à jour
+#df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+
+# IV.1.7.Récupérer les notations des ETBS de crédit
+
+
+# Lecture du fichier "Notations_Etablissements_de_crédit"
+df_notations = pd.read_excel(chemin_Notations_Etablissements_de_crédit)
+
+# Ajouter une nouvelle colonne "Note Etablissements de Crédit" dans df_bdt
+df_bdt['Note Etablissements de Crédit'] = ''
+
+# Convertir 'Identifiant emprunteur' en entier dans df_bdt
+df_bdt['Identifiant emprunteur'] = pd.to_numeric(df_bdt['Identifiant emprunteur'], errors='coerce').fillna(0).astype(int)
+
+# Convertir 'ID Emp' en entier dans df_notations (si nécessaire)
+df_notations['ID Emp'] = pd.to_numeric(df_notations['ID Emp'], errors='coerce').fillna(0).astype(int)
+
+# Formater 'Identifiant emprunteur' à 9 caractères dans df_bdt
+df_bdt['Identifiant emprunteur'] = df_bdt['Identifiant emprunteur'].astype(str).str.zfill(9)
+
+# Formater 'ID Emp' à 9 caractères dans df_notations
+df_notations['ID Emp'] = df_notations['ID Emp'].astype(str).str.zfill(9)
+
+# Filtrer df_bdt pour le segment "Etablissements de Crédit"
+df_bdt_filtered = df_bdt[df_bdt['Segment'] == 'Etablissements de Crédit']
+
+# Croiser df_bdt_filtered avec df_notations pour récupérer la "Note Etablissements de Crédit"
+df_merged = pd.merge(
+    df_bdt_filtered,
+    df_notations,
+    left_on='Identifiant emprunteur',
+    right_on='ID Emp',
+    how='left'
+)
+
+# Mettre à jour df_bdt avec les "Note Etablissements de Crédit"
+if 'Score_y' in df_merged.columns:
+    for index, row in df_merged.iterrows():
+        df_bdt.loc[df_bdt['Identifiant emprunteur'] == row['Identifiant emprunteur_x'], 'Note Etablissements de Crédit'] = row['Score_y']
+
+# Convertir la colonne "Date entrée Defaut SS" en type datetime
+df_bdt['Date entrée Defaut SS'] = pd.to_datetime(df_bdt['Date entrée Defaut SS'], errors='coerce', dayfirst=True)
+
+# Formater la colonne "Date entrée Defaut SS" au format DD/MM/YYYY
+df_bdt['Date entrée Defaut SS'] = df_bdt['Date entrée Defaut SS'].dt.strftime('%d/%m/%Y')
+
+# Sauvegarder le fichier mis à jour
+# df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+
+
+
+# Harmoniser  DNA et Impayés avec RiskCrédit en ajoutant deux champs
+
+import pandas as pd
+
+# Chargement et préparation des données
+risk_credit_path = "U:/DG/DGDR/50.RISQUES FINANCIERS/550. Pilotage et Innovation/C_DEVELOPPEMENT/RiskCredit/data/reprise_historique.xlsx"
+df_risk_credit_dna_deleted = pd.read_excel(risk_credit_path, sheet_name='DNA_deleted', engine='openpyxl')
+df_risk_credit_bdd_deleted = pd.read_excel(risk_credit_path, sheet_name='BDD_deleted', engine='openpyxl')
+
+# Préparation des données RiskCredit
+for df in [df_risk_credit_dna_deleted, df_risk_credit_bdd_deleted]:
+    df['id_tiers'] = df['id_tiers'].apply(lambda x: str(int(x)).zfill(9) if pd.notna(x) else x)
+    df['date'] = df['date'].apply(lambda x: pd.to_datetime(x, format='%d/%m/%Y').strftime('%m/%Y') if pd.notna(x) else None)
+
+# Préparation de df_bdt
+df_bdt['Date'] = df_bdt['Date'].apply(lambda x: '0' + x if isinstance(x, str) and len(x.split('/')[0]) == 1 else str(x))
+
+# Filtrer les données RiskCredit
+date_bdt = df_bdt['Date'].iloc[0]
+df_risk_credit_dna_filtered = df_risk_credit_dna_deleted[df_risk_credit_dna_deleted['date'] == date_bdt]
+df_risk_credit_bdd_filtered = df_risk_credit_bdd_deleted[df_risk_credit_bdd_deleted['date'] == date_bdt]
+
+# Vérifier et renommer les colonnes
+if 'DNA' in df_bdt.columns:
+    df_bdt = df_bdt.rename(columns={'DNA': 'DNA_original'})
+else:
+    raise KeyError("La colonne 'DNA' n'existe pas dans le DataFrame.")
+
+# Créer les nouvelles colonnes sans conversion forcée
+df_bdt['Montant DNA retenu'] = df_bdt['DNA_original'].where(
+    ~df_bdt['Identifiant emprunteur'].isin(df_risk_credit_dna_filtered['id_tiers']),
+    0
+)
+
+df_bdt['Montant résiduel impayé retenu'] = df_bdt['Montant résiduel impayé à date du jour'].where(
+    ~df_bdt['Identifiant emprunteur'].isin(df_risk_credit_bdd_filtered['id_tiers']),
+    0
+)
+
+# Renommer les colonnes
+df_bdt = df_bdt.rename(columns={
+    'Montant DNA retenu': 'DNA',
+    'Montant résiduel impayé retenu': 'Impayés'
+})
+
+# Fonction pour convertir les valeurs en float, en remplaçant les chaînes vides par 0
+def safe_float_convert(value):
+    try:
+        return float(value) if value != '' else 0
+    except (ValueError, TypeError):
+        return 0
+
+# Calculer l'exposition uniquement pour les lignes DCB
+def calculer_exposition_dcb(row):
+    try:
+        return (
+            safe_float_convert(row['Encours comptable']) +
+            safe_float_convert(row['HB prêt']) +
+            safe_float_convert(row['DA']) +
+            safe_float_convert(row['DNA']) +
+            safe_float_convert(row['GAPD'])
+        )
+    except Exception as e:
+        print(f"Erreur lors du calcul de l'exposition pour la ligne: {row}. Erreur: {e}")
+        return 0
+
+# Mettre à jour l'exposition uniquement pour les lignes DCB
+dcb_mask = df_bdt['Direction'] == 'DCB'
+df_bdt.loc[dcb_mask, 'Exposition'] = df_bdt[dcb_mask].apply(calculer_exposition_dcb, axis=1)
+
+# Liste des colonnes à inclure dans le DataFrame final
+df_bdt = df_bdt[[
+    "Direction", "Ressources","Produit" ,"Date", "N° SIREN emprunteur", "Identifiant emprunteur", "Libellé court emprunteur",
+    "Structure", "DR", "Code postal","Département","Libellé catégorie emprunteur",
+    "Segment", "Sous-Segment", "Score","classe de risque","Note Etablissements de Crédit",
+    "Milésime", "Va score", "Etat du tiers", "Motif Defaut / SS", "Date entrée Defaut SS",
+    "Impayés", "CRD comptable M fin mois", "Nb Prêts", "Encours comptable",
+    "DA", "DNA", "HB prêt", "Nb prêts provisionnés", "Provision","Impayés techniques", "Nb prêts réaménagés", "Encours réaménagés","GAPD", "Exposition"
+,  "Intitulé de l'affaire","Montant TP","Valorisation  du pf à la Clôture (Encours en €) sans Plus/moins values latentes","Exposition sans plus/moins values latentes (en €)"]]
+
+
+# Sauvegarder le fichier mis à jour
+df_bdt.to_excel(chemin_bdt, index=False, engine='openpyxl')
+end_time = time.time()
+execution_time = end_time - start_time
+execution_time_minutes = execution_time / 60
+#print(f"Le temps d'exécution est de {execution_time_minutes} minutes.")
+log_message(f" Nombre de lignes BDT : {len(df_bdt)}")
+print(f"Mise à jour réussie de la base BDT. Temps d'exécution : {execution_time_minutes:.2f} minutes.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
