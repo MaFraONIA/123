@@ -9,6 +9,8 @@ https://github.com/OpenClassrooms-Student-Center/7168871-apprenez-les-bases-du-l
 ----------------------------------------------------------------------------------------------------------------
 https://openclassrooms.com/en/paths
 ----------------------------------------------------------------------------------------------------------------
+https://openclassrooms.com/en/job-postings/apprenticeship?jobCategories=31%7CData%7C%23004D40&jobPostingsPage=4
+----------------------------------------------------------------------------------------------------------------
 
 https://www.youtube.com/watch?v=PxmvWAOksls
 
