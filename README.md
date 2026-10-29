@@ -7,6 +7,8 @@ https://openclassrooms.com/fr/courses/7168871-apprenez-les-bases-du-langage-pyth
 https://github.com/OpenClassrooms-Student-Center/7168871-apprenez-les-bases-du-langage-python
 
 ----------------------------------------------------------------------------------------------------------------
+https://openclassrooms.com/en/paths
+----------------------------------------------------------------------------------------------------------------
 
 https://www.youtube.com/watch?v=PxmvWAOksls
 
